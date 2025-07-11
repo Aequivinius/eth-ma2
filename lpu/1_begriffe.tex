@@ -1,0 +1,119 @@
+\label{sec:begriffe}
+\begin{lpu}
+
+Bevor Sie im weiteren Verlauf dieses Moduls eigene Programme zum maschinellen Lernen schreiben, ist es wichtig, dass Sie sich mit den zentralen Begriffen dieses Themas vertraut machen. Auch wenn Sie einige dieser Wörter womöglich schon gehört haben, so haben sie im Zusammenhang mit ML oft eine sehr spezifische Bedeutung.
+
+In diesem Kapitel erarbeiten Sie sich diese Begriffe anhand eines Artikels von IBM\footnote{\href{https://www.ibm.com/think/topics/machine-learning}{\url{ibm.com/think/topics/machine-learning}}}. Der Artikel erklärt, was maschinelles Lernen ist, welche Arten es gibt und wie es in der Praxis angewendet wird.
+
+\begin{aufgabe}{1}
+Erstellen Sie ein neues, leeres Textdokument mit dem Namen \texttt{LastnameFirstname\_glossary.txt}. Das ist Ihr Glossar, welches Sie im Verlauf dieser Unterrichtseinheit mit eigenen Definitionen wichtiger Begriffe befüllen; und so in Zukunft auch eine Möglichkeit haben, sich schnell wieder in Erinnerung zu rufen, was Sie gelernt haben.
+
+Tragen Sie darin zunächst acht Begriffe ein und formulieren Sie zu denen jeweils eine erste eigene Definition.
+
+\newpage
+
+\begin{itemize}[noitemsep]
+  \item classification (Klassifizierung)
+  \item clustering (Ballung)
+  \item deep learning (mehrschichtiges Lernen)
+  \item machine learning (maschinelles Lernen)
+  \item model (Modell)
+  \item prediction (Vorhersage)
+  \item supervised learning (überwachtes Lernen)
+  \item unsupervised learning (unüberwachtes Lernen)
+\end{itemize}
+
+\end{aufgabe}
+
+Diese Aufgabe mag auf den ersten Blick etwas merkwürdig scheinen. Sie tragen eine Definition ein, obwohl Sie noch gar nicht eine klare Vorstellung davon haben können, was die Begriffe bedeuten. Das ist jedoch eine wertvolle \textit{Lernstrategie}: So halten Sie sich einerseits vor Augen, nach welchen Informationen Sie genau in dem Artikel suchen. Damit wird die Lektüre zielgerichteter und hilft insbesondere SuS, welche zu konzentrieren über längere Zeit Mühe haben. Andererseits machen Sie explizit, was an vagen Ideen in Ihrem Kopf schon vorhanden ist: Vielleicht haben Sie bereits eine Intuition oder ein Halbwissen, was ein Begriff bedeuten könnte. So können Sie diese bewusst vergleichen mit der Definition, die im Text angeboten wird.
+
+Darum machen Sie erste Definitionen noch \textit{bevor} Sie den Artikel lesen. Nach der Lektüre können Sie Ihre Definitionen anpassen.
+
+\begin{aufgabe}{2}
+Lesen Sie nun den Artikel "Was ist maschinelles Lernen" aufmerksam durch. 
+\end{aufgabe}
+
+\textbf{Hinweis:} Der Artikel ist anspruchsvoll. Lassen Sie sich nicht entmutigen, wenn Sie nicht alles auf Anhieb verstehen.
+
+\begin{artikelbox}
+
+\artikelheader{Maschinelles Lernen (ML)}
+\textit{Ursprünglich auf Englisch unter \href{https://www.ibm.com/cloud/learn/machine-learning}{\url{ibm.com/cloud/learn/machine-learning}}, am 1.1.2022 ins Deutsche übersetzt durch \url{nicola.colic@bbbaden.ch}.}
+
+Diese Einführung ins maschinelle Lernen gibt eine Übersicht über dessen Geschichte, wichtige Definitionen, Anwendungen und Probleme innerhalb der heutigen Geschäftswelt.
+
+\artikelsubheader{Was ist ML?}
+ML ist ein Zweig der künstlichen Intelligenz und der Computerwissenschaften, welcher auf der Verwendung von Daten und Algorithmen fokussiert, um die Art wie Menschen lernen zu imitieren und schrittweise seine Genauigkeit verbessert.
+IBM hat eine lange Geschichte mit ML. Von einem Mitarbeiter, Arthur Samuel, wird gesagt, er habe den Begriff "machine learning" mit seiner Forschung über ein Schachspiel geprägt. Robert Nealey, selbsternannter Schachmeister, spielte 1962 das Spiel auf einem IBM 7094-Computer und verlor gegen den Computer. Verglichen mit was heute möglich ist scheint dieser Erfolg beinahe trivial, aber er wird als einer der bedeutendsten Meilensteine im Feld der künstlichen Intelligenz betrachtet. In den kommenden Jahrzehnten ermöglichten die technologischen Weiterentwicklungen bezüglich Speicherplatzes und Rechenleistung einige innovative Produkte, die wir heute kennen und lieben, so wie beispielsweise der Vorschlags-Algorithmus von Netflix oder selbststeuernde Autos.
+ML ist ein wichtiger Teil des wachsenden Feldes der Datenwissenschaft. Durch statistische Methoden werden Algorithmen trainiert, um Klassifikationen oder Vorhersagen zu treffen, und dabei Schlüsselerkenntnisse innerhalb von Datenschürf-Projekten zu gewinnen. Diese Erkenntnisse liegen Entscheidungen innerhalb Applikationen und der Geschäftswelt zugrunde, wobei sie idealerweise einen Einfluss auf Messgrössen bezüglich des Wachstums haben. Während "big data" wächst, wächst auch die Nachfrage des Marktes für Datenwissenschaftler, welche bei der Erkennung der wichtigsten Geschäftsfragen Unterstützung leisten müssen und die Daten, die jene beantworten, finden.
+
+\artikelsubheader{ML vs. mehrschichtiges Lernen vs. neurale Netzwerke}
+Weil mehrschichtiges Lernen und ML austauschbar verwendet werden, lohnt es sich die Nuancen der beiden zu verstehen. ML, mehrschichtiges Lernen und neurale Netzwerke sind alle Unterfelder der künstlichen Intelligenz. Allerdings ist mehrschichtiges Lernen ein Unterfeld von ML, und neurale Netzwerke wiederum ein Unterfeld von mehrschichtigem Lernen.
+Mehrschichtiges Lernen und ML unterscheiden sich darin, wie die jeweiligen Algorithmen lernen. Mehrschichtiges Lernen automatisiert vieles der Auswahl von geeigneten Merkmalen, und eliminiert damit einen Teil der menschlichen Mitarbeit, die anderenfalls notwendig ist, und somit grössere Datensätze verwertbar macht. Man kann sich mehrschichtiges Lernen als skalierbares ML vorstellen (wie Lex Fridman in einer MIT-Vorlesung gesagt hat). Klassisches, nicht-mehrschichtiges ML hängt mehr von menschlichen Eingriffen ab. Menschliche Experten suchen sich bestimmte Merkmale aus, auf welche der Algorithmus achten soll, und so braucht diese Art oft besser strukturierte Daten, um zu lernen.
+Mehrschichtiges Lernen kann einen Nutzen aus annotierten Datensätzen ziehen, was auch überwachtes Lernen genannt wird, um seine Algorithmen auszuwählen; aber es braucht nicht unbedingt einen annotierten Datensatz. Es kann unstrukturierte Daten in Rohform (beispielsweise Text oder Bilder) verarbeiten, und kann automatisch bestimmen, welche Merkmale dieser Daten die unterschiedlichen Kategorien der Daten voneinander unterscheiden. Im Gegensatz zu ML braucht es dazu keine menschlichen Eingriffe, was uns ermöglicht, ML auf interessante Weise zu skalieren. Mehrschichtiges Lernen und neuronale Netzwerke sind der Grund, warum es zu Fortschritt in den Feldern der maschinellen Verarbeitung natürlicher Sprache, Spracherkennung und maschinellen Sehens gekommen ist.
+Neurale Netzwerke, oder artifizielle, d.h. künstliche, neurale Netzwerke, bestehen aus Schichten von Knoten, wovon eine die Eingabeschicht, eine oder mehrere versteckte Schichten, und eine die Ausgabeschicht ist. Jeder Knoten, oder artifizielles Neuron, ist mit einem anderen verbunden und hat ein zugeordnetes Gewicht und einen Grenzwert. Wenn die Ausgabe irgendeines einzelnen Knotens über diesem Grenzwert liegt, dann ist der Knoten aktiviert und schickt Daten zur nächsten Schicht des Netzes. Ansonsten werden keine Daten zur nächsten Schicht gesendet. Das "mehrschichtig" im mehrschichtigen Lernen bezeichnet den Umstand, dass es mehr als eine Schicht in einem neuralen Netz gibt. Ein neurales Netz, welches aus mehr als drei Schichten besteht (wobei Eingabe- und Ausgabeschicht mitzählen), gilt als mehrschichtiger Lern-Algorithmus oder als ein mehrschichtiges neurales Netz. Ein neurales Netz, welches lediglich zwei oder drei Schichten hat, ist einfach ein neurales Netz.
+
+\newpage
+
+\artikelsubheader{Wie ML funktioniert}
+UC Berkeley teilt das Lernen eines ML-Algorithmus' in drei Teile ein:
+\begin{enumerate}
+\item Entscheidungsprozess: Für gewöhnlich werden ML-Algorithmen benutzt, um Klassifikationen oder Vorhersagen zu treffen. Ausgehend von einigen Eingabe-Daten, welche annotiert oder nicht sein können, produziert der Algorithmus eine Schätzung bezüglich eines Musters in den Daten.
+\item Eine Fehlerfunktion, welche die Vorhersage des Modells evaluiert. Wenn es Beispiele gibt, dann kann die Fehlerfunktion einen Vergleich anstellen, um die Genauigkeit des Modells zu bestimmen.
+\item Ein Modell-Optimierungsprozess: Wenn das Modell sich besser an die Datenpunkte im Lern-Datensatz anpasst, dann werden die Gewichte angepasst um den Unterschied zwischen dem Beispiel und der Schätzung des Modells. Der Algorithmus wiederholt diesen Evaluations- und Optimierungsprozess, und aktualisiert so die Gewichte selbständig, bis ein bestimmter Grenzwert an Genauigkeit erreicht wurde.
+\end{enumerate}
+
+\artikelsubheader{ML-Methoden}
+ML-Klassifikatoren lassen sich in drei Hauptkategorien einteilen:
+
+\textbf{Überwachtes ML}
+Überwachtes Lernen oder überwachtes ML ist definiert dadurch, dass es annotierte Datensätze gebraucht, um Algorithmen zu trainieren, welche Daten klassifizieren oder Resultate korrekt vorhersagen. Eingabedaten werden in das Modell gespiesen, dieses passt seine Werte an, bis das Model ausreichend passend ist. Dies passiert als Teil eines Kreuzvalidierungs-Prozesses um sicherzustellen, dass dem Modell keine Über- oder Unteranpassung unterläuft. Überwachtes lernen hilft Organisationen, eine Vielzahl echter Probleme grosser Ordnung zu lösen, wie etwa das Klassifizieren von unerwünschten E-Mails in einem separaten Ordner des Posteingangs. Zu den Methoden, welche beim überwachten Lernen gebraucht werden, gehören neurale Netze, naive Bayes-Klassifikatoren, lineare und logistische Regressionen, random forest, Stützvektormaschinen und weitere.
+
+
+\textbf{Unüberwachtes Lernen oder unüberwachtes ML}
+Dies benutzt ML-Algorithmen, um unannotierte Datensätze zu analysieren und zu ballen. Diese Algorithmen erkennen versteckte Muster oder Datengruppen, ohne dass Menschen eingreifen müssen. Ihre Fähigkeit, Ähnlichkeiten und Unterschiede in Informationen zu finden, machen sie zu einer idealen Lösung für explorative Daten-Analyse, Querverkaufsstrategien, Kunden-Segmentierung, Bilder- und Mustererkennung. Sie wird auch gebraucht, um die Anzahl Merkmale eines Modells durch Dimensionalitätsreduktion zu verkleinern; Hauptkomponentenanalyse und Singulärwertanalyse sind zwei Ansätze hierzu. Andere Algorithmen, welche in unüberwachtem Lernen gebraucht warden, sind neurale Netze, der k-means-Algorithmus, probabilistische Ballungsmethoden und weitere.
+
+\textbf{Halbüberwachtes Lernen}
+Dies stellt die goldene Mitte zwischen überwachten und unüberwachtem Lernen dar. Während des Trainings benutzt es einen kleineren annotierten Datensatz, um die Klassifikation und Erkennung von Merkmalen eines grösseren, unannotierten Datensatzes voranzutreiben. Halbüberwachtes Lernen kann damit das Problem lösen, nicht genug annotierte Daten zu haben (oder es sich nicht leisten zu können, so viele Daten zu annotieren), um einen überwachten Lernalgorithmus zu trainieren.
+
+\textbf{Bestärkendes ML}
+Ein verhaltensgesteuertes ML-Modell, das ähnlich zum überwachten Lernen ist, aber bei dem der Algorithmus nicht mit Beispieldaten trainiert wird. Dieses Modell lernt fortlaufend durch Versuch und Irrtum. Eine Reihe von erfolgreichen Ergebnissen wird verstärkt, um die beste Empfehlung oder Handlungsdevise für ein gegebenes Problem zu entwickeln.
+Das IBM Watson-System, welches 2011 Jeopardy! gewonnen hat, ist ein gutes Beispiel. Das System benutzt bestärkendes Lernen, um zu entscheiden, ob es sich an einer Frage versuchen soll, welches Quadrat es auf dem Spielbrett aussuchen soll und wie hoch sein Einsatz sein soll.
+
+\artikelsubheader{Praktische ML-Anwendungsfälle}
+Es folgen einige Beispiele von ML, welche im täglichen Leben vorkommen: 
+\begin{itemize}
+\item (Automatische) Spracherkennung, wird auch computergesteuerte Spracherkennung oder Textsynthese genannt, was die Umwandlung von menschlicher Sprache in geschriebenes Wort mithilfe von maschineller Sprachverarbeitung bedeutet. Viele Mobilgeräte verfügen über Spracherkennung, um sprachgesteuerte Suchen auszuführen, wie etwa Sir, oder es leichter zu machen, Textnachrichten zu verfassen.
+\item Kundendienst: Textbasierte Dialogsysteme verdrängen Menschen in der customer journey. Sie beantworten Oft Gestellte Fragen zu Themen wie Fracht oder bieten personalisierte Beratung an, betreiben Querverkäufe oder empfehlen Grössen für Benutzer. Sie ändern somit die Art, wie wir über Kundenbindung auf Netzseiten und sozialen Medien nachdenken. Beispiele sind virtuelle Agenten im elektronischen Handel, Nachrichten-Applikationen wie Slack und Facebook Messenger, und die Aufgaben, die virtuelle Assistenten und Sprachassistenten übernehmen.
+\item Maschinelles Sehen: Diese Technologie der künstlichen Intelligenz ermöglicht es Computern und System, sinnvolle Informationen aus digitalen Bildern, Filmen und anderen visuellen Eingaben zu extrahieren, und Handlung basierend auf diesen Eingaben zu ergreifen. Diese Fähigkeit, Empfehlungen auszusprechen, unterscheidet sie von Bilderkennungs-Aufgaben. Basierend auf faltenden neuronalen Netzen hat das maschinelle Sehen Anwendungen im Annotieren von Bildern in den sozialen Medien, Analyse von Röntgenbildern im Gesundheitsbereich oder selbststeuernde Autos im Automobil-Sektor.
+\item Empfehlungs-Systeme: Algorithmen der künstlichen Intelligenz helfen basierend auf vergangenen Daten über vergangenes Kaufverhalten dabei, Tendenzen zu entdecken, welche benutzt werden können, um effektivere Querverkaufsstrategien zu entwickeln. Dies wird benutzt, um relevante Empfehlungen für weitere Käufe während des Kaufs den Kunden anzuzeigen.
+\item Automatisierter Aktienhandel: Entwickelt, um Aktien-Portfolios zu optimieren, generieren Plattformen des Hochfrequenzhandels abertausende Transaktionen jeden Tag ohne menschliche Eingriffe.
+\end{itemize}
+\end{artikelbox}
+
+\begin{hinweis}
+    Der Artikel von IBM wurde selbst mithilfe maschinellen Lernens ins Deutsche übertragen. Eine wichtige Anwendung von ML ist nämlich die \textit{maschinelle Übersetzung}. Während diese Unterrichtseinheit nicht ganz so weit geht, so haben Sie am Ende davon die Möglichkeit, sich in der natürlichen Sprachverarbeitung etwas zu vertiefen. Diese stellt die Grundlage für die maschinelle Übersetzung dar! 
+    
+    Einige Formulierungen sind darum sprachlich nicht perfekt, inhaltlich aber korrekt. Wenn Sie sich unsicher sind, lesen Sie die englische Originalfassung.
+\end{hinweis}
+\end{lpu}
+
+\subsection*{Didaktische Überlegungen}
+Die Einführung zentraler Begriffe des maschinellen Lernens anhand eines Artikels verfolgt ein bewusst gewähltes didaktisches Ziel: Anders als viele klassische Informatikthemen unterliegt das Feld des maschinellen Lernens einem rasanten Wandel — sowohl inhaltlich als auch in der verwendeten Terminologie. Begriffe, Konzepte und Methoden ändern sich schnell, und neue Verfahren treten regelmässig hinzu. Für Sie als zukünftige Informatikerinnen und Informatiker bedeutet das, dass nicht allein das Verstehen von heute gängigen Definitionen zählt, sondern vor allem die Fähigkeit, sich selbständig in neue Inhalte einzuarbeiten.
+
+Die Arbeit mit einem authentischen übersetzten Fachartikel fördert diese Kompetenz gezielt: Sie üben, wie man aus einem anspruchsvollen Text zentrale Informationen filtert, eigene Definitionen entwickelt und die Bedeutung neuer Begriffe im Kontext versteht. Diese Fähigkeit zur eigenständigen Wissensaneignung ist nicht nur im Bereich ML zentral, sondern eine Schlüsselkompetenz in der gesamten Informatik und Technik.
+
+Zudem stärkt die Auseinandersetzung mit einem englischsprachigen Originaltext (optional) Ihre Fachsprachkompetenz – ein weiterer Aspekt, der gerade im internationalen Arbeitsumfeld der Informatik von wachsender Bedeutung ist.
+
+\subsection*{Musterlösung}
+
+\begin{itemize}
+  \item \textbf{classification (Klassifizierung):} Ein ML-Verfahren, bei dem ein Algorithmus entscheidet, zu welcher vorgegebenen Kategorie ein Datensatz gehört.
+  \item \textbf{clustering (Ballung):} Eine Methode des unüberwachten Lernens, bei der ähnliche Datenpunkte automatisch zu Gruppen zusammengefasst werden.
+  \item \textbf{deep learning (mehrschichtiges Lernen):} Eine spezielle Form des maschinellen Lernens, die mit vielen Schichten künstlicher neuronaler Netze arbeitet.
+  \item \textbf{machine learning (maschinelles Lernen):} Ein Teilbereich der KI, bei dem Systeme aus Beispielen lernen, um Aufgaben zu lösen, ohne explizit programmiert zu sein.
+  \item \textbf{model (Modell):} Das Ergebnis eines Lernprozesses, das genutzt wird, um Vorhersagen oder Klassifikationen basierend auf neuen Daten zu treffen.
+  \item \textbf{prediction (Vorhersage):} Die Fähigkeit eines Modells, ein Ergebnis für neue, unbekannte Datenpunkte zu schätzen.
+  \item \textbf{supervised learning (überwachtes Lernen):} Eine Methode, bei der ein Modell mit Daten trainiert wird, deren richtige Ergebnisse bereits bekannt sind.
+  \item \textbf{unsupervised learning (unüberwachtes Lernen):} Eine Methode, bei der das Modell Muster in Daten erkennt, ohne dass vorab richtige Ergebnisse bekannt sind.
+\end{itemize}

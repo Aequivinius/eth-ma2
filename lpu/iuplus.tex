@@ -1,0 +1,63 @@
+
+\begin{lpu}
+
+\textbf{Einstiegsfrage:} Können wir Versicherungsbeiträge vorhersagen?
+
+Wir steigen heute mit einer Frage ein, die – ganz ehrlich – auch aus einem Bewerbungsgespräch bei einer Versicherung stammen könnte: Stellen Sie sich vor, Sie arbeiten bei einer Krankenkasse. Ihnen liegen einige wenige Daten über eine Person vor: Alter, Geschlecht, ob sie raucht oder nicht – und deren Body-Mass-Index. \textit{Können Sie aus diesen Informationen vorhersagen, wie viel diese Person die Versicherung kosten wird?}
+
+Die Daten, die Ihnen vorliegen, sehen wie folgt aus:
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[h!]
+\centering
+\begin{tabular}{cccccc}
+\rowcolor[HTML]{EFEFEF} 
+{\color[HTML]{333333} age} & {\color[HTML]{333333} sex} & {\color[HTML]{333333} bmi} & {\color[HTML]{333333} smoker} & {\color[HTML]{333333} region} & {\color[HTML]{333333} health   insurance charges} \\
+19                         & \female                         & 27.9                       & yes                           & southwest                     & ???                                             \\                                           
+\end{tabular}
+\end{table}
+
+Was denken Sie? Wie viel könnte diese Person zahlen - eher viel oder eher weniger? Warum? Brauchen Sie weitere Informationen oder Vergleichswerte, um das entscheiden zu können?
+
+Vermutlich schon - Sie müssen wissen, was jemand durchschnittlich an die Krankenkasse zahlt, und ob 27.9 ein hoher oder niedriger BMI ist. Sie brauchen also etwas Vorwissen, oder zumindest weitere Daten, die Ihnen als Vergleichspunkt dienen:
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[h!]
+\centering
+\begin{tabular}{cccccc}
+\rowcolor[HTML]{EFEFEF} 
+{\color[HTML]{333333} age} & {\color[HTML]{333333} sex} & {\color[HTML]{333333} bmi} & {\color[HTML]{333333} smoker} & {\color[HTML]{333333} region} & {\color[HTML]{333333} health   insurance charges} \\
+19                         & \female                         & 27.9                       & yes                           & southwest                     & ???                                             \\
+18                         & \male                         & 33.77                      & no                            & southeast                     & 1725                                              \\
+28                         & \male                        & 33                         & no                            & southeast                     & 4449                                              \\
+33                         & \male                        & 22                         & no                            & northwest                     & 8240                                             
+\end{tabular}
+\end{table}
+
+So sind Sie bereits einen Schritt weiter - Sie können einschätzen, in welchem Rahmen sich die Prämien und BMIs bewegen. Was würden Sie also raten, was diese Person zahlen könnte?
+
+Tatsächlich zahlt diese Person eine Prämie von 16884, was deutlich höher als die Übrigen ist; vermutlich deswegen, weil sie raucht. Hätten Sie mehr vergleichbare Daten gehabt, hätten Sie dies vielleicht erahnen können.
+
+Nun haben Sie aber nicht nur eine Person pro Tag, für die Sie eine solche Prognose machen müssen; sondern sehr viele. Sie müssen sich also auf die Hilfe eines Computers verlassen. Wir können unsere Einstiegsfrage also schärfen: \textit{Könnte ein Computer lernen, aus solchen Daten eine Prämie zu schätzen? Was müsste er dazu über viele Personen hinweg "verstehen"? Wie können wir einem Computer begreifbar machen, dass Raucher eine höhere Krankenkassenprämie zahlen?}
+
+Maschinelles Lernen kommt heute in so vielen Bereichen zum Einsatz – von Netflix über Spotify bis zur Verkehrsplanung und Krankenversicherungen. Damit wir mit maschinellem Lernen gute Vorhersagen treffen können, brauchen sie Daten, wie wir sie im Beispiel oben gesehen haben. Unser Einstiegsbeispiel steht als \textit{stellvertretend} für eine ganze Klasse an spannenden Problemen, für welche wir mit maschinellem Lernen Lösungen finden können.
+
+\newpage
+
+Am Ende dieser Unterrichtseinheit können Sie…
+
+\begin{itemize}
+  \item erklären, was maschinelles Lernen ist und wie es sich von klassischer Programmierung unterscheidet,
+  \item erkennen, welche Arten von Daten es gibt und wie man sie für maschinelles Lernen vorbereitet,
+  \item einfache Modelle selbst anwenden, zum Beispiel um Vorhersagen zu treffen oder Zugehörigkeit zu einer Gruppe zu erkennen,
+  \item mit Python und einer speziellen Bibliothek eigene kleine ML-Projekte umsetzen,
+  \item entscheiden, welcher Algorithmus für eine bestimmte Aufgabe geeignet ist,
+  \item beurteilen, wie gut ein Modell funktioniert – und woran man das erkennt,
+  \item einschätzen, welche Chancen und Risiken ML im Alltag mit sich bringt (z.B. bei Datenschutz oder Fairness).
+\end{itemize}
+    
+\end{lpu}

@@ -1,0 +1,143 @@
+\begin{lpu}
+\label{sec:regression}
+
+Sie haben im letzten Kapitel Entscheidungsbäume kennengelernt, welche sich besonders gut für \textbf{Klassifikationsprobleme} eignen, also Situationen, in welchen ein neuer Datenpunkt einer von vordefinierten Kategorien zugeordnet werden soll. In diesem Kapitel lernen Sie einen zweiten Algorithmus kennen, der sich für \textbf{Regression} eignet — also für Situationen, in denen ein \textit{numerischer} Wert vorhergesagt wird.
+
+Wir beginnen damit, folgende Frage zu untersuchen: Gibt es bei Menschen eine Beziehung zwischen \emph{Grösse} und \emph{Gewicht}? Und können wir das Gewicht einer Person allein aufgrund ihrer Grösse vorhersagen?
+
+\begin{aufgabe}{1: Intuition}
+Überlegen Sie sich, wie Grösse und Gewicht typischerweise zusammenhängen.
+
+\begin{itemize}
+  \item Können Sie allein aufgrund der Grösse einer Person deren Gewicht schätzen?
+  \item Versuchen Sie, eine einfache Formel aufzustellen:
+  
+  \medskip
+  \texttt{Gewicht [kg] = Koeffizient $\times$ Grösse [cm]}
+  
+  \item Testen Sie die Formel mit verschiedenen Beispielwerten (zum Beispiel den Ihrigen). Was fällt Ihnen auf?
+\end{itemize}
+\end{aufgabe}
+
+Die Formel mag für diese Beispielwerte stimmen (oder auch nicht), aber um eine fundierte Aussage zu machen darüber, ob Ihre Formel für die freie Wildbahn geeignet ist, brauchen wir mehr Daten. Tatsächlich sind Daten das Gold im maschinellen Lernen, da sie Daten brauchen, um Ihre Modelle zu trainieren, und dann zusätzlich Daten benötigen, um zu überprüfen, ob Ihr Modell gut ist. In unserem Fall gerade haben Sie Ihr Modell (= Ihre Formel) aufgrund Ihrer Intuition und möglicherweise auf einem Datensatz bestehend aus einem Eintrag (= Ihre eigenen Daten) berechnet. Aber nun brauchen Sie ein repräsentatives Abbild der Wirklichkeit, um zu überprüfen, wie gut Ihre Formel darin ist, akkurate Vorhersagen zu treffen.
+
+\begin{hinweis}
+In der Praxis des maschinellen Lernens ist die Datenbeschaffung (\textit{data engineering} mindestens genauso wichtig und herausfordernd wie die Auswahl und korrekte Anwendung eines passenden Algorithmus!
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.25]{lpu/data.jpeg}
+  \label{fig:data}
+\end{figure}
+
+\end{hinweis}
+
+Falls Sie diese LPU nicht im Klassenverband bearbeiten, können Sie die nachfolgende Aufgabe überspringen und stattdessen \href{https://www.kaggle.com/datasets/burnoutminer/heights-and-weights-dataset}{diesen}\footnote{\href{https://www.kaggle.com/datasets/burnoutminer/heights-and-weights-dataset}{\url{kaggle.com/datasets/burnoutminer/heights-and-weights-dataset}}} Datensatz verwenden. Allerdings müssten Sie dort die Grössen von \textit{inches} in Zentimeter und Pfund in Kilogramm umrechnen.
+
+\begin{aufgabe}{2: Datensammlung}
+Erstellen Sie einen Datensatz mit Grösse und Gewicht Ihrer Klassenkameradinnen und -kameraden.
+
+\begin{itemize}
+  \item Bestimmen Sie in der Klasse eine Person als \emph{Schreiber} und eine als \emph{Untersucher}.
+  \item Der Schreiber erstellt eine anonyme Excel-Tabelle, in die die Daten eingetragen werden.
+  \item Der Untersucher fragt die Klassenmitglieder individuell nach Grösse und Gewicht, und gibt diese ohne den Namen an den Schreiber weiter.
+  \item Der Schreiber teilt den fertigen Datensatz mit der Klasse.
+\end{itemize}
+\end{aufgabe}
+
+Auch wenn diese Art der Datenbeschaffung mühsam erscheinen mag, so vermittelt sie doch ein Gefühl dafür, wie schwierig es sein kann, an gute Daten zu kommen!
+
+\begin{aufgabe}{3}
+\begin{enumerate}
+    \item Verwenden Sie Ihre Formel aus der ersten Aufgabe, um für jede Grösse ein Gewicht vorherzusagen. 
+    \item Vergleichen Sie Ihre Vorhersagen mit den tatsächlichen Werten.
+    \item Wie würden Sie Ihren Klassenkameraden mit einem Zahlenwert zusammenfassen, wie ``korrekt'' Ihre Formel für den ganzen Datensatz liegt? 
+    \item Können Sie so die Formel in der Klasse ermitteln, welche am ``besten'' ist?
+\end{enumerate}
+\end{aufgabe}
+
+Wie Sie vermutlich erkannt haben, müssen Sie die Unterschiede zwischen den Vorhersagen Ihrer Formel und den tatsächlichen Werten verrechnen. Hierzu gibt es unterschiedliche Methoden, aber wir verwenden in dieser LPU die folgende:
+
+\begin{theorie}
+    Die \textbf{mittlere quadratische Abweichung} (\textit{mean squared error} zu Englisch, \textit{MSE} abgekürzt) ist ein Fehlermass, also eine Art, auszudrücken, wie hoch der Fehler einer \textit{Regression} über einem Datensatz im Vergleich zu den tatsächlichen Werten ist.
+
+     \[
+  \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} \left( \text{tatsächlich}_{i} - \text{vorhergesagt}_{i} \right)^2
+  \]
+
+  Zu Deutsch ist der MSE der Durchschnitt der quadrierten Unterschiede. Wir nehmen das Quadrat der Unterschiede, da uns im MSE nicht interessiert, ob unser Modell unter oder über dem eigentlichen Wert liegt, sondern lediglich um \textit{wieviel} daneben es liegt. Je kleiner der MSE, umso näher liegt das Modell an den tatsächlichen Daten.
+\end{theorie}
+
+Solche Fehlermasse können wir aber nicht nur verwenden, um fertige Modelle zu evaluieren; sondern auch, um bessere Modelle zu erstellen. Dies sehen Sie in der nachfolgenden Aufgabe:
+
+\begin{aufgabe}{4}
+    Berechnen Sie für Ihre ursprüngliche Formel den MSE. Davon ausgehend, fangen Sie an, den Koeffizienten Ihrer Formel zu verändern, und die Auswirkungen davon auf den MSE zu beobachten. Verändern Sie den Koeffizienten so lange, bis der MSE so klein wie möglich ist.
+\end{aufgabe}
+
+Herzlichen Glückwunsch! Sie haben einen entscheidenden Schritt auf Ihrer Reise in der Welt des maschinellen Lernens getätigt!
+
+\begin{theorie}
+Mit dieser Methode haben Sie ein erstes Regressionsmodell trainiert: Sie haben eine \emph{Modellform} definiert, eine \emph{Fehlerfunktion} (hier den MSE) bestimmt und anschliessend durch Variation die beste Variante davon ermittelt. In der Praxis übernimmt diese Optimierung später eine Software wie \texttt{scikit-learn}.
+\end{theorie}
+    
+\end{lpu}
+
+\subsection*{Didaktische Überlegungen}
+
+Dieses Kapitel zur linearen Regression wurde so gestaltet, dass die SuS sowohl ein grundlegendes Verständnis für das Prinzip der Vorhersage numerischer Werte entwickeln als auch einen ersten vollständigen Modellierungsprozess durchlaufen — von der Datensammlung über die Modellformulierung bis hin zur Evaluation. Auf diesem wird später im Sinne eines Spiralkurrikulums aufgebaut.
+
+Ein zentrales didaktisches Anliegen dieser Aufgabe liegt in der bewussten Entscheidung, die SuS ihre eigenen Daten erheben zu lassen. Dies hat mehrere Vorteile:
+
+\begin{itemize}
+  \item \textbf{Eigenverantwortung und Datenbewusstsein:} Die SuS erfahren, dass der Erfolg von ML-Algorithmen wesentlich von der Qualität der zugrundeliegenden Daten abhängt. Durch das Erfassen eigener Körperdaten entsteht ein hohes Mass an Identifikation mit dem Datensatz.
+  
+  \item \textbf{Fehlerquellen reflektieren:} Bei der Erhebung können Diskussionen auftreten, insbesondere über Messfehler, Datenschutz und Standardisierung.
+  
+  \item \textbf{Intuition des später verwendeten Begriffs der \emph{features}:} Die SuS erkennen, dass sie bewusst entscheiden müssen, welche Informationen (Grösse, Gewicht) in das Modell eingehen sollen.
+\end{itemize}
+
+Das gewählte Modell — eine lineare Funktion zwischen Grösse und Gewicht — ist bewusst stark vereinfacht. Im Plenum kann diskutiert werden, wie sich das Modell verbessern liesse:
+
+\begin{itemize}
+  \item \textbf{Einbezug weiterer Merkmale:} Das Geschlecht könnte als weiterer Prädiktor (\texttt{feature}) berücksichtigt werden. Dies führt zur \emph{multiplen linearen Regression} und erlaubt eine differenziertere Vorhersage.
+  
+  \item \textbf{Nichtlineare Zusammenhänge:} Die SuS könnten vermuten, dass die Beziehung zwischen Grösse und Gewicht nicht vollständig linear ist. Diese Hypothese eröffnet eine Diskussion über quadratische Modelle oder andere Regressionsformen.
+  
+  \item \textbf{Visualisierung und Streuung:} Durch die Darstellung als Streudiagramm wird ersichtlich, dass ein Modell nie alle Werte exakt trifft. Die SuS erkennen so die Bedeutung des MSE als \emph{Fehlermass}, aber auch seine Grenzen (z.B. Empfindlichkeit gegenüber Ausreissern).
+\end{itemize}
+
+\subsection*{Musterlösungen}
+
+\begin{aufgabe}{1}
+Die Fragestellung zielt auf ein erstes, noch rein heuristisches Modell ab. Die SuS sollen versuchen, eine Formel der Form
+\[
+\text{Gewicht} = \text{Koeffizient} \times \text{Grösse}
+\]
+aufzustellen. Die Idee ist, dass grössere Personen tendenziell schwerer sind. Ein erster Versuch könnte sein:
+\[
+\text{Gewicht} = 0.5 \times \text{Grösse}
+\]
+Für eine Person mit $170\,\text{cm}$ ergibt dies:
+\[
+\text{Gewicht} = 0.5 \times 170 = 85\,\text{kg}
+\]
+Dies erscheint leicht zu hoch. Mit einem kleineren Koeffizienten, z.\,B. $0.38$:
+\[
+\text{Gewicht} = 0.38 \times 170 \approx 64.6\,\text{kg}
+\]
+Diese Formel ist realistischer. Eine brauchbare Startschätzung für viele Personen könne daher sein:
+\[
+\boxed{\text{Gewicht} \approx 0.4 \times \text{Grösse}}
+\]
+\end{aufgabe}
+
+
+\begin{aufgabe}{2 und 3}
+Die Umrechnung der Daten aus den Beispiel-Datensatz sowie die Formeln zur Berechnung des MSE im Excel sind in der beiliegenden Datei \texttt{LA\_1607\_L.xlsx} zu finden.
+
+Beispielrechnung für 3 Datenpunkte:
+\begin{align*}
+\text{MSE} &= \frac{1}{3} \left[(85 - 0.4 \cdot 182)^2 + (66 - 0.4 \cdot 168)^2 + (87 - 0.4 \cdot 188)^2 \right] \\
+&= \frac{1}{3} \left[(12.2)^2 + (-1.2)^2 + (11.8)^2\right] \\
+&= \frac{1}{3} (148.84 + 1.44 + 139.24) = \boxed{96.51}
+\end{align*}
+\end{aufgabe}

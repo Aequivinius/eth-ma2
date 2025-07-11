@@ -1,0 +1,202 @@
+\usepackage{wasysym} % for male and female symbols
+
+\usepackage[utf8]{inputenc} % Ensures UTF-8 encoding for special characters
+\usepackage[ngerman]{babel} % Adapts language elements (e.g., "Abbildung" instead of "Figure") to German
+
+% Formatting and Layout
+\usepackage{geometry} % Adjusts page margins and layout
+\usepackage{tcolorbox} % Creates colored boxes for emphasis or notes
+\usepackage{mdframed} % Allows framed environments with background colors
+\usepackage{multicol} % switch between single and two columns
+
+% Math and Symbols
+\usepackage{amsmath} % Provides advanced mathematical typesetting
+
+% Tables and Colors
+\usepackage{booktabs} % Enhances table formatting for professional appearance
+\usepackage{graphicx} % Enables the inclusion of images
+\usepackage[table,xcdraw]{xcolor} % Adds colors to tables and drawings
+
+% Listings and Code
+\usepackage{listings} % Formats code listings in a basic way
+\usepackage{minted} % Formats code listings with syntax highlighting (requires Pygments)
+
+% Text Manipulation
+\usepackage{soul} % Allows text highlighting, strikethrough, etc.
+\usepackage{emoji} % Enables inserting emojis into the document
+
+% Lists and Enumerations
+\usepackage{enumitem} % Allows me to make smore compact lists
+
+% Figures and Captions
+\usepackage{subcaption} % Supports subfigures with individual captions
+
+% External Content and Hyperlinks
+\usepackage{pdfpages} % Includes external PDFs in the document
+\usepackage{hyperref} % Enables clickable links and \url command
+
+% Miscellaneous
+\usepackage{jupynotex} % For integrating Jupyter Notebook outputs into LaTeX
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=25mm,
+ top=20mm,
+ }
+
+\newcommand\todo[1]{\noindent\textcolor{orange}{\emoji{warning} #1}}
+\newcommand{\singleslide}[1]{
+    \begin{tcolorbox}[colframe=black!75, width=\textwidth, height=0.25\textheight, valign=center]
+        \Large \textbf{#1}
+    \end{tcolorbox}
+    \vspace{0.5cm}
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newenvironment{lpu}{
+  \sffamily
+  \fontsize{14pt}{16pt}\selectfont
+  \lstset{basicstyle=\fontsize{13pt}{15pt}\ttfamily}
+}{
+  \normalfont
+  \lstset{basicstyle=\normalsize\ttfamily}
+}
+
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}
+
+% Stil für Aufgabennummer
+\newtcbox{\aufgabenummerbox}[1][]{
+  on line,
+  colback=gray!20,
+  colframe=black,
+  boxrule=0.8pt,
+  arc=2pt,
+  outer arc=2pt,
+  boxsep=1pt,
+  left=4pt,
+  right=4pt,
+  top=2pt,
+  bottom=2pt,
+  fontupper=\bfseries,
+  #1
+}
+
+% Umgebung für Aufgaben
+\newenvironment{aufgabe}[1]
+{
+\begin{mdframed}[
+  backgroundcolor=blue!5,
+  linecolor=blue!40!black,
+  linewidth=1pt,
+  roundcorner=4pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  skipabove=12pt,
+  skipbelow=12pt
+]
+\aufgabenummerbox{Aufgabe #1}\vspace{6pt}
+}
+{
+\end{mdframed}
+}
+
+% Umgebung für Aufgaben
+\newenvironment{theorie}
+{
+\begin{mdframed}[
+  backgroundcolor=orange!5,
+  linecolor=blue!40!black,
+  linewidth=1pt,
+  roundcorner=4pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  skipabove=12pt,
+  skipbelow=12pt
+]
+\aufgabenummerbox{Theorie}\vspace{6pt}
+}
+{
+\end{mdframed}
+}
+
+
+\usepackage{svg}
+
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}  % für zentrierte Bilder mit valign
+
+
+
+\definecolor{featuregreen}{RGB}{220, 255, 220}
+\definecolor{targetred}{RGB}{255, 230, 230}
+
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+
+\newenvironment{hinweis}{
+  \begin{mdframed}[backgroundcolor=yellow!10, linecolor=yellow!50!black, linewidth=1pt, roundcorner=5pt]
+  \textbf{Hinweis:}
+}{
+  \end{mdframed}
+}
+
+
+\usepackage{mdframed}
+\definecolor{hellgrau}{gray}{0.95}
+
+\newmdenv[
+  backgroundcolor=hellgrau,
+  linecolor=black,
+  linewidth=0.8pt,
+  roundcorner=4pt,
+  innertopmargin=1em,
+  innerbottommargin=1em,
+  innerleftmargin=1em,
+  innerrightmargin=1em,
+  font=\rmfamily
+]{artikelbox}
+
+\newcommand{\artikelheader}[1]{\textbf{\Large #1}\par\vspace{0.5em}}
+\newcommand{\artikelsubheader}[1]{\vspace{0.5em}\textbf{\normalsize #1}\par\vspace{0.3em}}

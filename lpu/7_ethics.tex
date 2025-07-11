@@ -1,0 +1,707 @@
+\begin{lpu}
+
+Maschinelles Lernen ist nicht neutral. Die Modelle lernen aus Daten, und diese Daten stammen aus der realen Welt – mitsamt ihren Ungleichheiten, Vorurteilen und blinden Flecken.
+
+Ein typisches Beispiel: Ein ML-Modell entscheidet über die Kreditwürdigkeit von Personen. Diese Entscheidung beeinflusst reale Leben – darf man so etwas einem Algorithmus überlassen? Wer ist verantwortlich, wenn das Modell diskriminiert?
+
+Ethische Fragen im maschinellen Lernen betreffen insbesondere:
+\begin{itemize}
+  \item \textbf{Datenschutz:} Wer darf welche Daten verwenden?
+  \item \textbf{Transparenz:} Kann man erklären, wie eine Entscheidung zustande kam?
+  \item \textbf{Fairness:} Werden alle Gruppen gleich behandelt?
+  \item \textbf{Verantwortung:} Wer haftet für Fehlentscheide?
+\end{itemize}
+
+In diesem Kapitel konzentrieren wir uns auf den ersten und dritten Punkt. Dafür kehren wir zu unserem Beispiel oben zurück:
+
+\begin{aufgabe}{1}
+Lesen Sie die Fallbeschreibung:
+
+\emph{Eine Bank möchte maschinelles Lernen einsetzen, um automatisch zu entscheiden, ob jemand kreditwürdig ist. Dafür verwendet sie historische Daten von früheren Kunden.}
+
+Machen Sie sich darauf Gedanken zu folgenden Fragen, und halten Sie zu jedem Punkt mindestens ein konkretes Beispiel schriftlich fest.
+
+\begin{itemize}
+  \item Welche Daten könnten dafür zum Einsatz kommen?
+  \item Was könnte dabei problematisch sein?
+  \item Welche Vorteile könnte ein ML-Modell gegenüber einem Menschen haben?
+  \item Welche Risiken entstehen?
+\end{itemize}
+\end{aufgabe}
+
+\subsubsection*{Datenschutz}
+Auf diese Fragen gibt es sicher ganz unterschiedliche Möglichkeiten zu antworten, aber stellen wir uns vor, unsere Bank würde mit einem solchen Datensatz operieren:
+
+\begin{table}[h]
+\begin{tabularx}{0.6\textwidth}{|l|l|r|r|c|c|c|r|c|}
+\hline
+\textbf{Name} & \textbf{Geschlecht} & \textbf{Alter} & \textbf{Schulden} & \textbf{ledig} & \textbf{arbeitslos} & \textbf{Führerschein} & \textbf{PLZ} & \textbf{Kreditwürdig} \\
+\hline
+Fischer & männlich & 38 & 20000 & ja & nein & nein & 5000 & nein \\
+Müller  & männlich & 45 & 4000  & nein & ja & nein & 8108 & nein \\
+Hasani  & weiblich & 26 & 0     & ja & nein & ja & 8108 & ja \\
+Weber   & männlich & 28 & 500   & ja & nein & ja & 5400 & \cellcolor{orange}? \\
+\hline
+\end{tabularx}
+\caption{Beispiel-Daten für eine Bank, welche die Kreditwürdigkeit ihrer Kunden vorhersagen möchte.}
+\end{table}
+
+Diese Tabelle enthält auch Daten, die bei der Entscheidung, ob jemand kreditwürdig ist, keine Rolle spielen sollten: Oder denken Sie, dass ein Müller weniger oder mehr kreditwürdig ist als eine Hasani?
+
+\begin{theorie}
+Solche Daten sind durch das Schweizer Datenschutzgesetz (DSG) geschützt! Es bildet die gesetzliche Grundlage für den Umgang mit Personendaten in der Schweiz. Es definiert, wann und wie Daten erhoben, gespeichert, verarbeitet und weitergegeben werden dürfen. Ziel ist der Schutz der Persönlichkeit und der Grundrechte von natürlichen Personen – insbesondere in einer zunehmend datengetriebenen Welt.
+
+Das revidierte DSG wurde 2020 verabschiedet und ist seit dem 1. September 2023 in Kraft. In der EU ist die viel beachtete europäische Datenschutz-Grundverordnung (DSGV) seit 2018 gültig und hat international Massstäbe gesetzt. Um weiterhin als ``gleichwertiger Drittstaat'' zu gelten und einen freien Datenverkehr mit der EU zu ermöglichen, hat die Schweiz ihr eigenes DSG stark an die DSGV angeglichen. Dies betrifft unter anderem:
+
+\begin{itemize}
+  \item das Recht auf Information, Auskunft und Löschung
+  \item die Einwilligungspflicht bei besonders schützenswerten Daten (z. B. Gesundheitsdaten, politische Meinung, Religion)
+  \item das Prinzip der Datenminimierung und Zweckbindung
+  \item die Pflicht zur Datensicherheit durch technische und organisatorische Massnahmen
+\end{itemize}
+\end{theorie}
+
+Viele von Ihnen kennen Begriffe wie ``Datenschutz'' oder ``Privatsphäre'' vielleicht eher aus Nachrichten oder Einstellungen auf dem Smartphone – aber was genau damit gemeint ist, bleibt oft abstrakt.
+
+In dieser Aufgabe möchten wir Ihnen zeigen, wie konkret Datenschutz in der Schweiz aussieht. Dafür brauchen Sie keinerlei juristisches Vorwissen. Der Artikel 5 des DSG, welchen Sie lesen werden, ist kurz und klar formuliert und lässt sich mit ein wenig Konzentration gut verstehen.
+
+\begin{aufgabe}{2}
+Lesen Sie zunächst die nachfolgenden Fragen, und dann den \href{https://datenrecht.ch/gesetzestexte/dsg/#id686591b1ad647}{Art. 5 Begriffe}\footnote{\href{https://datenrecht.ch/gesetzestexte/dsg/#id686591b1ad647}{\url{datenrecht.ch/gesetzestexte/dsg/}}}, um Antworten auf die Fragen zu finden. 
+
+\begin{enumerate}
+    \item Welche der Daten in unserem Beispiel (siehe oben oder unten) sind Personendaten?
+    \item Welche der Daten im Beispiel sind besonders schützenswerte Personendaten?
+    \item Passt die Definition von \textit{Profiling} auf das geplante Kreditwürdigkeits-Modell?
+\end{enumerate}
+
+\end{aufgabe}
+
+\begin{table}[h]
+\begin{tabularx}{0.6\textwidth}{|l|l|r|r|c|c|c|r|c|}
+\hline
+\textbf{Name} & \textbf{Geschlecht} & \textbf{Alter} & \textbf{Schulden} & \textbf{ledig} & \textbf{arbeitslos} & \textbf{Führerschein} & \textbf{PLZ} & \textbf{Kreditwürdig} \\
+\hline
+Fischer & männlich & 38 & 20000 & ja & nein & nein & 5000 & nein \\
+Müller  & männlich & 45 & 4000  & nein & ja & nein & 8108 & nein \\
+Hasani  & weiblich & 26 & 0     & ja & nein & ja & 8108 & ja \\
+Weber   & männlich & 28 & 500   & ja & nein & ja & 5400 & \cellcolor{orange}? \\
+\hline
+\end{tabularx}
+\end{table}
+
+Vermutlich ist Ihnen bei der Lektüre auch aufgefallen, wie weit das DSG den Begriff \textit{Personendaten bearbeiten} fasst:
+\begin{theorie}
+    Sobald Sie mit Personendaten in Berührung kommen, greift das DSG. Denn:
+
+    \textit{Jeder Umgang mit Personendaten, unabhängig von den angewandten Mitteln und Verfahren, insbesondere das Beschaffen, Speichern, Aufbewahren, Verwenden, Verändern, Bekanntgeben, Archivieren, Löschen oder Vernichten von Daten}
+\end{theorie}
+
+Das ist wichtig, denn \href{https://datenrecht.ch/gesetzestexte/dsg/#id686591b1ad7a0}{Art. 6 Grundsätze}\footnote{\href{https://datenrecht.ch/gesetzestexte/dsg/#id686591b1ad7a0}{\url{datenrecht.ch/gesetzestexte/dsg/}}} geht dann dazu über, zu erklären, unter welchen Umständen Sie \textit{Personendaten bearbeiten} dürfen.
+
+\begin{theorie}
+Gemäss dem DSG ist das \emph{Bearbeiten von Personendaten} nur unter bestimmten Voraussetzungen zulässig. Das Bearbeiten ist gemäss Art.\ 6 erlaubt, wenn die folgenden Grundsätze eingehalten werden:
+
+\begin{enumerate}
+  \item \textbf{Rechtmässigkeit:} Die Bearbeitung muss auf einem gesetzlichen Fundament beruhen oder durch eine \emph{Einwilligung} der betroffenen Person gedeckt sein.
+  
+  \item \textbf{Verhältnismässigkeit:} Es dürfen nur jene Daten bearbeitet werden, die für den angegebenen Zweck notwendig sind. Die Bearbeitung muss in einem angemessenen Verhältnis zum Zweck stehen.
+
+  \item \textbf{Zweckbindung:} Daten dürfen nur zu dem Zweck bearbeitet werden, der beim Beschaffen angegeben wurde. (Art.\ 6 Abs.\ 3)
+  
+  \item \textbf{Transparenz:} Die betroffene Person muss wissen, welche Daten zu welchem Zweck bearbeitet werden. Bei Datenbeschaffung bei Dritten besteht eine \emph{Informationspflicht} (Art.\ 19 DSG).
+
+  \item \textbf{Richtigkeit:} Die bearbeiteten Daten müssen sachlich richtig und auf dem neuesten Stand sein.
+
+  \item \textbf{Löschpflicht:} Daten müssen gelöscht oder anonymisiert werden, sobald sie für den Bearbeitungszweck nicht mehr benötigt werden.
+\end{enumerate}
+\end{theorie}
+
+Das DSG macht allerdings eine wichtige Unterscheidung, was die \textit{Art} der Personendaten betrifft, auf die wir nachfolgend genauer eingehen. Merken Sie sich auch bereits die Möglichkeit der \textit{Anonymisierung} bei der Löschpflicht oben — auch darauf kommen wir noch zu sprechen!
+
+\begin{theorie}
+
+Einige Daten gelten als \textbf{besonders schützenswert}, z.B.:
+
+\begin{itemize}
+  \item Gesundheitsdaten
+  \item religiöse, weltanschauliche oder politische Ansichten
+  \item Daten über die ethnische Herkunft
+  \item Daten über administrative oder strafrechtliche Verfolgungen
+\end{itemize}
+
+Für das Bearbeiten dieser Daten ist grundsätzlich die \textbf{ausdrückliche Einwilligung} der betroffenen Person notwendig.
+\end{theorie}
+
+Dies hier ist lediglich eine Übersicht, und keine abschliessende Erklärung des DSGs. Dieses enthält über diese Grundsätze über hinaus nämlich noch viele weitere Artikel, wie zum Beispiel, dass bei grossen Unternehmen ein \textit{Verzeichnis der Bearbeitungstätigkeiten} geführt werden muss (Art. 12), dass Personen informiert werden müssen, wenn indirekt Daten über sie erhoben werden (Art. 19) oder dass bei automatisierte Entscheidungen die betroffene Personen die Überprüfung durch eine natürliche Person einfordern kann (Art. 21).
+
+\begin{aufgabe}{3: Vor Gericht!}
+
+\textbf{Ausgangslage:}  
+Stellen Sie sich (wie eingangs) vor, eine Bank in der Schweiz verwendet ein ML-Modell, um automatisiert zu entscheiden, ob jemand kreditwürdig ist. Das Modell basiert auf zahlreichen Merkmalen (u.\,a.\ Alter, Einkommen, Beruf, Wohnort, Geschlecht und Anzahl vorheriger Kreditanfragen). Die betroffene Person wurde aufgrund des Modells abgelehnt, obwohl sie sich selbst für kreditwürdig hält.
+
+\textbf{Ziel:}  
+In dieser Aufgabe übernehmen Sie in Dreiergruppen verschiedene Rollen, um den Fall aus unterschiedlichen Perspektiven zu beurteilen. Ihre Aufgabe ist es, auf Grundlage des DSG zu argumentieren.
+
+\vspace{1em}
+\textbf{Gruppeneinteilung:}
+
+\begin{itemize}
+  \item \textbf{Anklage:}  
+  Diese Rolle übernimmt die betroffene Person. Sie argumentieren, dass das Vorgehen der Bank gegen das DSG verstösst.
+
+  \item \textbf{Verteidigung:}  
+  Diese Rolle übernimmt die Bank. Sie argumentieren, dass das Vorgehen DSG-konform war.
+
+  \item \textbf{Gericht:}  
+  Diese Person übernimmt die Rolle der Richterin oder des Richters. Sie hören beide Seiten an, stellen Rückfragen und entscheiden am Ende des Verfahrens, ob die Bank gegen das DSG verstossen hat oder nicht.
+\end{itemize}
+
+\vspace{1em}
+\textbf{Ablauf:}
+
+\begin{enumerate}
+  \item \textbf{15 Minuten Vorbereitung:}  
+  Jede Rolle bereitet sich mit dem DSG (Art. 5–22) und den entsprechenden Materialien vor. Notieren Sie Ihre wichtigsten Argumente stichwortartig.
+
+  \item \textbf{10 Minuten Anhörung:}  
+  Die Anklage stellt ihre Sicht dar (max. 3 Minuten), gefolgt von der Verteidigung (max. 3 Minuten). Dann dürfen beide Seiten einander je eine Rückfrage stellen.
+
+  \item \textbf{5 Minuten Urteilsfindung:}  
+  Die Richterin oder der Richter stellt Rückfragen und trifft danach ein Urteil. Begründen Sie Ihre Entscheidung schriftlich in 2–3 Sätzen.
+
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Hinweise:}
+
+\begin{itemize}
+  \item Berücksichtigen Sie besonders: Art. 5 (Begriffe), Art. 6 (Grundsätze), Art. 19 (Informationspflicht), Art. 21 (Automatisierte Entscheide), Art. 22 (Folgenabschätzung).
+  \item Es gibt in dieser Aufgabe kein ``richtig'' oder ``falsch'', entscheidend ist die argumentative Qualität.
+  \item Sie dürfen Annahmen treffen in den Punkten, die in der Ausgangslage offen gelassen wurden; insbesondere auch solche, die Ihrer Seite dienlich sind.
+\end{itemize}
+
+\end{aufgabe}
+
+\subsubsection*{Anonymisierung}
+Wie vorhin schon angekündigt: Die Anonymisierung spielt hier eine wichtige Rolle. Das Datenschutzgesetz schützt \emph{Personendaten} (vielleicht würde es also besser \textit{Personen-}Datenschutzgesetz heissen), also Daten, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen. Sobald diese Daten jedoch \textbf{anonymisiert} wurden, gelten sie nicht mehr als Personendaten – und fallen somit nicht mehr unter das DSG!
+
+\begin{theorie}
+Wenn Personendaten so weit anonymisiert wurden, dass keine Rückschlüsse auf bestimmte Personen möglich sind, dürfen sie auch \emph{ohne Einwilligung} der betroffenen Person bearbeitet, gespeichert oder analysiert werden.
+\end{theorie}
+
+Das klingt toll — wir anonymisieren also einfach unsere Daten, und können sie dann nach Herzenslust für unsere ML-Algorithmen benutzen! In unserem Szenario könnten wir beispielsweise einfach die Namen schwärzen...
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|l|c|c|l|}
+\hline
+\textbf{Name} & \textbf{Alter} & \textbf{G.} & \textbf{PLZ} & \textbf{Beruf} & \textbf{Eink.} & \textbf{Anfr.} & \textbf{Entscheid} \\
+\hline
+\cellcolor{black!20}████████ & 36 & m & 8003 & Mechaniker      & 58\,000 & 2 & bewilligt \\
+\cellcolor{black!20}████████ & 28 & w & 3012 & Lehrerin        & 72\,000 & 1 & bewilligt \\
+\cellcolor{black!20}████████ & 45 & m & 4052 & IT-Support      & 63\,000 & 3 & abgelehnt \\
+\cellcolor{black!20}████████ & 31 & w & 8108 & Pflegefachfrau  & 54\,000 & 0 & bewilligt \\
+\cellcolor{black!20}████████ & 61 & m & 7000 & Pensioniert     & 48\,000 & 5 & abgelehnt \\
+\hline
+\end{tabular}
+\caption{Bankkundendaten mit geschwärzter Namensspalte (anonymisiert)}
+\end{table}
+
+Leider ist die Sache aber nicht so einfach, wie wir nachfolgend sehen werden.
+
+
+\begin{theorie}\textbf{Anonymisierung} bezeichnet das unwiderrufliche Entfernen oder Verändern von personenbezogenen Informationen in einem Datensatz, sodass eine Identifikation der betroffenen natürlichen Person auch mit vertretbarem Aufwand nicht mehr möglich ist – weder direkt noch indirekt, auch nicht durch Kombination mit anderen Informationen.
+\end{theorie}
+
+In der Praxis ist es sehr viel schwieriger, Daten wirklich anonym zu machen, als es scheint. Denn:
+
+\begin{itemize}
+  \item \textbf{Direkte Identifikatoren} (Name, E-Mail, AHV-Nummer etc.) lassen sich relativ einfach entfernen.
+  \item Doch sogenannte \textbf{indirekte Identifikatoren} (z.\,B.\ PLZ, Alter, Beruf, Schule, Seltenheitsmerkmale) können oft in Kombination Rückschlüsse auf eine bestimmte Person zulassen.
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Beispiel 1:}  
+Ein Datensatz enthält nur das Alter, Geschlecht und den Wohnort von Personen. In einem kleinen Dorf mit nur einer 54-jährigen Frau kann diese Person dennoch eindeutig identifiziert werden – auch ohne ihren Namen.
+
+\vspace{0.5em}
+\textbf{Beispiel 2:}  
+Ein Arztbericht lautet:  
+\emph{``Herr M., 52, wurde am 3. Mai 2024 im Kantonsspital Aarau wegen Verdachts auf Morbus Crohn behandelt.''}  Auch wenn hier der Name entfernt wurde, kann jemand mit lokalem Wissen diese Person einfach identifizieren.
+
+\vspace{0.5em}
+\textbf{Beispiel 3:}  
+Ein Trainingsdatensatz für ein ML-Modell enthält Gesundheitsdaten, aus denen sich ethnische Herkunft, sexuelle Orientierung oder Krankheiten ableiten lassen – oft reicht ein einzelner ungewöhnlicher Wert, um eine Person zu erkennen.
+
+\textbf{Wichtig:} Eine Anonymisierung ist DSG-konform nur dann, wenn sie \emph{irreversibel} ist – also die betroffene Person nicht einmal mit erheblichem Aufwand identifiziert werden kann.
+
+Wir werden das nun an einem konkreten Beispiel veranschaulichen. Nehmen wir aus Ausgangslage dafür folgenden Datensatz:
+
+\begin{longtable}{llrrl}
+\caption{Bevölkerungsdaten mit scheinbar harmlosen Angaben}
+\label{tab:bevoelkerung} \\
+\toprule
+Name & Geschlecht & Alter & PLZ & Beruf \\
+\midrule
+\endfirsthead
+\toprule
+Name & Geschlecht & Alter & PLZ & Beruf \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{{Fortsetzung auf der nächsten Seite}} \\
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Sarah Hofmann     & w & 42 & 8105 & Informatiker \\
+Nico Weber        & m & 26 & 8700 & Student \\
+Clara Koch        & m & 65 & 8152 & Logistiker \\
+Anna Schneider    & m & 23 & 8000 & Logistiker \\
+Tim Hofmann       & m & 31 & 8152 & Pflegefachkraft \\
+Tim Keller        & m & 40 & 8032 & Gärtner \\
+Elena Koch        & w & 44 & 8105 & Koch \\
+Anna Baumgartner  & w & 63 & 8152 & Student \\
+Noah Meier        & m & 65 & 8134 & Gärtner \\
+Ben Schneider     & m & 61 & 8000 & Jurist \\
+Leon Kunz         & w & 50 & 8134 & Informatiker \\
+Elena Meier       & m & 38 & 8134 & Mechaniker \\
+Kevin Schneider   & m & 23 & 8003 & Koch \\
+Luis Kunz         & w & 54 & 8108 & Mechaniker \\
+Nina Keller       & m & 49 & 8003 & Verkäuferin \\
+Paul Kunz         & m & 21 & 8050 & Student \\
+Sarah Hofmann & w & 42 & 8105 & Informatiker \\
+Nico Weber & m & 26 & 8700 & Student \\
+Clara Koch & m & 65 & 8152 & Logistiker \\
+Anna Schneider & m & 23 & 8000 & Logistiker \\
+Tim Hofmann & m & 31 & 8152 & Pflegefachkraft \\
+Tim Keller & m & 40 & 8032 & Gärtner \\
+Elena Koch & w & 44 & 8105 & Koch \\
+Anna Baumgartner & w & 63 & 8152 & Student \\
+Noah Meier & m & 65 & 8134 & Gärtner \\
+Ben Schneider & m & 61 & 8000 & Jurist \\
+Leon Kunz & w & 50 & 8134 & Informatiker \\
+Elena Meier & m & 38 & 8134 & Mechaniker \\
+Kevin Schneider & m & 23 & 8003 & Koch \\
+Luis Kunz & w & 54 & 8108 & Mechaniker \\
+Nina Keller & m & 49 & 8003 & Verkäuferin \\
+Paul Kunz & w & 31 & 8152 & Koch \\
+Laura Hofmann & w & 37 & 8032 & Verkäuferin \\
+Tim Müller & m & 55 & 8600 & Jurist \\
+Tom Müller & m & 41 & 8134 & Logistiker \\
+Joel Baumgartner & m & 44 & 8000 & Koch \\
+Paul Kunz & w & 47 & 8032 & Mechaniker \\
+Zoé Koch & m & 31 & 8134 & Gärtner \\
+Noah Müller & m & 43 & 8003 & Student \\
+\end{longtable}
+
+\begin{aufgabe}{4}
+    Nun haben nachlässige Entwickler von einem Marketing-Werkzeug für Gesichtscremes diesen Datensatz zwar zu anonymisieren versucht, indem sie die Namen gelöscht haben. Aber ein Mitarbeiter hat mit diesem Datensatz in einem öffentlichen Café gearbeitet, und bei einem Blick über dessen Schulter erhaschen Sie unter einer Überschrift \textbf{Verwendet Abdeckstift für Pickel} folgenden Eintrag: \textit{Jurist, 55}.
+
+    Können Sie herausfinden, wer damit gemeint sein könnte? Wie verändert sich die Situation, wenn Sie nur einen Teil dieser Informationen erhaschen können?
+\end{aufgabe}
+
+Zum Abschluss dieses ersten Teils zur Ethik vervollständigen Sie nun Ihr Glossar:
+
+\begin{aufgabe}{5}
+Fügen Sie Ihrem persönlichen Glossar Definitionen für die folgenden Begriffe in Ihren eigenen Worten hinzu. Kopieren Sie auf keinen Fall einfach den entsprechenden Gesetzestext, sondern überlegen Sie sich, was die für Sie relevante Bedeutung dessen ist.
+
+\vspace{0.5em}
+\begin{itemize}
+  \item \textbf{Personendaten} (personal data)
+  \item \textbf{besonders schützenswerte Personendaten} (sensitive personal data)
+  \item \textbf{Datenbearbeitung} (data processing)
+  \item \textbf{Profiling}
+  \item \textbf{Anonymisierung} (anonymisation)
+\end{itemize}
+
+\end{aufgabe}
+
+
+\subsubsection*{\textit{bias}}
+Lassen wir nun die Gesichtspunkte des Datenschutzes ausser Acht, und freuen uns darüber, dass unser ML-Modell zur Beurteilung der Kreditwürdigkeit, wie Sie in Aufgabe 1 vielleicht auch schon sich überlegt haben, \textit{fairer} entscheidet, als ein von Vorurteilen belaster Mensch es tun würde. Denn ein ML-Modell operiert nur Fakten-basiert, und bringt keine eigenen Vorurteile mit sich...
+
+\begin{aufgabe}{6}
+
+\textbf{Ausgangslage:}  
+Sie sind Teil eines Entwicklerteams, das ein einfaches ML-Modell für die automatische Zulassung zu einem Hip-Hop-Dance-Camp erstellen soll. Das Modell wurde mit historischen Daten trainiert und entscheidet, ob eine Bewerbung ``angenommen'' oder ``abgelehnt'' wird – basierend auf wenigen Merkmalen.
+
+\vspace{0.5em}
+\textbf{Sie erhalten folgenden Trainingsdatensatz:}
+
+\begin{centering}
+\begin{verbatim}
+Alter   Geschlecht   Wohnort     Angenommen?
+13      w            Zürich      ja
+14      w            Zürich      ja
+15      w            Zürich      ja
+14      m            Zürich      nein
+15      m            Zürich      nein
+14      m            Bern        nein
+13      w            Bern        ja
+\end{verbatim}
+\end{centering}
+
+\vspace{0.5em}
+\textbf{Aufgabenstellung:}
+
+\begin{enumerate}
+  \item Untersuchen Sie den Trainingsdatensatz: Welche Bewerbungen wurden zugelassen, welche abgelehnt?
+  \item Welche Muster erkennt ein einfaches ML-Modell wie ein Entscheidungsbaum darin?
+  \item Schreiben Sie selbst eine einfache Entscheidungsregel in Worten, die ein Algorithmus ``lernen'' würde.
+  \item Testen Sie die Regel an folgenden neuen Bewerbungen:
+  
+  \begin{itemize}
+    \item 14 Jahre, männlich, Zürich
+    \item 13 Jahre, weiblich, Bern
+    \item 15 Jahre, männlich, Bern
+  \end{itemize}
+
+  \item Welche Bewerbungen werden vermutlich abgelehnt? Ist das gerechtfertigt?
+  \item Diskutieren Sie in der Gruppe: Was für ein \textbf{bias}, also Verzerrung, liegt in diesem Trainingsdatensatz?
+  \item Überlegen Sie, wie Sie den Datensatz verändern müssten, damit das Modell fairer entscheidet.
+\end{enumerate}
+\end{aufgabe}
+
+Wie Sie sehen, ist selbst ein so einfaches ML-Modell nicht ``neutral'' ist, sondern genau das lernt, was im Datensatz steckt – auch wenn dieser diskriminierende Muster enthält.
+
+\begin{theorie}
+
+\textbf{\textit{Garbage in, garbage out}} (kurz: \textbf{GIGO}) ist ein Prinzip aus der Informatik und bezieht sich auf folgende Erkenntnis:
+
+\begin{center}
+\emph{Ein Algorithmus ist nur so gut wie die Daten, mit denen er trainiert wurde.}
+\end{center}
+
+Wenn ein ML-Modell mit schlechten, fehlerhaften, verzerrten oder unvollständigen Daten gefüttert wird, kann auch das beste Modell keine brauchbaren oder fairen Ergebnisse liefern. Die ``Qualität'' eines Algorithmus hängt also nicht nur von dessen mathematischer Raffinesse ab, sondern wesentlich vom \textbf{Datenmaterial}.
+\end{theorie}
+
+Leider gibt es zahlreiche Beispiele, die teilweise schlimme Folgen für Menschen haben.
+
+\begin{itemize}
+  \item Ein Modell zur Gesichtserkennung, das überwiegend mit Bildern heller Hauttypen trainiert wurde, funktioniert bei dunkleren Hautfarben schlechter – und trifft häufiger falsche Entscheidungen.
+  \item Ein Modell, das Spam-E-Mails erkennen soll, aber nur mit E-Mails aus dem Jahr 2010 trainiert wurde, erkennt moderne Phishing-Versuche nicht zuverlässig.
+  \item Diskriminierung durch Risikobewertung in der Strafjustiz. Ein US-amerikanisches ML-System namens COMPAS wurde verwendet, um Rückfallwahrscheinlichkeiten von Straftäter:innen zu prognostizieren. Es stellte sich heraus: Afroamerikanische Personen wurden vom System deutlich häufiger als ``Hochrisiko'' eingestuft, obwohl sie nicht häufiger rückfällig wurden als weisse Personen. Der Datensatz aber basierte auf historischen Polizeidaten, in denen farbige Menschen systematisch häufiger kontrolliert und angezeigt wurden – nicht, weil sie gefährlicher waren, sondern wegen institutionellem Rassismus. Das ML-System hat diesen institutionellen Rassismus also übernommen, ohne dass der Algorithmus rassistisch gewesen wäre.
+  \item{Ungenaue Diagnosen bei Patienten mit dunkler Haut}. ML-Modelle in der medizinischen Bildanalyse (z. B. Hautkrebs-Erkennung) wurden mehrheitlich mit Bildern von hellhäutigen Patienten trainiert. Als Folge daraus wurden Krankheiten bei dunkler Haut häufiger nicht erkannt oder zu spät, und die Qualität der Diagnose hing also ungewollt von der Hautfarbe ab. Dies aufgrund fehlender Diversität im Trainingsdatensatz – weil standardisierte medizinische Bilddaten häufig nur auf westlichen Bevölkerungen basieren.
+  \item{Sprachmodelle und Diskriminierung}: Grosse Sprachmodelle übernehmen diskriminierende Begriffe und Vorurteile aus dem Internet. Frauen werden häufiger mit Begriffen wie ``Hausfrau'' oder ``emotional'' assoziiert, während Männer mit ``Führung'', ``Rationalität'' etc. verknüpft werden. Das Modell lernt diese Assoziationen. 
+\end{itemize}
+
+\begin{theorie}
+\textbf{\textit{Bias}} – also Verzerrung oder Voreingenommenheit – ist eine typische Ursache für ``Garbage''. Wenn ein Datensatz zum Beispiel bestimmte Gruppen systematisch bevorzugt oder benachteiligt, übernimmt das Modell diesen Bias und produziert ebenfalls verzerrte Entscheidungen. Dies ist besonders problematisch bei automatisierten Systemen (z.\,B.\ bei Kreditvergabe, Bewerbungsfiltern oder im Strafvollzug).
+\end{theorie}
+
+Was können Sie als Entwickler dagegen tun?
+
+\begin{itemize}
+  \item Daten sorgfältig überprüfen (z.\,B.\ ob sie alle Gruppen fair repräsentieren)
+  \item Verzerrungen und Lücken im Datensatz erkennen und dokumentieren
+  \item Bei sensiblen Anwendungen bewusst diverse Trainingsdaten einplanen
+  \item Bias erkennen, offenlegen und im besten Fall korrigieren
+\end{itemize}
+
+Erinnern Sie sich auch daran, dass bei automatisierten Entscheidungen Sie in der Schweiz ein Recht darauf haben, eine Erklärung und menschliche Beurteilung zu verlangen.
+
+\begin{aufgabe}{7}
+Ergänzen Sie in Ihrem Glossar:
+
+\begin{itemize}
+  \item \textit{bias} (Verzerrung)
+  \item \textit{garbage in, garbage out}
+\end{itemize}
+Verwenden Sie möglichst eigene Formulierungen und ein eigenes Beispiel pro Begriff.
+\end{aufgabe}
+
+\end{lpu}
+
+\subsection*{Didaktische Überlegungen}
+
+Ziel dieses Kapitels ist es, den SuS die zentrale Erkenntnis zu vermitteln, dass maschinelles Lernen (ML) nicht ``neutral'' ist, sondern dass jede algorithmische Entscheidung auf menschlich geprägten Daten und Modellannahmen basiert. Durch einen interaktiven Zugang — so gut es bei diesem schwierigen Thema geht — sollen sie die ethischen, rechtlichen und gesellschaftlichen Implikationen solcher datengetriebenen Systeme verstehen und kritisch reflektieren können. 
+
+Insbesondere die Lektüre der tatsächlichen Gesetzestexte ist zwar herausfordernd, aber zugleich ist es wichtig, dass die SuS lernen, auch ``Primär-Texte'' bei solch wichtigen, viel-diskutierten Fragestellungen zu konsultieren, um nicht Opfer falscher Information zu werden. Um das zu vereinfachen, sind die Aufgaben im ersten Teil auf lediglich ausgewählte, überschaubare Abschnitte des DSG ausgerichtet.
+
+\subsection*{Musterlösungen}
+
+\begin{aufgabe}{1}
+
+Welche Daten könnten für den beschriebenen Fall zum Einsatz kommen?
+
+\begin{itemize}
+  \item \textbf{Personenbezogene Daten:} Name, Alter, Geschlecht, Nationalität, Wohnort (PLZ), ...
+  \item \textbf{Finanzdaten:} Einkommen, bisherige Kredite, Schulden, Ausgaben, Arbeitsverhältnis, ...
+  \item \textbf{Verhaltensdaten:} Zahlungsverhalten, Mahnungen, Kreditkartenlimit ausgereizt?, ...
+  \item \textbf{Soziale Daten (kritisch):} Bildungsstand, Familienstand, Anzahl Kinder, Beruf, ...
+  \item \textbf{Technische Daten (umstritten):} IP-Adresse, Ort der Antragstellung, Tageszeit, ...
+  \item ...
+\end{itemize}
+
+in Modell könnte erkennen, dass Personen mit regelmässigem Einkommen, mittlerem Alter und geringem Kreditvolumen statistisch seltener ausfallen. Problematisch dabei könnte aber sein:
+
+\begin{itemize}
+  \item \textbf{Diskriminierung:} Das Modell könnte bestimmte Gruppen benachteiligen, z.\,B.\:
+  \begin{itemize}
+    \item Personen aus bestimmten PLZ-Gebieten
+    \item Frauen im gebärfähigen Alter
+    \item Personen mit ausländisch klingendem Namen
+    \item ...
+  \end{itemize}
+
+  \item \textbf{Intransparenz:} Das Modell ist eine ``Black Box'' – man weiss nicht genau, warum jemand abgelehnt wurde.
+
+  \item \textbf{Verstoss gegen Datenschutz:} Nutzung sensibler Daten ohne Einwilligung.
+
+  \item \textbf{Verstärkung von Ungleichheiten:} Wer in der Vergangenheit keinen Kredit bekam, wird vom System automatisch abgewertet – auch wenn sich die Umstände verändert haben.
+  \item ...
+
+\end{itemize}
+
+Wenn viele abgelehnte Personen aus einem bestimmten Quartier stammen, lernt das Modell ``Wohnort = hohes Risiko'' – auch wenn das im Einzelfall ungerecht ist. Das Modell könnte auch andere falsche Zusammenhänge lernen (z.\,B.\ ``Lehrpersonen = unzuverlässig''), wenn die Datenlage klein oder verzerrt ist.
+
+\vspace{0.5em}
+\textbf{Vorteile}
+
+\begin{itemize}
+  \item \textbf{Schnelligkeit:} Entscheidungen in Sekundenbruchteilen
+  \item \textbf{Skalierbarkeit:} Tausende Anträge gleichzeitig bewertbar
+  \item \textbf{Konsistenz:} Gleiche Regeln für alle – keine Tagesform, keine Laune, keine Sympatien
+  \item \textbf{Vermeidung subjektiver Vorurteile:} z. B. kein Einfluss durch Kleidung, Sprache, Auftreten
+
+\end{itemize}
+
+Das gilt aber nur, wie später im Kapitel klar werden sollte, wenn das Modell \emph{nicht} bereits mit voreingenommenen Daten trainiert wurde! Ein verantwortungsvoll eingesetztes Modell könnte hingegen auch helfen, Diskriminierung zu \emph{reduzieren} – wenn man es mit diversen Daten trainiert und transparent gestaltet.
+
+\vspace{0.5em}
+\textbf{Risiken}
+
+\begin{itemize}
+  \item \textbf{Verstärkung von Diskriminierung (Bias):} Die Maschine reproduziert alte Ungerechtigkeiten – nur ``schöner'' verpackt
+  \item \textbf{Verlust menschlicher Kulanz:} Kein Verständnis für Einzelschicksale
+  \item \textbf{Mangelnde Transparenz:} Betroffene wissen nicht, wie sie sich verbessern können
+  \item \textbf{Fehlende Kontrolle:} ``Technische Objektivität'' wird nicht hinterfragt
+
+\end{itemize}
+
+\end{aufgabe}
+
+\begin{aufgabe}{2}
+
+\textbf{Frage 1: Welche der Daten im Beispiel sind Personendaten?}
+
+Gemäss \textbf{Art.\ 5} sind \emph{Personendaten} alle Angaben, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen.
+
+\textbf{Im Beispiel gehören dazu:}
+
+\begin{itemize}
+  \item \textbf{Name} – direkte Identifikation möglich
+  \item \textbf{Alter, Geschlecht, Wohnort (PLZ)} – indirekte Identifikation möglich, v. a. in Kombination
+  \item \textbf{Einkommen, Kreditanfragen, Beruf, Kreditwürdigkeit} – können ebenfalls Rückschlüsse auf eine Person erlauben
+\end{itemize}
+
+Auch wenn ein Datensatz keinen Namen enthält, kann er über Kombinationen (z. B. ``45-jährige Informatikerin aus 8108'') personenbezogen sein.
+
+\vspace{0.5em}
+\textbf{Frage 2: Welche der Daten sind besonders schützenswerte Personendaten?}
+
+Gemäss \textbf{Art.\ 5 lit.\ c} sind besonders schützenswert:
+
+\begin{itemize}
+  \item religiöse, weltanschauliche, politische oder gewerkschaftliche Ansichten
+  \item Gesundheitsdaten
+  \item genetische oder biometrische Daten
+  \item Daten über Verwaltungs- oder Strafverfolgung
+  \item Daten über Sozialhilfe
+\end{itemize}
+
+Die meisten der im Beispiel genannten Daten (Alter, Einkommen etc.) sind also \textbf{nicht besonders schützenswert}.  \textbf{Aber:} Wenn z. B. der Grund für eine Kreditverweigerung ein gesundheitlicher ist (z. B. ``Krebserkrankung = zu grosses Risiko''), dann handelt es sich um \emph{besonders schützenswerte Personendaten}.
+
+\vspace{0.5em}
+\textbf{Frage 3: Passt die Definition von \textit{profiling} auf das Kreditwürdigkeits-Modell?}
+
+\textbf{Art.\ 5 lit.\ f} definiert \textit{profiling} als:
+\begin{quote}
+``jede Art der automatisierten Bearbeitung von Personendaten, um persönliche Aspekte zu analysieren oder vorherzusagen''
+\end{quote}
+
+\textbf{Das Kreditmodell erfüllt diese Definition eindeutig:}
+\begin{itemize}
+  \item Die Bearbeitung erfolgt automatisiert durch ein ML-Modell
+  \item Ziel ist es, \textbf{Verhalten oder Eigenschaften vorherzusagen}, z. B. ob jemand den Kredit zuverlässig zurückzahlt
+\end{itemize}
+
+\end{aufgabe}
+
+\begin{aufgabe}{3: mögliche Argumente}
+
+Die folgenden Argumente sind exemplarisch. Je nach Annahmen der SuS können auch andere Punkte sinnvoll eingebracht werden. Entscheidend ist die Bezugnahme auf das DSG und die argumentative Kohärenz.
+
+\vspace{0.5em}
+\textbf{Anklage (betroffene Person)}
+
+\textbf{Hauptthese:} Die Bank hat durch das automatisierte Verfahren meine Rechte verletzt und das DSG nicht eingehalten.
+
+\vspace{0.5em}
+\textbf{Mögliche Argumente:}
+
+\begin{itemize}
+  \item \textbf{Art.\ 6 – Verhältnismässigkeit:} Das Modell verwendet zu viele personenbezogene Merkmale, auch solche, die irrelevant oder diskriminierend sein können (z. B. Geschlecht, Wohnort).
+  \item \textbf{Art.\ 5 lit.\ c – Besonders schützenswerte Daten:} Falls sensible Daten (z. B. Gesundheitsdaten, ethnische Herkunft) indirekt genutzt wurden, wäre eine ausdrückliche Einwilligung erforderlich gewesen.
+  \item \textbf{Art.\ 21 – Automatisierte Einzelentscheide:} Es handelt sich um einen vollständig automatisierten Entscheid mit massiven Auswirkungen. Ich wurde nicht informiert und konnte keine menschliche Überprüfung verlangen.
+  \item \textbf{Art.\ 19 – Informationspflicht:} Ich wurde nicht transparent über die Kriterien und die Funktionsweise des Modells informiert.
+  \item \textbf{Diskriminierungspotential:} Das Modell diskriminiert möglicherweise systematisch bestimmte Gruppen (z. B. alleinerziehende Frauen, Menschen mit niedrigem Einkommen).
+\end{itemize}
+
+\textbf{Forderung:} Offenlegung der Kriterien, menschliche Nachprüfung, mögliche Schadenersatzforderung.
+
+\vspace{1em}
+\textbf{Verteidigung (Bank)}
+
+\textbf{Hauptthese:} Die Bank hat alle DSG-relevanten Bestimmungen eingehalten und handelt im Rahmen des Gesetzes.
+
+\vspace{0.5em}
+\textbf{Mögliche Argumente:}
+
+\begin{itemize}
+  \item \textbf{Art.\ 6 – Zweckbindung und Verhältnismässigkeit:} Die verwendeten Daten sind notwendig und sachlich gerechtfertigt, um das Risiko eines Kreditausfalls zu beurteilen.
+  \item \textbf{Art.\ 5 lit.\ f – Profiling:} Es handelt sich um Profiling, aber nicht zwingend um eine \emph{automatisierte Einzelentscheidung}, wenn eine nachträgliche Überprüfung möglich ist (optional als Zusatzannahme).
+  \item \textbf{Art.\ 19 – Informationspflicht:} In den AGB wurde auf das Verfahren hingewiesen. Die betroffene Person hat dem durch Antragstellung zugestimmt.
+  \item \textbf{Datensicherheit:} Die Bank verwendet ein DSG-konformes, technisches System mit Schutzmassnahmen. Keine besonders schützenswerten Daten wurden verwendet.
+  \item \textbf{Fairness und Objektivität:} Das Modell entscheidet nachvollziehbar auf Basis messbarer Kriterien – anders als Menschen, die von Vorurteilen beeinflusst sein könnten.
+\end{itemize}
+
+\textbf{Forderung:} Das Verfahren ist DSG-konform, die Ablehnung rechtlich zulässig.
+
+\vspace{0.5em}
+\textbf{Gericht (mögliche Urteilsbegründung)}
+
+\begin{itemize}
+    \item \textbf{Beispiel 1 (zugunsten der Anklage):}
+\begin{quote}
+Die Bank hat keine transparente Kommunikation gemäss Art.\ 19 DSG geleistet, und es ist nicht klar, ob eine menschliche Nachprüfung möglich ist (Art.\ 21 DSG). Die automatisierte Ablehnung ist damit nicht DSG-konform.
+\end{quote}
+\item \textbf{Beispiel 2 (zugunsten der Bank):}
+\begin{quote}
+Die Entscheidung basiert auf sachlich begründeten Kriterien und wurde ausreichend dokumentiert. Da keine besonders schützenswerten Daten verwendet wurden und die Informationspflicht erfüllt wurde, liegt kein Verstoss gegen das DSG vor.
+\end{quote}
+\end{itemize}
+
+\end{aufgabe}
+
+
+\begin{aufgabe}{4}
+
+Der Eintrag ``Jurist, 55'' lässt sich überraschend gut einer konkreten Person (Tim Müller, in diesem Fall) zuordnen. Bei einer Stichprobe wie der unsrigen von 70 Personen kommt es durchaus vor, dass es nur eine einzige juristisch tätige Person im Alter von 55 Jahren gibt.
+
+In diesem Fall wäre die betroffene Person durch die Kombination von Beruf und Alter eindeutig bestimmbar. Die Daten gelten gemäss Art. 5 lit. a damit wieder als personenbezogen, obwohl der Name entfernt wurde.
+
+Ein solcher Fall zeigt exemplarisch, dass Anonymisierung nicht nur bedeutet, offensichtliche Identifikatoren zu löschen (z. B. Namen oder AHV-Nummern), sondern dass auch Kombinationen von scheinbar harmlosen Informationen eine Re-Identifikation ermöglichen können.
+
+\vspace{0.5em}
+
+Wird nur ein Teil der Information bekannt (z. B. nur ``Jurist'' oder nur ``55 Jahre''), ist die Zuordnung schwieriger, aber unter Umständen immer noch möglich. Tatsächlich gibt es in dem Datensatz nur eine Person mit Alter von 55 Jahren, und lediglich zwei Juristen. Wäre der Name beispielsweise auf die Initialen gekürzt worden (also Herr M., Jurist) wäre auch eine eindeutige zuordnung möglich gewesen.
+
+
+Die Wirksamkeit einer Anonymisierung hängt also stark vom Kontext und der Grösse des Datensatzes ab. Bereits zwei kombinierte Datenfelder können ausreichen, um eine betroffene Person zu identifizieren – insbesondere in kleinen Stichproben.
+
+\end{aufgabe}
+
+
+
+\begin{aufgabe}{5}
+
+Die folgenden Begriffe könnten von SuS im Glossar etwa so beschrieben werden. Wichtig ist, dass sie in eigenen Worten und mit einem klaren Verständnis formuliert sind. Variationen oder passende Beispiele sind zulässig und erwünscht.
+
+\textit{Personendaten}  
+Daten, die sich auf eine bestimmte Person beziehen oder mit anderen Infos so kombiniert werden können, dass man erkennt, um wen es geht. Zum Beispiel Name, Wohnort, Alter oder E-Mail-Adresse.
+
+\textit{besonders schützenswerte Personendaten}  
+Daten, die besonders privat oder heikel sind. Dazu gehören zum Beispiel Gesundheitsdaten, religiöse oder politische Meinungen, oder Informationen zu Strafen und Sozialhilfe.
+
+\textit{Datenbearbeitung}  
+Alles, was man mit Daten macht – vom Sammeln über das Speichern bis zum Löschen. Auch wenn man Daten nur anschaut oder weitergibt, ist das schon eine Bearbeitung.
+
+\textbf{\textit{profiling}}  
+Wenn ein Computerprogramm automatisch viele Daten auswertet, um etwas über eine Person vorherzusagen – zum Beispiel, ob jemand ein gutes Opfer für Werbung für Pickel-Hautpflege ist.
+
+\textit{Anonymisierung}  
+Ein Verfahren, bei dem Daten so verändert werden, dass niemand mehr herausfinden kann, auf wen sie sich beziehen. Auch nicht mit zusätzlichem Wissen. Anonymisierte Daten unterstehen nicht mehr dem Datenschutzgesetz.
+
+\end{aufgabe}
+
+
+
+\begin{aufgabe}{6}
+
+\textbf{1. Welche Bewerbungen wurden zugelassen, welche abgelehnt?}
+
+Zugelassen wurden alle weiblichen Bewerberinnen, egal ob aus Zürich oder Bern. Abgelehnt wurden alle männlichen Bewerber – unabhängig vom Wohnort oder Alter.  
+Der Datensatz enthält also 4 Zusagen (alle weiblich) und 3 Absagen (alle männlich).
+
+\vspace{0.5em}
+\textbf{2. Welche Muster erkennt ein einfaches ML-Modell?}
+
+Ein einfaches Modell, z. B. ein Entscheidungsbaum, würde schnell feststellen, dass das Geschlecht den grössten Einfluss auf die Entscheidung hat. Es könnte also den ersten Entscheidknoten bei ``Geschlecht = w'' setzen.
+
+\vspace{0.5em}
+\textbf{3. Welche Entscheidungsregel würde das Modell lernen?}
+
+Eine mögliche Regel wäre:  
+\textit{Wenn Geschlecht = weiblich, dann ``ja''. Sonst ``nein''.}
+
+Eventuell erkennt das Modell auch zusätzlich:  
+\textit{Wenn Geschlecht = weiblich und Wohnort = Zürich, dann ``ja''.}  
+Aber die Entscheidung basiert in erster Linie auf dem Geschlecht.
+
+\vspace{0.5em}
+\textbf{4. Testen Sie die Regel an neuen Bewerbungen:}
+
+\begin{itemize}
+  \item 14 Jahre, männlich, Zürich → \textit{vermutlich abgelehnt}
+  \item 13 Jahre, weiblich, Bern → \textit{vermutlich angenommen}
+  \item 15 Jahre, männlich, Bern → \textit{vermutlich abgelehnt}
+\end{itemize}
+
+Die Regel trifft auf alle drei Fälle klar zu, wenn das Modell vor allem auf ``Geschlecht'' achtet.
+
+\vspace{0.5em}
+\textbf{5. Welche Bewerbungen werden vermutlich abgelehnt? Ist das gerechtfertigt?}
+
+Zwei von drei neuen Bewerbungen würden abgelehnt – beide männlich.  
+Ob das gerechtfertigt ist, ist zweifelhaft: Das Modell berücksichtigt keine Talente, Interessen oder individuellen Qualifikationen. Es diskriminiert offensichtlich alle Jungen.
+
+\vspace{0.5em}
+\textbf{6. Was für ein \textit{bias} liegt vor?}
+
+Der Trainingsdatensatz enthält einen klaren \textit{gender bias}. Alle Mädchen wurden angenommen, alle Jungen abgelehnt – unabhängig von anderen Eigenschaften.
+
+Ein Modell, das mit solchen Daten trainiert wird, lernt automatisch diese Verzerrung. Es reproduziert also nicht eine faire Realität, sondern die Voreingenommenheit der alten Auswahl.
+
+\vspace{0.5em}
+\textbf{7. Wie müsste der Datensatz verändert werden, damit das Modell fairer entscheidet?}
+
+Man müsste den Datensatz ausgewogener gestalten. Das bedeutet:
+
+\begin{itemize}
+  \item auch Beispiele aufnehmen, in denen Jungen angenommen wurden
+  \item zusätzliche Merkmale einführen, z. B. Tanzerfahrung oder Motivation
+  \item Daten gleichmässiger über verschiedene Gruppen verteilen (Geschlecht, Wohnort, Alter)
+\end{itemize}
+
+Alternativ könnte man das Modell technisch so regulieren, dass es keine diskriminierenden Merkmale wie das Geschlecht berücksichtigt – oder dass diese neutral gewichtet werden.
+
+Dieses Beispiel zeigt gut, dass ein ML-Modell genau das lernt, was in den Daten steckt. Wenn die Trainingsdaten unfair sind, wird auch das Modell unfair.
+
+\end{aufgabe}
+
+\begin{aufgabe}{7}
+
+\textbf{\textit{bias} (Verzerrung)}.
+Ein bias entsteht, wenn ein ML-Modell durch einseitige oder fehlerhafte Daten eine verzerrte Entscheidung trifft. Das Modell übernimmt dann Vorurteile aus den Trainingsdaten – auch wenn es diese nicht ``bewusst'' hat.
+
+Beispiel: Ein automatischer Filter entscheidet, wer für ein Schülerstipendium vorgeschlagen wird. Das Modell wurde aber mit Daten von Gymnasien trainiert, nicht von Berufsschulen. Dadurch werden Berufsschüler seltener erkannt – obwohl sie genauso gut wären.
+
+
+\textbf{\textit{garbage in, garbage out}}.
+Dieser Ausdruck bedeutet: Wenn die Eingabedaten schlecht sind, kann auch das beste Modell nichts Sinnvolles lernen. Schlechte Daten führen zu schlechten Ergebnissen.
+
+Beispiel: Eine App schlägt SuS Lernmethoden vor, basierend auf ihren Noten. Aber wenn die Noten aus alten Schuljahren stammen oder aus einem anderen Fach, passen die Vorschläge oft gar nicht mehr – sie basieren auf falschen Annahmen. Denn: Noten können sich schnell ändern; oft braucht es nur ein paar wenige gut vorbereitete Prüfungen, um einen Schnitt deutlich zu heben!
+
+\end{aufgabe}
