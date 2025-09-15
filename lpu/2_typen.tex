@@ -1,4 +1,4 @@
-\begin{lpu}
+\begin{lpu}{Welche Daten gibt es und was für Vorhersagen kann man damit treffen?}
 
 Maschinelles Lernen lebt von den Daten – ohne Daten keine Erkenntnis. Damit Sie sinnvolle Modelle entwickeln k\"onnen, m\"ussen Sie Ihre Daten kennen, analysieren und korrekt aufbereiten. Das beginnt damit, die unterschiedlichen Datentypen zu verstehen, die im maschinellen Lernen auftreten. Nur so k\"onnen Sie entscheiden, welcher Algorithmus sich f\"ur Ihre Aufgabenstellung eignet.
 
@@ -36,7 +36,7 @@ Im maschinellen Lernen unterscheidet man zwei Arten von Daten:
 Ordnen Sie folgende Merkmale einer Person den zwei Datentypen zu: \emph{Alter, Geschlecht, Nationalit\"at, Gewicht, Wohnregion, Schulabschluss}. Begr\"unden Sie Ihre Entscheidungen.
 \end{aufgabe}
 
-Im Beispiel oben ist die Zuordnung weitgehend eindeutig: Man kann sich zwar überlegen, ob man bei Schulabschluss eine Note ausgibt oder auflistet, ob jemand eine EFZ, eine Matur oder einen anderen Abschluss gemacht hat. Im ersten Fall hätten wir es dann mit \textit{numerischen} Daten zu tun, und im zweiten Fall mit \textit{kategorischen}. Doch aufgepasst! Was, wenn wir alle möglichen Abschlüsse auflisten, und nur die \textbf{Nr.} verwenden, um anzugeben, welchen Abschluss jemand erreicht hat?
+Im Beispiel oben ist die Zuordnung weitgehend eindeutig: Man kann sich zwar überlegen, ob man bei Schulabschluss eine Note ausgibt oder auflistet, ob jemand eine EFZ, eine Matur oder einen anderen Abschluss gemacht hat. Im ersten Fall hätten wir es dann mit \textit{numerischen} Daten zu tun, und im zweiten Fall mit \textit{kategorischen}. Doch aufgepasst! Was, wenn wir alle möglichen Abschlüsse auflisten und nur die \textbf{Nr.} verwenden, um anzugeben, welchen Abschluss jemand erreicht hat?
 
 \begin{table}
 \begin{center}
@@ -62,10 +62,17 @@ Im Beispiel oben ist die Zuordnung weitgehend eindeutig: Man kann sich zwar übe
 \end{center}
 \end{table}
 
-Aufgepasst also vor \textbf{falschen Freunden}! In diesem Fall sind 5, 7 und 8 (zum Beispiel) zwar Zahlen, aber stellen trotzdem \textit{kategorische} Daten dar. Wir können zwar theoretisch diese Zahlen verrechnen, doch bedeuten die numerischen Werte nichts. Welchem Abschluss würde eine 3.5 entsprechen?
+\label{sec:categorical}
+Aufgepasst also vor \textbf{falschen Freunden}! In diesem Fall sind 5, 7 und 8 (zum Beispiel) zwar Zahlen, aber stellen trotzdem \textit{kategorische} Daten dar. Wir können zwar theoretisch diese Zahlen verrechnen, doch bedeuten die numerischen Werte nichts. Welchem Abschluss würde eine \textit{3.5} entsprechen? 
+
+Es gibt in unserem Beispiel (und im Schweizer Bildungssystem) keine Kategorie \textit{3.5}. Wir könnten uns zwar vorstellen, dass es eine Mischform zwischen Berufsmaturität (Kategorie 3) und FMS (Kategorie 4) geben \textit{könnte}, aber das würde bedeuten, dass wir die Idee von kategorischen Daten missverstehen:
+
+Die Kategorien oben werden lediglich mit einer Zahl \textit{codiert}: Diese Zahl ist ein Etikett, kein Messwert. Aus der Kategorie 8 folgt nicht, dass es exakt „doppelt so viel“ Bildung ist wie 4; die Codes tragen \textit{keine} Information über Abstände. Wir hätten beispielsweise auch Buchstaben A für die obligatorische Schule, B für die Lehre etc. verwenden können — nur ist es für viele Computer einfacher, mit ganzen Zahlen zu hantieren.
+
+Wichtig zu verstehen ist auch, dass die Kategorien \textit{diskret} sind, d.h. ein Datenpunkt gehört entweder zu einer Kategorie oder nicht. Genauso wie man im Schweizer Bildungssystem nicht einen ``halben Abschluss'' haben kann, kann ein Datenpunkt nicht nur teilweise zu einer Kategorie gehören.
 
 \begin{theorie}
-Viele Algorithmen im ML k\"onnen nur mit Zahlen arbeiten. Deshalb m\"ussen kategorische Daten oft in Zahlen umgewandelt werden. Die Daten bleiben kategorisch, wobei jeder Kategorie eine Zahl zugeordnet wird.
+Viele Algorithmen im ML k\"onnen nur mit Zahlen arbeiten. Deshalb müssen kategorische Daten oft in Zahlen umgewandelt werden. Die Daten bleiben kategorisch, wobei jeder Kategorie eine Zahl zugeordnet wird.
 \end{theorie}
 
 Auch numerische Daten m\"ussen oft vorbereitet werden: Manche ML-Algorithmen reagieren empfindlich darauf, wenn sich numerische Werte nicht zwischen $[0,1]$ bewegen. Das nachfolgende Beispiel veranschaulicht dies:
@@ -181,7 +188,7 @@ Dies stellt sicher, dass alle Merkmale vergleichbare Wertebereiche haben – una
 
 Es gibt auch andere Verfahren zur Skalierung, aber diese Unterrichtseinheit beschränkt sich auf die Skalierung auf $[0,1]$.
 
-Nun, da wir wichtige Grundlagen zu den Daten gelegt haben, müssen wir noch einige Begriffe schärfen, bevor wir mit den ersten Algorithmen loslegen können. Wie Sie in Kapitel \ref{sec:begriffe} gesehen haben, ist der generelle Ablauf im maschinellen Lernen folgender:
+Nun, da wir wichtige Grundlagen zu den Daten gelegt haben, müssen wir noch einige Begriffe schärfen, bevor wir mit den ersten Algorithmen loslegen können. Wie Sie in sehen werden (und wie es in \ref{sec:begriffe} bereits skizziert wurde), ist der generelle Ablauf im maschinellen Lernen folgender:
 
 \begin{figure}
 \begin{center}
@@ -235,10 +242,55 @@ Unterschieden werden:
 \end{aufgabe}
 
 \begin{hinweis}
-Manche Aufgabenstellungen enthalten beides: numerische und kategorische Aspekte. Solche \glqq zusammengesetzten\grqq{} Daten werden im fortgeschrittenen ML ebenfalls behandelt.
+Manche Aufgabenstellungen enthalten beides: numerische und kategorische Aspekte. Solche `` zusammengesetzten'' Daten werden im fortgeschrittenen ML ebenfalls behandelt: Zum Beispiel könnten Sie vorhersagen möchten, was für einen Abschluss jemand vermutlich erreichen wird (= kategorischer Wert) und mit welcher Note diese Person abschliesst (= numerischer Wert).
 \end{hinweis}
 
-Unstrukturierte Daten – wie Bilder, Sprache oder Texte – lassen sich schwerer vorhersagen. Hierzu braucht es spezielle Algorithmen, z.\,B. tiefe neuronale Netze. Diese Themen sprengen den Rahmen dieses Moduls, geh\"oren aber zu den spannendsten aktuellen Entwicklungen.
+Unstrukturierte Daten – wie Bilder, Sprache oder Texte – lassen sich schwerer ``vorhersagen''. Aber man kann sich vorstellen, wie \textit{generative Modelle} einzelne Pixel eines Bildes als Zahl ``vorhersagen'' oder berechnen können, mit welchem Wort ein unfertiger Satz am möglicherweise enden könnte. Hierzu braucht es spezielle Algorithmen, z.\,B. tiefe neuronale Netze. Diese Themen sprengen den Rahmen dieses Moduls, gehören aber zu den spannendsten aktuellen Entwicklungen.
+
+\subsubsection*{Zusammenfassung}
+
+In diesem Kapitel haben Sie die verschiedenen Arten von Daten kennengelernt und erfahren, welche Rolle sie im maschinellen Lernen spielen.  
+
+\begin{itemize}
+  \item \textbf{Numerische Daten} (z. B. Alter, Einkommen) sind messbar und lassen sich sinnvoll verrechnen.
+  \item \textbf{Kategorische Daten} (z. B. Geschlecht, Region) sind beschreibend und können nicht verrechnet werden – auch wenn sie manchmal als Zahlen codiert sind.
+  \item Kategorische Daten werden oft in Zahlen \textbf{umcodiert}, bleiben aber inhaltlich kategorisch.
+  \item \textbf{Skalieren} bedeutet, numerische Merkmale auf denselben Bereich (z. B. $[0,1]$) zu bringen, damit sie miteinander vergleichbar sind.
+  \item Vorhersagen im ML lassen sich unterscheiden in:
+  \begin{itemize}
+    \item \textbf{numerische Vorhersagen} (Regression)
+    \item \textbf{kategorische Vorhersagen} (Klassifikation)
+  \end{itemize}
+\end{itemize}
+
+\subsubsection*{Übungsaufgaben}
+
+\begin{aufgabe}{I}
+\textbf{Skalierungs-Rechenübung:}  Ein Datensatz enthält folgende Werte zum Alter: $22, 35, 60$. Skalieren Sie alle drei Werte auf einen Bereich von $[0, 1]$.  
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+Sie erhalten einen Datensatz mit folgenden Informationen:  
+\begin{itemize}
+  \item Vorname
+  \item Postleitzahl
+  \item Alter
+  \item Einkommen
+  \item Lieblingsfarbe
+\end{itemize}
+
+Welche dieser Merkmale sollten Sie aus Sicht des maschinellen Lernens:
+\begin{enumerate}
+  \item numerisch skalieren?
+  \item als kategorisch codieren?
+\end{enumerate}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+Warum ist es problematisch, wenn ein ML-Modell mit unskalierten Daten arbeitet, bei denen ein Merkmal in \texttt{Gramm} angegeben ist, ein anderes aber in \texttt{Kilogramm}?
+\end{aufgabe}
+
+
 \end{lpu}
 
 \subsection*{Musterlösung}
@@ -305,7 +357,7 @@ $$
 $     \text{Alter: } \frac{28 - 26}{40 - 26} = \frac{2}{14} \approx 0.143 \quad\text{Einkommen: } \frac{78000 - 50000}{79000 - 50000} = \frac{28000}{29000} \approx 0.966
     $
 \item \textbf{Person A:}
-$     \text{Alter: } 0.0 \quad\text{Einkommen: } 0.0
+$     \text{Alter: } \frac{26 - 26}{40 - 26} = 0.0 \quad\text{Einkommen: } \frac{50000 - 50000}{79000 - 50000} = 0.0
     $
 \item \textbf{Person B:}
 $     \text{Alter: } \frac{40 - 26}{14} = 1.0 \quad\text{Einkommen: } \frac{79000 - 50000}{29000} = 1.0
@@ -327,8 +379,7 @@ $     \frac{\,|0.143 - 1.0| + |0.966 - 1.0|\,}{2} = \frac{0.857 + 0.034}{2} \app
 
 \vspace{1em}
 
-\textbf{Alternative Betrachtung:}
-Würde man stattdessen die euklidische Distanz verwenden, ergäbe sich das gleiche Ergebnis, jedoch stärker vom Einkommensunterschied dominiert. Alternativ könnte man auch die Merkmale unterschiedlich gewichten, z.B. dem Alter mehr Bedeutung geben. Das würde Person A begünstigen. Die Wahl des Ähnlichkeitsmasses hängt also stark vom Anwendungskontext ab.
+\textbf{Alternative Betrachtung für mathematisch fortgeschrittene SuS:} Würde man stattdessen die euklidische Distanz verwenden, ergäbe sich das gleiche Ergebnis, jedoch stärker vom Einkommensunterschied dominiert. Alternativ könnte man auch die Merkmale unterschiedlich gewichten, z.B. dem Alter mehr Bedeutung geben. Das würde Person A begünstigen. Die Wahl des Ähnlichkeitsmasses hängt also stark vom Anwendungskontext ab.
 
 \end{aufgabe}
 
@@ -408,7 +459,7 @@ Wir verwenden den Mittelwert der absoluten Differenzen der Merkmale.
 \end{itemize}
 
 \vspace{1em}
-\textbf{Alternative Betrachtung:}
+\textbf{Alternative Betrachtung für fortgeschrittene SuS:}
 
 \begin{itemize}
   \item Wenn Bildschirmzeit in diesem Kontext wichtiger ist (z.\,B. wegen gemeinsamer Hobbys), könnte man diesem Merkmal ein grösseres Gewicht geben.
@@ -417,7 +468,7 @@ Wir verwenden den Mittelwert der absoluten Differenzen der Merkmale.
   d = \sqrt{(\Delta x)^2 + (\Delta y)^2}
   \]
   Diese Methode betont grosse Unterschiede noch stärker.
-  \item Eine weitere Möglichkeit wäre die Nutzung von Clustering-Algorithmen, falls man mehrere Eigenschaften und mehr Personen berücksichtigen möchte.
+  \item Eine weitere Möglichkeit wäre die Nutzung von Ballungs-Algorithmen, die wir später sehen werden, falls man mehrere Eigenschaften und mehr Personen berücksichtigen möchte.
 \end{itemize}
 
 \end{aufgabe}
@@ -442,3 +493,33 @@ Wir verwenden den Mittelwert der absoluten Differenzen der Merkmale.
 \end{aufgabe}
 
 
+\begin{aufgabe}{I}
+\textbf{Skalierung der Alterswerte:}  
+Gegeben: Werte = 22, 35, 60  
+Minimum = 22, Maximum = 60  
+
+\[
+\text{Skalierter Wert} = \frac{\text{aktueller Wert} - 22}{60 - 22} = \frac{\text{aktueller Wert} - 22}{38}
+\]
+
+\begin{itemize}
+  \item 22: $\frac{22 - 22}{38} = 0$
+  \item 35: $\frac{35 - 22}{38} = \frac{13}{38} \approx 0.342$
+  \item 60: $\frac{60 - 22}{38} = 1$
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\begin{itemize}
+  \item Vorname könnte man entfernen, er hat keinen sinnvollen Informationsgehalt für ML.
+  \item Numerisch skalieren: Alter, Einkommen (numerische Merkmale)  
+  \item Kategorisch codieren: Postleitzahl (regionale Kategorie), Lieblingsfarbe  
+\end{itemize}
+\textbf{Begründung}: Postleitzahlen sehen zwar wie Zahlen aus, aber tragen keine numerische Bedeutung — sie sind Kategorien.
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+\textbf{Problem:}  
+Wenn ein Merkmal in Gramm (z.B. 1000 g) und ein anderes in Kilogramm (z. B. 1 kg) angegeben ist, scheinen sie numerisch sehr verschieden, obwohl sie denselben Wert haben.  
+Ein ML-Algorithmus würde fälschlicherweise annehmen, dass 1000 (Gramm) viel mehr bedeutet als 1 (Kilogramm) — und könnte dadurch stark verzerrte Vorhersagen treffen.
+\end{aufgabe}

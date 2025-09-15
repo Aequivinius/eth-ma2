@@ -1,4 +1,6 @@
-\begin{lpu}
+\begin{lpu}{\texttt{scikit-learn}: Unser Werkzeugkasten fürs ML}
+\label{sec:skit}
+
 In diesem Kapitel lernen Sie nun endlich, wie Sie ML-Algorithmen nicht von Hand, sondern mithilfe von python berechnen und verwenden können. Dazu verwenden wir die Bibliothek \texttt{scikit-learn}. Dies ist eine weitverbreitete und stabile Bibliothek für maschinelles Lernen in, die seit 2007 kontinuierlich weiterentwickelt wird und unter einer \textit{open-source}-Lizenz steht.
 
 Ein zentraler Vorteil von \texttt{scikit-learn} besteht darin, dass viele unterschiedliche ML-Algorithmen (z.B. lineare Regression, \textit{k-means}, Entscheidungsbäume; aber auch weitere) über eine einheitliche Programmierschnittstelle verfügbar sind. Das bedeutet: Wenn Sie ein Modell trainiert haben, können Sie unabhängig vom gewählten Algorithmus mit denselben Befehlen Vorhersagen treffen. Diese Modelle werden in \texttt{scikit-learn} als sogenannte \textit{estimators} (Abschätzer) bezeichnet.
@@ -8,7 +10,7 @@ Ein zentraler Vorteil von \texttt{scikit-learn} besteht darin, dass viele unters
 \begin{itemize}
   \item Klassifikation (z. B. Vorhersage von Kategorien wie ``spam'' oder ``ham'')
   \item Regression (z. B. Vorhersage eines numerischen Werts)
-  \item Ballung (Clustering), also das Gruppieren ähnlicher Daten ohne Vorwissen
+  \item Ballung (\textit{clustering}), also das Gruppieren ähnlicher Daten ohne Vorwissen
 \end{itemize}
 
 \vspace{0.5em}
@@ -92,7 +94,7 @@ In diesem Schritt entscheiden Sie, was genau Sie vorhersagen möchten (das nennt
 \caption{Beispieldatensatz zu Gesundheitskosten und personenbezogenen Merkmalen}
 \end{table}
 
-Aus den Daten in der Tabelle oben können Sie bspw. ein Modell erstellen, was die Krankenkasse-Prämie berechnet basierend auf Alter, BMI und Tabakkonsum. In dem Fall wäre die Prämie das \textit{target} (nachfolgend \textcolor{targetred}{rot}) und Alter, BMI und Tabakkonsum die \textit{features} (nachfolgend \textcolor{featuregreen}{grün}). 
+Aus den Daten in der Tabelle oben können Sie bspw. ein Modell erstellen, was die Krankenkasse-Prämie berechnet basierend auf Alter, BMI und Tabakkonsum. In dem Fall wäre die Prämie das \textit{target} (nachfolgend \colorbox{lightgray}{\textcolor{targetred}{rot}}) und Alter, BMI und Tabakkonsum die \textit{features} (nachfolgend \colorbox{lightgray}{\textcolor{featuregreen}{grün}}). 
 
 \begin{table}[h!]
 \centering
@@ -143,7 +145,7 @@ Aber Sie könnten auch versuchen, den BMI vorherzusagen (\textit{target}) ausgeh
 
 
 
-Im Falle unseres Iris-Datensatzes wird uns das Leben hier aber sehr einfach gemacht: Im Datensatz sind die Kolonnen bereits mit \texttt{.data} und \texttt{.target} benannt. \texttt{.data} enthält die Längen der Blüten, und \texttt{.target} die Kategorisierung (\texttt{0} für \textit{Iris setosa}, \texttt{1} für \textit{Iris versicolor} und \texttt{2} für \textit{Iris virginica}. Wir müssen also diese Kolonnen lediglich in unterschiedlichen Variablen speichern, um diese Unterteilung in \textit{target} und \textit{features} zu machen:
+Im Falle unseres Iris-Datensatzes wird uns das Leben hier aber sehr einfach gemacht: Im Datensatz sind die Kolonnen bereits mit \texttt{.data} und \texttt{.target} benannt. \texttt{.data} enthält die Längen der Blüten, und \texttt{.target} die Kategorisierung (\texttt{0} für \textit{Iris setosa}, \texttt{1} für \textit{Iris versicolor} und \texttt{2} für \textit{Iris virginica}). Wir müssen also diese Kolonnen lediglich in unterschiedlichen Variablen speichern, um diese Unterteilung in \textit{target} und \textit{features} zu machen:
 
 \begin{lstlisting}[language=Python]
 X = iris.data
@@ -160,7 +162,7 @@ Wir hätten \texttt{X} und \texttt{y} auch \texttt{features} und \texttt{target}
 
 \subsubsection*{\textit{train-test split}}
 
-Wenn ein Modell trainiert wird, besteht die Gefahr, dass es die vorhandenen Daten zu gut lernt – man spricht dann von einer ``Überanpassung'' (\textit{overfitting}). Ein solches Modell funktioniert zwar sehr gut auf den Daten, die es bereits kennt, aber schlecht auf neuen, unbekannten Daten. 
+Wenn ein Modell trainiert wird, besteht die Gefahr, dass es die vorhandenen Daten zu gut lernt – man spricht dann von einer ``Überanpassung'' (\textit{overfitting}). Ein solches Modell funktioniert zwar sehr gut auf den Daten, die es bereits kennt, aber schlecht auf neuen, unbekannten Daten. Das ist ein bisschen wie ``auswendig lernen, ohne zu verstehen''.
 
 \begin{aufgabe}{1: \textit{overfitting} oder echtes Verständnis?}
 
@@ -231,7 +233,7 @@ Ein Modell benötigt möglichst viele Beispiele, um verlässliche Muster zu erke
 \begin{itemize}
   \item {80\,\% / 20\,\% ist ein verbreiteter Kompromiss: genügend Trainingsdaten, aber auch ausreichend Testdaten für eine seriöse Evaluation.
   \item Bei sehr grossen Datensätzen (z.\,B. >100\,000 Beispiele) sind auch 90\,\% / 10\,\% sinnvoll, da bereits 10\,\% eine grosse Testmenge darstellen.
-  \item Bei kleinen Datensätzen wird manchmal eine 70\,\% / 30\,\%-Aufteilung verwendet, um mehr Testbeispiele zu erhalten. (Alternativ kann \textit{cross validation} eingesetzt werden, aber diese sprengt den Rahmen dieser Unterrichtseinheit).
+  \item Bei kleinen Datensätzen wird manchmal eine 70\,\% / 30\,\%-Aufteilung verwendet, um mehr Testbeispiele zu erhalten. (Alternativ kann \textit{cross validation} eingesetzt werden, aber diese sprengt den Rahmen dieser Unterrichtseinheit. Interessierte SuS können \href{https://machinelearningmastery.com/k-fold-cross-validation}{hier}\footnote{\href{https://machinelearningmastery.com/k-fold-cross-validation}{\url{machinelearningmastery.com/k-fold-cross-validation}}} beispielsweise mehr erfahren.)
 \end{itemize}
 
 \begin{theorie}
@@ -271,7 +273,7 @@ Die Bedeutung der einzelnen Variablen ist:
 
 \subsubsection*{Aufbereitung}
 
-Bevor ein ML-Modell mit den Daten trainiert wird, müssen diese oft vorbereitet werden – man spricht von \textit{reprocessing} (wörtlich Vorverarbeitung). Das Ziel ist es, die Daten in eine Form zu bringen, mit der der Algorithmus effizient und korrekt arbeiten kann.
+Bevor ein ML-Modell mit den Daten trainiert wird, müssen diese oft vorbereitet werden – man spricht von \textit{preprocessing} (wörtlich Vorverarbeitung). Das Ziel ist es, die Daten in eine Form zu bringen, mit der der Algorithmus effizient und korrekt arbeiten kann.
 
 Eine zentrale Technik, die Sie bereits kennen, ist die \textit{Skalierung}. Numerische Werte wie z. B. Alter oder Einkommen werden auf einen gemeinsamen Zahlenbereich gebracht (z. B. $[0,1]$), damit einzelne Spalten das Modell nicht übermässig beeinflussen.
 
@@ -280,7 +282,7 @@ Darüber hinaus gibt es weitere wichtige Möglichkeiten der Aufbereitung:
 \begin{itemize}
   \item \textit{one hot encoding:} Kategorische Merkmale wie ``Region'' oder ``Geschlecht'' werden in Zahlen umgewandelt.
   \item Fehlende Werte behandeln: Leere Zellen (NaN) werden z.B. durch Mittelwerte oder spezielle Marker ersetzt.
-  \item Text-Vektorisierung: Texte müssen in Zahlen umgewandelt werden, da viele Modelle nicht gut natürlichen Text verarbeiten können. Das wird oft mittels \textit{embeddings} gemacht, sodass der gesamte Text als ein mathematischer Vektor ausgedrückt werden kann. (Dies nur zur Informationen; diese Technik geht weit über den Rahmen dieser Unterrichtseinheit hinaus.)
+  \item Text-Vektorisierung: Texte müssen in Zahlen umgewandelt werden, da viele Modelle nicht gut natürlichen Text verarbeiten können. Das wird oft mittels \textit{embeddings} gemacht, sodass der gesamte Text als ein mathematischer Vektor ausgedrückt werden kann. (Dies nur zur Information; diese Technik geht weit über den Rahmen dieser Unterrichtseinheit hinaus.)
 \end{itemize}
 
 \texttt{scikit-learn} stellt für all diese Schritte praktische Funktionen bereit, z.B. \texttt{StandardScaler}, \texttt{OneHotEncoder} oder \texttt{SimpleImputer}.
@@ -416,6 +418,29 @@ Sobald wir die nötige Aufbereitung der Messdaten vorgenommen haben, können wir
 \begin{lstlisting}[language=Python]
 DT.predict(new_flower_scaled)
 \end{lstlisting}
+
+
+\subsubsection*{Zusammenfassung}
+
+In diesem Kapitel haben Sie gelernt, wie Sie mithilfe der Bibliothek \texttt{scikit-learn} maschinelles Lernen in Python praktisch umsetzen können. Anhand des bekannten Iris-Datensatzes haben Sie die typische Vorgehensweise kennengelernt:
+
+\begin{itemize}
+  \item \textbf{Importieren von Daten:} z. B. über \texttt{load\_iris(as\_frame=True)}
+  \item \textbf{Zuweisung von \texttt{features} und \texttt{target}:} Eingabedaten (\texttt{X}) und Zielwerte (\texttt{y})
+  \item \textbf{Aufteilen in Trainings- und Testdaten:} mit \texttt{train\_test\_split()}
+  \item \textbf{Skalieren der Daten:} mit z.B. \texttt{MinMaxScaler()}
+  \item \textbf{Modellwahl und Training:} mit \texttt{fit()}, z.B. \texttt{DecisionTreeClassifier()}
+  \item \textbf{Evaluation des Modells:} mit \texttt{score()} oder Vergleich von \texttt{y\_test} und \texttt{y\_pred}
+  \item \textbf{Modell speichern und laden:} mit \texttt{joblib.dump()} und \texttt{joblib.load()}
+  \item \textbf{Vorhersagen treffen:} mit \texttt{predict()}
+\end{itemize}
+
+Die einheitliche Benennung (\texttt{fit()}, \texttt{predict()}, \texttt{score()}) erlaubt es, sehr einfach verschiedene ML-Algorithmen auszuprobieren ohne die gesamte Pipeline umstellen zu müssen. So können Sie Ihr Wissen über Entscheidungsbäume, lineare Regression oder \textit{k-means} direkt anwenden.
+
+
+
+
+
 \end{lpu}
 
 

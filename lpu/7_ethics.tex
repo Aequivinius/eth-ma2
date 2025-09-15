@@ -1,4 +1,4 @@
-\begin{lpu}
+\begin{lpu}{Fair und verantwortungsvoll entscheiden mit Daten}
 
 Maschinelles Lernen ist nicht neutral. Die Modelle lernen aus Daten, und diese Daten stammen aus der realen Welt – mitsamt ihren Ungleichheiten, Vorurteilen und blinden Flecken.
 
@@ -318,7 +318,7 @@ Fügen Sie Ihrem persönlichen Glossar Definitionen für die folgenden Begriffe 
 \end{aufgabe}
 
 
-\subsubsection*{\textit{bias}}
+\subsubsection*{\textit{bias} (Verzerrung)}
 Lassen wir nun die Gesichtspunkte des Datenschutzes ausser Acht, und freuen uns darüber, dass unser ML-Modell zur Beurteilung der Kreditwürdigkeit, wie Sie in Aufgabe 1 vielleicht auch schon sich überlegt haben, \textit{fairer} entscheidet, als ein von Vorurteilen belaster Mensch es tun würde. Denn ein ML-Modell operiert nur Fakten-basiert, und bringt keine eigenen Vorurteile mit sich...
 
 \begin{aufgabe}{6}
@@ -409,6 +409,62 @@ Ergänzen Sie in Ihrem Glossar:
   \item \textit{garbage in, garbage out}
 \end{itemize}
 Verwenden Sie möglichst eigene Formulierungen und ein eigenes Beispiel pro Begriff.
+\end{aufgabe}
+
+\subsubsection*{Zusammenfassung}
+
+In dieser Lerneinheit haben Sie erkannt, dass maschinelles Lernen nicht nur ein technisches, sondern auch ein gesellschaftliches Thema ist. Sie haben gelernt:
+
+\begin{itemize}
+  \item \textbf{Daten sind nicht neutral:} ML-Modelle übernehmen die Strukturen und Verzerrungen aus den Trainingsdaten.
+  \item \textbf{Datenschutz ist zentral:} Personendaten sind gesetzlich geschützt. Für deren Bearbeitung braucht es klare Regeln und Einwilligungen.
+  \item \textbf{Bias kann zu Diskriminierung führen:} Verzerrte Trainingsdaten führen zu verzerrten Modellen. Fairness ist kein Selbstläufer.
+  \item \textbf{Anonymisierung ist anspruchsvoll:} Einfache Löschung von Namen reicht nicht – auch indirekte Merkmale können Rückschlüsse ermöglichen.
+\end{itemize}
+
+ML kann mächtige Werkzeuge liefern – aber es braucht Verantwortungsbewusstsein und kritisches Denken, um sie fair und sinnvoll einzusetzen.
+
+\subsubsection*{Übungsaufgaben}
+
+\begin{aufgabe}{I}
+\textbf{Darf ein Algorithmus das?}
+
+Lesen Sie die folgende Entscheidung eines ML-Modells:
+
+\begin{quote}
+  \emph{Ein Algorithmus entscheidet, dass eine 65-jährige Rentnerin aus PLZ 8134 keinen Kredit erhält – mit der Begründung, dass ähnliche Personen in der Vergangenheit häufiger Kredite nicht zurückgezahlt haben.}
+\end{quote}
+
+Beurteilen Sie diese Entscheidung unter folgenden Gesichtspunkten:
+
+\begin{enumerate}
+  \item Welche personenbezogenen Daten wurden hier offenbar verwendet?
+  \item Welche ethischen oder rechtlichen Probleme könnten damit einhergehen?
+  \item Wie müsste ein fairer Entscheidungsprozess stattdessen aussehen?
+\end{enumerate}
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\textbf{Bias erkennen und beheben}
+
+Ein Algorithmus soll anhand von Schulnoten automatisch empfehlen, wer in ein Förderprogramm aufgenommen wird. Der Trainingsdatensatz enthält jedoch deutlich mehr männliche Schüler.
+
+\begin{enumerate}
+  \item Erklären Sie, was passieren kann, wenn das Modell auf diesem Datensatz trainiert wird.
+  \item Geben Sie zwei konkrete Möglichkeiten an, wie Sie als Entwickler den Bias erkennen und beheben können.
+\end{enumerate}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+\textbf{Anonymisiert oder nicht?}
+
+Bewerten Sie, ob folgende Datensätze tatsächlich anonymisiert sind. Begründen Sie Ihre Antwort jeweils in einem Satz.
+
+\begin{enumerate}
+  \item Tabelle mit Alter, Geschlecht, PLZ, Einkommen.
+  \item Patientenberichte, bei denen nur der Name entfernt wurde.
+  \item Datensatz mit vollständig zufällig generierten Personen ohne Rückverbindung zu realen Fällen.
+\end{enumerate}
 \end{aufgabe}
 
 \end{lpu}
@@ -694,7 +750,7 @@ Dieses Beispiel zeigt gut, dass ein ML-Modell genau das lernt, was in den Daten 
 \begin{aufgabe}{7}
 
 \textbf{\textit{bias} (Verzerrung)}.
-Ein bias entsteht, wenn ein ML-Modell durch einseitige oder fehlerhafte Daten eine verzerrte Entscheidung trifft. Das Modell übernimmt dann Vorurteile aus den Trainingsdaten – auch wenn es diese nicht ``bewusst'' hat.
+Ein \textit{bias} entsteht, wenn ein ML-Modell durch einseitige oder fehlerhafte Daten eine verzerrte Entscheidung trifft. Das Modell übernimmt dann Vorurteile aus den Trainingsdaten – auch wenn es diese nicht ``bewusst'' hat.
 
 Beispiel: Ein automatischer Filter entscheidet, wer für ein Schülerstipendium vorgeschlagen wird. Das Modell wurde aber mit Daten von Gymnasien trainiert, nicht von Berufsschulen. Dadurch werden Berufsschüler seltener erkannt – obwohl sie genauso gut wären.
 
@@ -704,4 +760,31 @@ Dieser Ausdruck bedeutet: Wenn die Eingabedaten schlecht sind, kann auch das bes
 
 Beispiel: Eine App schlägt SuS Lernmethoden vor, basierend auf ihren Noten. Aber wenn die Noten aus alten Schuljahren stammen oder aus einem anderen Fach, passen die Vorschläge oft gar nicht mehr – sie basieren auf falschen Annahmen. Denn: Noten können sich schnell ändern; oft braucht es nur ein paar wenige gut vorbereitete Prüfungen, um einen Schnitt deutlich zu heben!
 
+\end{aufgabe}
+
+\begin{aufgabe}{I}
+\begin{itemize}
+  \item Verwendet wurden: Alter (65), Wohnort (PLZ 8134), sozioökonomische Klassifikation.
+  \item Problematisch: Diskriminierung aufgrund Alters oder Wohnorts (→ potenziell Verstoss gegen DSG), pauschale Rückschlüsse.
+  \item Fairer Prozess: Berücksichtigung individueller Bonitätsmerkmale (z. B. Einkommen, bisherige Zahlungsmoral), Möglichkeit zur persönlichen Begründung.
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\begin{itemize}
+  \item Wenn der Datensatz überwiegend männliche Schüler enthält, lernt das Modell unbewusst, dass ``männlich'' mit ``Förderung'' korreliert – auch wenn dies unbegründet ist. Mädchen könnten benachteiligt werden.
+  \item Mögliche Gegenmassnahmen:
+    \begin{itemize}
+      \item Datensatz ausbalancieren (gleich viele weibliche/männliche Beispiele verwenden)
+      \item Separate Evaluation nach Gruppen durchführen (Fairness-Test)
+    \end{itemize}
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+\begin{itemize}
+  \item \textit{Nicht anonymisiert}: Kombination von PLZ, Alter und Geschlecht kann oft auf Einzelpersonen schliessen lassen.
+  \item \textit{Nicht anonymisiert}: Indirekte Identifikation über seltene Diagnosen oder Ereignisse möglich.
+  \item \textit{Anonymisiert}: Wenn es keine Verbindung zur Realität gibt, sind keine Rückschlüsse möglich.
+\end{itemize}
 \end{aufgabe}

@@ -1,12 +1,12 @@
-\begin{lpu}
+\begin{lpu}{Wie man ähnliche Dinge zu Gruppen zusammenfasst: Ballung}
 
-Nachdem Sie bereits zwei Arten von Algorithmen kennengelernt haben — einen für die Klassifikation und die lineare Regression — begegnet Ihnen nun eine dritte: die \textbf{Ballung}, auch \emph{clustering} genannt. Während bei der Entwicklung für Algorithmen der Klassifikation und Regression jeweils die \emph{richtige Antwort} vorgegeben ist (man spricht von \emph{überwachtem Lernen}), ist dies bei Ballung nicht der Fall: Sie erkennen Strukturen in Daten, ohne dass jemand vorher gesagt hat, wie viele Gruppen es gibt oder wie diese aussehen sollen.
+Nachdem Sie bereits zwei Arten von Algorithmen des maschinellen Lernens kennengelernt haben — einen für die Klassifikation (nämlich den Entscheidungsbaum) und die lineare Regression für numerische Vorhersagen — begegnet Ihnen nun eine dritte: die \textbf{Ballung}, auch \emph{clustering} genannt. Während bei der Entwicklung für Algorithmen der Klassifikation und Regression jeweils die \emph{richtige Antwort} vorgegeben ist (man spricht von \emph{überwachtem Lernen}), ist dies bei Ballung nicht der Fall: Sie erkennen Strukturen in Daten, ohne dass jemand vorher gesagt hat, wie viele Gruppen es gibt oder wie diese aussehen sollen.
 
 Ein typisches Beispiel: Ein Onlineshop möchte seine Kundschaft segmentieren, um gezieltere Werbung zu machen. Dazu werden Merkmale wie Bestellverhalten oder Preisempfindlichkeit betrachtet – ohne zu wissen, wie viele «Typen» von Kundinnen und Kunden es gibt. Stellen Sie sich also vor, Sie betrieben einen Online-Shop für Elektronik. In Ihrem System liegen Daten vor über alle Bestellungen der letzten zwei Jahre: Wie teuer war die Bestellung? Zu welcher Tageszeit wurde sie getätigt? Welche Produktkategorien waren beteiligt? Nun möchten Sie Ihre Kundschaft \textit{segmentieren} (also in Gruppen einteilen), um gezieltere Angebote zu machen:
 
 Sie möchten für diese Gruppen unterschiedliche Rabatte oder Newsletter formulieren – wissen aber nicht im Voraus, wie viele Gruppen existieren oder wie diese genau definiert sind. Hier kommt ein Ballungsalgorithmus ins Spiel: Er gruppiert die vorhandenen Daten in sinnvolle \textit{cluster} (= Gruppen), basierend auf Ähnlichkeiten zwischen ihnen.
 
-Ein anderes Beispiel: Stellen Sie sich vor, Spotify möchte auswerten, wie sich verschiedene Nutzerinnen und Nutzer verhalten. Jede Person hört unterschiedlich oft Musik, zu verschiedenen Tageszeiten, in verschiedenen Genres. Spotify kann diese Daten verwenden, um Nutzerinnen und Nutzer automatisch in Gruppen einzuteilen und für diese Gruppen geeignete Vorschläge zu machen. Beispielsweise könnte ein \textit{clustering}-Algorithmus automatisch herausfinden, dass es folgende Gruppen gibt:
+Ein anderes Beispiel: Stellen Sie sich vor, Spotify möchte auswerten, wie sich verschiedene Nutzerinnen und Nutzer verhalten. Jede Person hört unterschiedlich oft Musik, zu verschiedenen Tageszeiten, in verschiedenen Genres. Spotify kann diese Daten verwenden, um Nutzerinnen und Nutzer automatisch in Gruppen einzuteilen und für diese Gruppen geeignete Vorschläge zu machen. Beispielsweise könnte ein Ballungs-Algorithmus automatisch herausfinden, dass es folgende Gruppen gibt:
 
 \begin{itemize}
   \item Lernende, die tagsüber ruhige Musik hören.
@@ -115,7 +115,7 @@ Da Sie wissen, dass das Geheimnis des Erfolges Ihres Unternehmens darin liegt, d
 \label{fig:pizza_kmeans_variante}
 \end{figure}
 
-\begin{aufgabe}{2}
+\begin{aufgabe}{2a}
 In Abbildung~\ref{fig:pizza_kmeans_variante} sehen Sie also die Positionen von Pizzabestellungen in einer Stadt. Die Punkte sind diesmal deutlich unregelmässiger verteilt als im vorherigen Beispiel. Sie möchten drei neue Depots eröffnen, von denen die Pizzas geliefert werden. Ziel ist es, dass:
 
 \begin{itemize}
@@ -140,26 +140,113 @@ In Abbildung~\ref{fig:pizza_kmeans_variante} sehen Sie also die Positionen von P
   \item Notieren Sie sich die Koordinaten der Zentren.
   \item Warum haben Sie genau diese Punkte gewählt?
 \end{itemize}
+\end{aufgabe}
 
-\vspace{1em}
-\textbf{3. Denken Sie einen Schritt weiter}
+In dieser Aufgabe haben Sie die Gruppen intuitiv gebildet. Doch wie bringen Sie einem Computer bei, automatisch solche Gruppierungen zu finden? Die nächsten zwei Teilaufgaben führen Sie dazu hin, zu verstehen, wie man algorithmisch solche Gruppen und Zentren finden kann.
+
+
+\begin{aufgabe}{2b}
+Wenn Sie die Gruppierungen aus Aufgabe 2a ``vergessen'', aber die Zentren beibehalten. Die nachfolgende Darstellung hilft Ihnen beim Visualisieren, aber Sie können auch \textit{Ihre} Zentren verwenden.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+\draw[step=1cm,gray,very thin] (0,0) grid (20,20);
+\draw[->] (0,0) -- (21,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,21) node[above] {$y$};
+
+\filldraw[black] (1.61,18.19) circle (2pt);
+\filldraw[black] (4.62,12.69) circle (2pt);
+\filldraw[black] (2.73,19.63) circle (2pt);
+\filldraw[black] (1.34,15.06) circle (2pt);
+\filldraw[black] (6.79,14.09) circle (2pt);
+\filldraw[black] (2.51,15.79) circle (2pt);
+\filldraw[black] (7.28,14.59) circle (2pt);
+
+\filldraw[black] (15.02,15.04) circle (2pt);
+\filldraw[black] (19.85,18.81) circle (2pt);
+\filldraw[black] (18.21,16.85) circle (2pt);
+\filldraw[black] (17.62,19.28) circle (2pt);
+\filldraw[black] (13.94,18.59) circle (2pt);
+\filldraw[black] (13.24,14.60) circle (2pt);
+\filldraw[black] (18.00,12.86) circle (2pt);
+
+\filldraw[black] (9.69,0.10) circle (2pt);
+\filldraw[black] (9.44,4.16) circle (2pt);
+\filldraw[black] (6.10,0.46) circle (2pt);
+\filldraw[black] (12.04,1.62) circle (2pt);
+\filldraw[black] (10.01,3.51) circle (2pt);
+\filldraw[black] (8.07,2.62) circle (2pt);
+\filldraw[black] (8.23,1.80) circle (2pt);
+
+\filldraw[red] (4,16) node[below right]{Zentrum 1} circle (4pt);
+\filldraw[red] (17,17) node[below right]{Zentrum 2} circle (4pt);
+\filldraw[red] (9,2) node[below right]{Zentrum 3} circle (4pt);
+
+\end{tikzpicture}
+\end{center}
+
+
+Wenn Sie ein Computer wären: Wie würden Sie für einen gegebenen Punkt entscheiden, welchem Zentrum er zugeordnet werden sollte?
+\end{aufgabe}
+
+\begin{aufgabe}{2c}
+Drehen wir den Spiess um: Wir ``vergessen'' die Zentren, aber merken uns die Gruppierung:
+
+\centering
+\begin{tikzpicture}[scale=0.4]
+  % Achsen und Gitter
+  \draw[step=1cm,gray,very thin] (0,0) grid (20,20);
+  \draw[->] (0,0) -- (21,0) node[right] {$x$};
+  \draw[->] (0,0) -- (0,21) node[above] {$y$};
+
+  % Gruppe 1 (links oben, blau)
+  \foreach \x/\y in {1.61/18.19, 4.62/12.69, 2.73/19.63, 1.34/15.06,
+                     6.79/14.09, 2.51/15.79, 7.28/14.59}{
+    \filldraw[blue] (\x,\y) circle (3pt);
+  }
+
+  % Gruppe 2 (rechts oben, grün)
+  \foreach \x/\y in {15.02/15.04, 19.85/18.81, 18.21/16.85, 17.62/19.28,
+                     13.94/18.59, 13.24/14.60, 18.00/12.86}{
+    \filldraw[green!70!black] (\x,\y) circle (3pt);
+  }
+
+  % Gruppe 3 (unten, orange)
+  \foreach \x/\y in {9.69/0.10, 9.44/4.16, 6.10/0.46, 12.04/1.62,
+                     10.01/3.51, 8.07/2.62, 8.23/1.80}{
+    \filldraw[orange] (\x,\y) circle (3pt);
+  }
+
+\end{tikzpicture}
+
+Wie würden Sie als Computer für jede Gruppe das Zentrum berechnen?
+
+\end{aufgabe}
+
+Sie haben gerade selbst die Grundidee des \textbf{\textit{k-means}-Algorithmus} entdeckt – ein Verfahren, das Gruppen findet, indem es immer wieder Gruppenzugehörigkeiten aktualisiert und neue Gruppenzentren berechnet. Während Sie sich hier noch auf Ihre Intuition verlassen haben, um die ersten Gruppierungen und Zentren zu bestimmen, verfügt ein Computer nicht über eine Intuition. An deren Stelle rücken der Zufall und die Iteration. 
+
+
+\begin{aufgabe}{3}
+Benutzen Sie \href{https://www.naftaliharris.com/blog/visualizing-k-means-clustering/}{diese Simulation}\footnote{\href{https://www.naftaliharris.com/blog/visualizing-k-means-clustering/}{\url{naftaliharris.com/blog/visualizing-k-means-clustering/}}}, um sich ein Bild davon zu machen, wie \textit{k-means} funktioniert. Beginnen Sie dort mit \tikz[baseline=(X.base)]
+  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
+  (X) {\textsf{Randomly}}; für \textit{How to pick the initial centroids?}; dann wählen Sie zunächst \tikz[baseline=(X.base)]
+  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
+  (X) {\textsf{Gaussian Mixture}};. Spielen Sie im Anschluss mit verschiedene Einstellungen!
+
+
+\vspace{0.5em}
+Beantworten Sie danach folgende Fragen:
 
 \begin{itemize}
-  \item Wenn Sie nun nur die Zentren betrachten: Könnte man jedem Punkt \emph{automatisch} das nächstgelegene Zentrum zuweisen, ungeachtet dessen, welcher (Start-)Gruppe dieser Punkt zugewiesen war?
-  \item Und wenn Sie dadurch neue Gruppen erhalten – wie könnten Sie dann neue Zentren berechnen?
-  \item Wiederholen Sie diesen Schritt (Zuweisen $\rightarrow$ Zentren berechnen) gedanklich ein weiteres Mal.
-\end{itemize}
-
-\vspace{1em}
-\textbf{4. Reflektieren Sie:}
-
-\begin{itemize}
-  \item Was würde passieren, wenn Sie diesen Prozess so lange wiederholen, bis sich nichts mehr verändert?
-  \item Haben Sie dabei etwas entdeckt, was vielleicht auch ein Computer tun könnte?
+  \item Was passiert, wenn zwei Zentren sehr nahe beieinander liegen? (Dazu können Sie zu Beginn der Simulation \tikz[baseline=(X.base)]
+  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
+  (X) {\textsf{I'll Choose}}; wählen.)
+  \item Wie verhält sich der Algorithmus bei ``nicht-runden'' Gruppenformen?
+  \item Ist die Wahl der Startpunkte wichtig?
 \end{itemize}
 \end{aufgabe}
 
-Sie haben gerade selbst die Grundidee des \textbf{\textit{k-means}-Algorithmus} entdeckt – ein Verfahren, das Gruppen findet, indem es immer wieder Gruppenzugehörigkeiten aktualisiert und neue Gruppenzentren berechnet. Während Sie sich hier noch auf Ihre Intuition verlassen haben, um die ersten Gruppierungen und Zentren zu bestimmen, verfügt ein Computer nicht über eine Intuition. An deren Stelle rückt der Zufall:
+Dieses Vorgehen wird nun mathematisch formalisiert.
 
 \begin{theorie}
 Ein verbreiteter Algorithmus zur Ballung ist \textbf{\textit{k-means}}. Er teilt Datenpunkte in genau $k$ Gruppen (Ballungen), sodass jeder Punkt zu dem Zentrum gehört, zu dem er die kleinste Distanz hat.
@@ -204,32 +291,9 @@ c_j = \left( \frac{1}{|G_j|} \sum_{x_i \in G_j} x_i^{(1)},\
 Das heisst: Jede Koordinate des Zentroids ist der Mittelwert der entsprechenden Koordinaten aller Punkte der Gruppe.
 \end{theorie}
 
-Auch wenn das mathematisch involviert scheinen mag, so ist der Algorithmus einfach zu verstehen. Folgende Simulation kann Ihnen helfen, sich das vorgehen des \textit{k-means} zu verbildichen:
+Auch wenn das mathematisch involviert scheinen mag, so ist der Algorithmus einfach zu verstehen. Obwohl Sie für gewöhnlich sich diese Berechnungen von einem Computer ausführen lassen (wie wir später auch sehen werden), ist es lehrreich, wenn Sie einmal zumindest die Berechnung mit Ihrem eigenen Gehirn ausführen.
 
-\begin{aufgabe}{3}
-Benutzen Sie \href{https://www.naftaliharris.com/blog/visualizing-k-means-clustering/}{diese Simulation}\footnote{\href{https://www.naftaliharris.com/blog/visualizing-k-means-clustering/}{\url{naftaliharris.com/blog/visualizing-k-means-clustering/}}}, um sich ein Bild davon zu machen, wie \textit{k-means} funktioniert. Beginnen Sie dort mit \tikz[baseline=(X.base)]
-  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
-  (X) {\textsf{Randomly}}; für \textit{How to pick the initial centroids?}; dann wählen Sie zunächst \tikz[baseline=(X.base)]
-  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
-  (X) {\textsf{Gaussian Mixture}};. Spielen Sie im Anschluss mit verschiedene Einstellungen!
-
-
-\vspace{0.5em}
-Beantworten Sie danach folgende Fragen:
-
-\begin{itemize}
-  \item Was passiert, wenn zwei Zentren sehr nahe beieinander liegen? (Dazu können Sie zu Beginn der Simulation \tikz[baseline=(X.base)]
-  \node[draw=black, rounded corners, inner xsep=2pt, inner ysep=1pt]
-  (X) {\textsf{I'll Choose}}; wählen.)
-  \item Wie verhält sich der Algorithmus bei ``nicht-runden'' Gruppenformen?
-  \item Ist die Wahl der Startpunkte wichtig?
-\end{itemize}
-\end{aufgabe}
-
-Obwohl Sie für gewöhnlich sich diese Berechnungen von einem Computer ausführen lassen (wie wir später auch sehen werden), ist es lehrreich, wenn Sie einmal zumindest die Berechnung mit Ihrem eigenen Gehirn ausführen.
-
-
-\begin{aufgabe}{4*}
+\begin{aufgabe}{4}
 In dieser Aufgabe wenden Sie den \textit{k-means}-Algorithmus auf ein ganz kleines Beispiel in zwei Dimensionen an. Die Punkte sind:
 
 \[
@@ -268,18 +332,105 @@ Wir möchten die Punkte in $k = 2$ Gruppen einteilen.
 
 \end{enumerate}
 \end{aufgabe}
+
+
+Wenn man ein Verfahren wie \textit{k-means} verwendet, stellen sich drei grundlegende Fragen:
+
+\begin{enumerate}
+    \item \textbf{Wie viele Gruppen (\textit{k}) soll man verwenden}
+    Die Anzahl \textit{k} muss im klassischen \textit{k-means}-Verfahren vorab gewählt werden. Es gibt keine ``richtige'' Zahl — vielmehr hängt die Wahl davon ab, wie fein oder grob die Gruppierung sein soll.  In der Praxis nutzt man oft sogenannte \textit{elbow plots}, um eine gute Wahl für \textit{k} zu finden: Man berechnet für verschiedene Werte von \textit{k} die Summe der quadratischen Abstände der Punkte zu ihren Gruppenzentren. Diese Summe nimmt mit grösserem \textit{k} ab – aber ab einem bestimmten Punkt lohnt sich das Hinzufügen weiterer Gruppen kaum mehr. Dort ist der ``Knick'' (engl. \textit{elbow}) – ein sinnvoller Kandidat für \textit{k}. Aber das ist nur eine Art, und oft hängt \textit{k} von der Anwendung ab.
+    
+    \item \textbf{Wann ist das Verfahren fertig?} 
+Das Verfahren wird so lange wiederholt , bis sich die Gruppenzentren \textit{kaum} mehr verändern. Aber was heisst \textit{kaum}? In der Praxis kann man z.B. eine Grenze $\varepsilon$ setzen:  
+\[
+\text{Stopp, wenn sich alle Zentren um weniger als } \varepsilon \text{ verschieben.}
+\]
+
+Für $\varepsilon$ gibt es keinen universell richtigen Wert, aber er sollte sich an der Grösse des Datenraumes orientieren. Programmier-Bibliotheken wie \texttt{scikit-learn}, welches Sie später benutzen werden, verwendet $\varepsilon = 10^{-4}$ für normalisierte Daten, bei welchen die Dimensionen zwischen $[0,1]$ liegen. Für unsere Koordinaten sollte der Wert entsprechend höher liegen. Ein anderer Ansatz ist es, eine maximale Anzahl Durchläufe vorgeben (z. B. 100 Wiederholungen).
+
+\item \textbf{Was bedeuten die Gruppen eigentlich?} Eine Frage, die sich beim Entdecken von Gruppen ebenfalls stellt, betrifft deren ``Identität'':  Was genau macht eine Gruppe aus? Was haben die Punkte darin gemeinsam?  
+
+Ein Ballungs-Verfahren kann nur sagen, \emph{dass} Punkte ähnlich sind — nicht \emph{warum}.  
+Die Interpretation bleibt Aufgabe der Menschen. Insbesondere bei Datensätzen mit vielen Merkmalen ist es eine echte Herausforderung, eine Gruppe verständlich zu beschreiben:  Welche Eigenschaften teilen die Mitglieder einer Gruppe? Gibt es ein typisches Profil? Manchmal entdeckt ein solcher Algorithmus Ähnlichkeiten, die einem Menschen nicht aufgefallen wären. Aber erklären kann der Algorithmus diese nicht; das bleibt eine menschliche Leistung.
+\end{enumerate}
+
+\subsubsection*{Zusammenfassung}
+
+In diesem Kapitel haben Sie den dritten Grundtyp maschinellen Lernens kennengelernt: die \textbf{Ballung} (engl. \textit{clustering}).  
+
+\begin{itemize}
+  \item Eine Ballung ist eine Gruppierung von ähnlichen Datenpunkten, ohne dass diese Gruppen vorher vorgegeben sind.
+  \item Ballung gehört zum \textbf{unüberwachten Lernen}: Es gibt keine Zielwerte oder Labels – der Algorithmus sucht selbst Strukturen.
+  \item Ein bekannter Algorithmus ist \textbf{\textit{k-means}}. Er funktioniert in mehreren Schritten:
+    \begin{enumerate}
+      \item Starte mit $k$ zufälligen Gruppenzentren.
+      \item Ordne alle Punkte dem nächstgelegenen Zentrum zu.
+      \item Berechne für jede Gruppe ein neues Zentrum (Zentroid).
+      \item Wiederhole, bis sich die Zentren kaum noch verändern.
+    \end{enumerate}
+  \item Die \textbf{Zugehörigkeit} eines Punktes wird durch die \textbf{Distanz} zum nächsten Zentrum bestimmt.
+  \item Die Gruppen, die so entstehen, müssen von Menschen interpretiert werden. Der Algorithmus zeigt nur: \textit{Diese Dinge sind einander ähnlich}.
+\end{itemize}
+
+
+\subsubsection*{Zusammenfassung}
+
+In diesem Kapitel haben Sie den dritten Grundtyp maschinellen Lernens kennengelernt: die \textbf{Ballung} (engl. \textit{clustering}).  
+
+\begin{itemize}
+  \item Eine Ballung ist eine Gruppierung von ähnlichen Datenpunkten, ohne dass diese Gruppen vorher vorgegeben sind.
+  \item Ballung gehört zum \textbf{unüberwachten Lernen}: Es gibt keine Zielwerte oder Labels – der Algorithmus sucht selbst Strukturen.
+  \item Ein bekannter Algorithmus ist \textbf{\textit{k-means}}. Er funktioniert in mehreren Schritten:
+    \begin{enumerate}
+      \item Starte mit $k$ zufälligen Gruppenzentren.
+      \item Ordne alle Punkte dem nächstgelegenen Zentrum zu.
+      \item Berechne für jede Gruppe ein neues Zentrum (Zentroid).
+      \item Wiederhole, bis sich die Zentren kaum noch verändern.
+    \end{enumerate}
+  \item Die \textbf{Zugehörigkeit} eines Punktes wird durch die \textbf{Distanz} zum nächsten Zentrum bestimmt.
+  \item Die Gruppen, die so entstehen, müssen von Menschen interpretiert werden. Der Algorithmus zeigt nur: \textit{Diese Dinge sind einander ähnlich}.
+\end{itemize}
+
+\subsubsection*{Übungsaufgaben}
+
+\begin{aufgabe}{I}
+In Ihren Daten liegen Informationen zu Bestellungen vor. Sie kennen aber \textit{keine} Labels (z. B. ``Vielbesteller'' oder ``Gelegenheitshopper'').  
+Warum ist Ballung hier ein geeigneter Ansatz? Und warum wäre ein Entscheidungsbaum ungeeignet?
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+Schreiben Sie in Pseudocode, wie der \texttt{k-means}-Algorithmus funktioniert. Verwenden Sie dabei die Begriffe: \textit{Zentrum}, \textit{Gruppe}, \textit{Distanz}, \textit{Wiederholung} und \textit{Zentroid}.
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+Sie haben die folgenden Punkte:  
+\[
+(2, 3),\quad (3, 2),\quad (8, 7),\quad (9, 6)
+\]  
+Sie starten mit zwei Zentren:  
+\[
+Z_1 = (2,3),\quad Z_2 = (9,6)
+\]
+
+\begin{itemize}
+  \item Ordnen Sie jeden Punkt dem näheren Zentrum zu.
+  \item Berechnen Sie für jede Gruppe das neue Zentrum (Zentroid).
+\end{itemize}
+\end{aufgabe}
+
+
 \end{lpu}
 
 \subsection*{Didaktische Überlegungen}
 
 
-Das Thema ``Ballung'' (\textit{clustering}) stellt eine neue Denkweise im maschinellen Lernen dar: Erstmals arbeiten die SuS mit einem \emph{unüberwachten Verfahren}, bei dem die ``richtigen Antworten'' nicht vorgegeben sind. Statt zwischen Kategorien zu unterscheiden (Klassifikation) oder Werte vorherzusagen (Regression), geht es hier darum, in rohen Daten Muster zu entdecken, ohne dass diese explizit benannt sind. Diese Art des maschinellen Lernens wurde hier bewusst so früh wie möglich eingeführt, damit die SuS ein Konzept vom ML formen, das sowohl überwachtes als auch unüberwachtes Lernen einschliesst, und nicht einen Konzeptwandel vollbringen müssen.
+Das Thema Ballung (\textit{clustering}) stellt eine neue Denkweise im maschinellen Lernen dar: Erstmals arbeiten die SuS mit einem \emph{unüberwachten Verfahren}, bei dem die ``richtigen Antworten'' nicht vorgegeben sind. Statt zwischen Kategorien zu unterscheiden (Klassifikation) oder Werte vorherzusagen (Regression), geht es hier darum, in rohen Daten Muster zu entdecken, ohne dass diese explizit benannt sind. Diese Art des maschinellen Lernens wurde hier bewusst so früh wie möglich eingeführt, damit die SuS ein Konzept vom ML formen, das sowohl überwachtes als auch unüberwachtes Lernen einschliesst, und nicht einen Konzeptwandel vollbringen müssen.
 
 Die vorgeschalteten Aufgaben, in denen SuS Standorte für einen Pizzalieferdienst setzen sollen, bevor der Algorithmus \textit{k-means} überhaupt eingeführt wird, dienen dazu, ein intuitives Verständnis für \textit{cluster} zu entwickeln. Sie lernen, dass Daten sinnvoll gruppiert werden können, auch wenn keine Etikette existiert.
 
 Durch die strukturierte Heranführung an \textit{k-means} – erst durch Ausprobieren, dann durch Theorie, dann durch Visualisieren und zuletzt durch eigenes Berechnen — wird der Algorithmus ``sanft'' eingeführt. Die Verwendung konkreter Koordinaten in der letzten Aufgabe (``\textit{k-means} von Hand durchrechnen'') erlaubt es, das Verfahren schrittweise nachzuvollziehen. Diese Aufgabe ist nicht zwingend erforderlich für alle SuS, kann aber für leistungsstärkere Gruppen eine wertvolle Gelegenheit darstellen, sich mit dem mathematischen Kern des Algorithmus auseinanderzusetzen.
 
-Für schwächere SuS kann diese letzte Aufgabe weggelassen werden, ohne dass das Grundverständnis für \textit{clustering} verloren geht. Alternativ kann sie als Partner- oder Gruppenarbeit gelöst werden.
+Für schwächere SuS kann diese letzte Aufgabe weggelassen werden, ohne dass das Grundverständnis für Ballungs-Algorithmen verloren geht. Alternativ kann sie als Partner- oder Gruppenarbeit gelöst werden.
 
 \subsubsection*{Mathematische Vertiefung: Vergleich MSE und euklidischer Distanz}
 
@@ -287,7 +438,7 @@ Didaktisch lohnend könnte auch der Vergleich der euklidischen Distanz (im Zuwei
 
 \begin{itemize}
   \item Beim MSE werden Fehlerquadrate über \textbf{eine feste Referenz} (z.\,B.\ eine Gerade) berechnet, und der Mittelwert dieser Abweichungen dient der Optimierung.
-  \item Beim \textit{clustering} hingegen dient die euklidische Distanz dazu, Punkte \textbf{dynamisch} einem Zentrum zuzuordnen. Die Zentren verändern sich selbst in jedem Schritt.
+  \item Beim \textit{k-means} hingegen dient die euklidische Distanz dazu, Punkte \textbf{dynamisch} einem Zentrum zuzuordnen. Die Zentren verändern sich selbst in jedem Schritt.
 \end{itemize}
 
 Diese Unterscheidung ist besonders fruchtbar im Hinblick auf Kompetenzaufbau: SuS lernen, dass mathematische Werkzeuge (wie Abstandsmasse) je nach Kontext unterschiedliche Bedeutungen und Funktionen erhalten können.
@@ -322,26 +473,87 @@ Entscheidungsbäume gehören zum \textbf{überwachten Lernen}. Sie benötigen f�
 
   \item \textbf{Neue Gruppen entdecken:} Es können Gruppen auftauchen, an die niemand gedacht hat (z.\,B.\ ``Gelegenheitseinkäufer mit hohem Durchschnittspreis''). Dies ermöglicht neue Marketingstrategien oder Produktauswahl.
 
-  \item \textbf{Skalierbarkeit:} Ein manuelles Durchforsten grosser Kundendatenbanken ist kaum möglich. Clustering-Algorithmen lassen sich hingegen auf sehr grosse Datenmengen anwenden – auch kontinuierlich und automatisiert.
+  \item \textbf{Skalierbarkeit:} Ein manuelles Durchforsten grosser Kundendatenbanken ist kaum möglich. Ballungs-Algorithmen lassen sich hingegen auf sehr grosse Datenmengen anwenden – auch kontinuierlich und automatisiert.
 
-  \item \textbf{Keine Zieldefinition notwendig:} Da keine vordefinierten ``richtigen Antworten'' nötig sind, eignet sich Clustering besonders in Situationen, wo das Ziel erst aus den Daten erschlossen werden soll – wie bei Marktanalysen oder Explorationsprojekten.
+  \item \textbf{Keine Zieldefinition notwendig:} Da keine vordefinierten ``richtigen Antworten'' nötig sind, eignet sich Ballungs-Algorithmen besonders in Situationen, wo das Ziel erst aus den Daten erschlossen werden soll – wie bei Marktanalysen oder Explorationsprojekten.
 \end{itemize}
 \end{itemize}
 \end{aufgabe}
 
 Die Aufgabe zielt darauf ab, dass SuS sich intuitiv mit der Idee der Clusterung auseinandersetzen. Eine mögliche Herangehensweise:
 
-\begin{aufgabe}{2}
+
+\begin{aufgabe}{2a}
+\textbf{1. Gruppieren Sie von Hand.}\\
+Eine sinnvolle Einteilung in drei Gruppen ergibt sich visuell:
 \begin{itemize}
-  \item Die SuS erkennen, dass sich auf der Karte Gruppen von Punkten bilden — z.\,B.\ links oben, rechts oben und unten Mitte.
-  \item Sie setzen drei Standorte so, dass sie in der Mitte dieser Gruppen liegen.
-  \item Typischerweise wählen sie Zentren nahe $(5,15)$, $(15,15)$ und $(10,5)$.
+  \item \emph{Gruppe L (links oben)}: Punkte mit $x\in[1,7.5]$ und $y\in[12.5,20]$.
+  \item \emph{Gruppe R (rechts oben)}: Punkte mit $x\in[13,20]$ und $y\in[12.5,20]$.
+  \item \emph{Gruppe U (unten)}: Punkte mit $y\in[0,4.5]$ (mittig/unten).
 \end{itemize}
+Jede Gruppe enthält hier je $7$ Bestellungen, die Punkte liegen jeweils räumlich nahe beieinander
+(``kompakt'').
 
-\textbf{Begründung:} Diese Punkte minimieren \textit{visuell} in der Regel die durchschnittliche Distanz zur jeweiligen Gruppe, (``sie liegen in der Mitte'') und ermöglichen eine sinnvolle Auslastung der Standorte. Hier kann man anknüpfen und fragen, wie man den die ``Mitte'' mathematisch finden würde.
-
-\textbf{Didaktisch wichtig:} Es gibt nicht ``die eine richtige Lösung'', sondern verschiedene plausible Gruppierungen. Die Diskussion darüber ist ausdrücklich Teil des Lernziels.
+\vspace{0.5em}
+\textbf{2. Wählen Sie Gruppenzentren.}\\
+Als plausible Depot-Standorte (Zentren) wählen wir je einen Punkt \emph{nahe der Mitte} der Gruppen. So minimieren wir die Wege innerhalb der jeweiligen Gruppe und teilen die Gesamtmenge
+gleichmässig auf drei Depots auf.
 \end{aufgabe}
+
+\begin{aufgabe}{2b}
+\textbf{Zuweisungsregel (aus Sicht eines Computers).}\\
+Gegeben drei Zentren $C_1,C_2,C_3$ und eine Bestellung $P=(x,y)$, ordnen wir $P$ dem \emph{nächstgelegenen} Zentrum zu. Das bedeutet intuitiv, dass wir den Abstand von $P$ zu jedem Zentrum $C_1$, $C_2$ und $C_3$ berechnen und $P$ dem Zentrum mit dem minimalen Abstand zuordnen. 
+
+Eine Art, den Abstand $D_1 = (x_1, y_1)$ zwischen den zwei Punkten $C_1$ und $P$ zu berechnen (und sinngemäss für die anderen Zentren wäre folgende:
+\[
+D_1=(x-x_1)^2+(y-y_1)^2,\quad
+D_2=(x-x_2)^2+(y-y_2)^2,\quad
+D_3=(x-x_3)^2+(y-y_3)^2.
+\]
+
+Wir ordnen dann $P$ dem Zentrum zu, zu dem der Wert $D_j$ am kleinsten ist. Wir nehmen hier den quadrierten Abstand, weil die \textit{Richtung} (also ob ein Unterschied positiv oder negativ ist) in diesem Fall ohne Bedeutung für uns ist.
+
+
+\vspace{0.5em}
+\textbf{Beispiel.} Für $P=(13.94,18.59)$ und die oben verwendeten Zentren
+$C_1=(4,16)$, $C_2=(17,17)$, $C_3=(9,2)$ gilt:
+\[
+\begin{aligned}
+D_1&\approx (9.94)^2+(2.59)^2\approx 105.5\\
+D_2&\approx ({-}3.06)^2+(1.59)^2\approx 11.9\\
+D_3&\approx (4.94)^2+(16.59)^2\approx 267.45
+\end{aligned}
+\]
+Also wird $P$ dem Zentrum $C_2$ zugewiesen. Bei seltenen Gleichständen (exakt gleiche Distanz) kann eine feste Regel definiert werden (z.B. das Zentrum mit kleinerer Indexnummer).
+\end{aufgabe}
+
+
+
+\begin{aufgabe}{2c}
+\textbf{Wie berechnet man das Zentrum einer Gruppe?}
+
+Nehmen wir an, eine Gruppe besteht aus mehreren Punkten mit Koordinaten:
+\[
+(x_1, y_1),\; (x_2, y_2),\; \dots,\; (x_n, y_n).
+\]
+Dann berechnen Sie das Zentrum (auch ``Schwerpunkt'' oder ``Mittelpunkt'' genannt), indem Sie die Mittelwerte der $x$- und $y$-Koordinaten bestimmen:
+\[
+\text{Zentrum} = \left(
+\frac{x_1 + x_2 + \dots + x_n}{n},\;
+\frac{y_1 + y_2 + \dots + y_n}{n}
+\right).
+\]
+
+\textbf{Beispiel:} Für die 7 orangefarbenen Punkte unten ergibt sich (gerundet):
+\[
+\text{Zentrum} \approx (9.08,\;2.04).
+\]
+
+Das neue Zentrum liegt nahe an der Mitte der Gruppe und minimiert die durchschnittliche Entfernung zu allen Punkten darin.
+\end{aufgabe}
+
+
+
 
 
 
@@ -446,3 +658,42 @@ D & 5.85 & 0.00 & Z_2 \\
 \end{aufgabe}
 
 
+\begin{aufgabe}{I}
+Da es keine bekannten Gruppen gibt, eignet sich eine Ballung: Der Algorithmus entdeckt selbstständig ähnliche Bestellmuster.  
+Ein Entscheidungsbaum braucht vorgegebene Kategorien (Labels), um lernen zu können — die fehlen hier.
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\begin{verbatim}
+1. Wähle k Start-Zentren zufällig aus den Datenpunkten
+
+2. Wiederhole:
+   a) Erstelle leere Gruppen (eine pro Zentrum)
+   b) Für jeden Punkt:
+       - Berechne die Distanz zu jedem Zentrum
+       - Ordne den Punkt der nächstgelegenen Gruppe zu
+
+   c) Für jede Gruppe:
+       - Berechne den neuen Zentroid (Mittelwert aller Punkte)
+       - Setze diesen als neues Zentrum
+
+3. Stoppe, wenn sich alle Zentren nur noch wenig verändern
+\end{verbatim}
+\end{aufgabe}
+
+
+\begin{aufgabe}{III}
+\textbf{Zuweisungsschritt:}
+\begin{itemize}
+  \item (2,3) → $Z_1$ (Distanz = 0)
+  \item (3,2) → $Z_1$ (Distanz = $\sqrt{2}$)
+  \item (8,7) → $Z_2$ (Distanz = $\sqrt{1}$)
+  \item (9,6) → $Z_2$ (Distanz = 0)
+\end{itemize}
+
+\textbf{Zentroid-Berechnung:}
+\begin{itemize}
+  \item Gruppe 1: $Z_1^{\text{neu}} = \left( \frac{2+3}{2}, \frac{3+2}{2} \right) = (2.5,\ 2.5)$
+  \item Gruppe 2: $Z_2^{\text{neu}} = \left( \frac{8+9}{2}, \frac{7+6}{2} \right) = (8.5,\ 6.5)$
+\end{itemize}
+\end{aufgabe}

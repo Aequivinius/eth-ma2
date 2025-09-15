@@ -1,6 +1,6 @@
-\begin{lpu}
+\begin{lpu}{Wie ein Computer Fragen stellt: Entscheidungsbäume}
 
-Das Motto von diesem Kapitel lautet: \textit{Gute Fragen führen zu guten Vorhersagen}. Sie lernen hier einen ersten echten ML-Algorithmus kennen: den \textbf{Entscheidungsbaum}. Doch bevor wir ins Formale gehen, starten wir mit einem Spiel – denn Maschinenlernen ist in vielen Fällen gar nicht so verschieden davon, wie Menschen lernen.
+Das Motto von diesem Kapitel lautet: \textit{Gute Fragen führen zu guten Vorhersagen}. Sie lernen hier ein zentrales Werkzeug des maschinellen Lernens kennen: den \textbf{Entscheidungsbaum}. Ein solcher Baum ist eine strukturierte Darstellung von Regeln, mit denen sich Vorhersagen treffen lassen. Doch bevor wir uns in die Formalitäten stürzen, starten wir mit einem Spiel — denn Maschinenlernen ist in vielen Fällen gar nicht so verschieden davon, wie Menschen lernen.
 
 \begin{aufgabe}{1: 20 Questions}
 Spielen Sie zuerst mit einem Partner\footnote{Falls Sie diese LPU nicht im Klassenverband durcharbeiten, können Sie auch \href{http://www.20q.net/}{online} (\href{http://www.20q.net/}{\url{20q.net}}) spielen} eine Runde \emph{20 Questions}:
@@ -28,12 +28,17 @@ Was dieses Spiel technisch betrachtet macht:
 
 Wenn wir das Vorgehen so formalisieren, dann lässt sich erkennen, dass auch ein Computer ein solches Vorgehen umsetzen könnte. Für jede Kategorie müssten wir also die passenden Attribute in Form einer Regel festhalten und das ausgedachte Objekt mit diesen Regeln vergleichen. In Pseudocode könnten diese Regeln wie folgt aussehen: \noindent\colorbox{orange!10}{\texttt{X.color == "grey"\ and X.weight == 5000 and X.has\_trunk == True}}.
 
-\newpage
 \begin{aufgabe}{2}
-Erweitern Sie die obige Regel dahingehend, dass Sie auch \textit{weisse} Tiere mit Rüssel, die zwischen 2 und 6 Tonnen wiegen, als Elefant klassifizieren. Gehen Sie dabei in zwei Schritten vor:
+\label{sec:elephant}
+Erweitern Sie die obige Regel so, dass Sie auch \textit{weisse} Tiere mit Rüssel, die zwischen 2 und 6 Tonnen wiegen, als Elefanten klassifiziert werden. Gehen Sie dabei in zwei Schritten vor:
 \begin{enumerate}
-    \item Verwenden Sie zunächst \texttt{or}, um die einzelnen Vergleichsausdrücke der Regel zu erweitern (\texttt{a == b} wird also zu \texttt{a == b or a == c}).
-    \item Überführen Sie dann die ganze Regel in ein Format, wie Sie es für das Spiel brauchen können. Da Sie bei 20 Questions nur binäre Fragen stellen dürfen, können Sie \textit{nicht} direkt fragen \texttt{(A or B) and C} (\texttt{A} bezeichnet hier nun einen einzelnen Vergleichsausdruck); aber Sie können nach \texttt{A and C} zuerst, und dann nach \texttt{B and C} fragen (effektiv fragen Sie also \texttt{(A and C) or (B and C)}).
+    \item ``Kleben'' Sie zunächst einzelne Vergleichsausdrücke mit \texttt{or} aneinander: Aus \texttt{a == b}, zum Beispiel, wird also \texttt{a == b or a == c}
+    \item Überführen Sie dann die ganze ``zusammengeklebte'' Regel in eine Form, die sich mit binären Fragen abfragen lässt. Eine Bedingung wie \texttt{(A or B) and C} können Sie nicht direkt als eine einzige Frage stellen, da sie mehr als eine Bedingung kombiniert. Stattdessen teilen Sie diese auf in zwei Fragen:
+    \begin{itemize}
+        \item Zuerst \texttt{A and C},
+        \item dann \texttt{B and C}.
+    \end{itemize}
+    Zusammen entspricht dies \texttt{(A and C) or (B and C)}. Gehen Sie sinngemäss mit Ihren Bedingungen vor.
 \end{enumerate}
 \end{aufgabe}
 
@@ -74,7 +79,7 @@ Wenn wir mit diesen Regeln das Spiel spielen wollten, würden wir gut daran tun,
 \end{center}
 
 \begin{aufgabe}{3}
-Überführen Sie die 3 Regeln oben in ein Format, sodass Sie mit \textit{weniger} als 12 Fragen ein Objekt einer der drei Kategorien zuordnen können.
+Überführen Sie die 3 Regeln oben in ein Diagramm, sodass Sie mit \textit{weniger} als 12 Fragen ein Objekt einer der drei Kategorien zuordnen können.
 \end{aufgabe}
 
 
@@ -89,7 +94,7 @@ Vielleicht haben Sie sogar überlegt, in welcher Reihenfolge Fragen gestellt wer
 Genau solche Strukturen tauchen in der Informatik und im maschinellen Lernen häufig auf – und sie lassen sich sogar automatisiert berechnen.
 
 \begin{theorie}
-Ein \textbf{Entscheidungsbaum} im ML funktioniert genau so: Er stellt nacheinander binäre Fragen zu den Eigenschaften eines Datenpunktes mit verschiedenen Eigenschaften, um am Ende eine Entscheidung, zu welcher Kategorie dieser Datenpunkt gehört, zu treffen.
+Ein \textbf{Entscheidungsbaum} im ML funktioniert genau so: Er stellt nacheinander binäre Fragen zu den Eigenschaften eines Datenpunktes mit verschiedenen Eigenschaften, um am Ende eine Entscheidung darüber zu treffen, zu welcher Kategorie dieser Datenpunkt gehört.
 \end{theorie}
 
 Sie haben also intuitiv eine der wichtigsten Strukturen des maschinellen Lernens entdeckt.
@@ -100,17 +105,17 @@ Sie haben also intuitiv eine der wichtigsten Strukturen des maschinellen Lernens
 
 \begin{enumerate}
   \item Überlegen Sie sich eine einfache binäre Frage basierend auf Gewicht oder Grösse, mit der Sie versuchen, das Geschlecht vorherzusagen.
-  \item Tragen Sie in einer neuen Spalte (\textit{Vorhersage des Entscheidungsbaumes} ein, ob die Regel korrekt liegt, indem Sie mit dem \textit{Tatsächlichen Gewicht} vergleichen
+  \item Tragen Sie in einer neuen Spalte (\textit{Vorhersage des Entscheidungsbaumes} ein, ob die Regel korrekt liegt, indem Sie mit dem \textit{tatsächlichen Gewicht} vergleichen
   \item Zählen Sie: Wie oft lag Ihre Vorhersage richtig?
   \item Versuchen Sie zwei weitere Vergleiche hinzuzufügen und vergleichen Sie das Resultat.
   \item Was passiert, wenn Sie die Reihenfolge Ihrer Fragen ändern?
 \end{enumerate}
 \end{aufgabe}
 
-Herzlichen Glückwunsch! Sie haben Ihren ersten Entscheidungsbaum entwickelt, und dessen Qualität überprüft!
+Herzlichen Glückwunsch! Sie haben Ihren ersten Entscheidungsbaum entwickelt und dessen Qualität überprüft!
 
 \begin{theorie}
-Wie Sie gesehen haben, bestehen Entscheidungsbäume aus:
+Wie Sie gelernt haben, bestehen Entscheidungsbäume aus:
 \begin{itemize}
   \item \textbf{Knoten:} eine Frage (z. B. \texttt{X.Grösse $>$ 175})
   \item \textbf{Äste:} die Antwortmöglichkeiten (\texttt{True} und \texttt{False})
@@ -125,9 +130,9 @@ Formuliere in Deinen eigenen Worten eine Definition für:
 \underline{\hspace{15cm}}
 \end{aufgabe}
 
-Der in der nachfolgenden Aufgabe eingesetzten \textbf{Titanic-Datensatz} ist einer der bekanntesten und am weitesten verbreiteten Datensätze in der Welt des maschinellen Lernens. Er wird häufig in Lehrbüchern, Kursen und Einführungsvideos verwendet, weil er reale historische Daten enthält, aber dennoch klein und übersichtlich genug ist, um einfache Modelle wie Entscheidungsbäume daran zu demonstrieren.
+Der in der nachfolgenden Aufgabe eingesetzten \textbf{Titanic-Datensatz} ist einer der bekanntesten und am weitesten verbreiteten Datensätze in der Welt des maschinellen Lernens. Er wird häufig in Lehrbüchern, Kursen und Einführungsvideos verwendet, weil er reale historische Daten enthält, aber dennoch klein und übersichtlich genug ist, um erste Werkzeuge wie Entscheidungsbäume daran zu erproben.
 
-Obwohl der Datensatz aus einem tragischen historischen Ereignis stammt, wird er in der Informatik didaktisch genutzt, um grundlegende Konzepte wie Klassifikation, Feature-Auswahl und Modellbewertung zu vermitteln. Ein respektvoller Umgang mit den Daten wird dabei vorausgesetzt.
+Obwohl der Datensatz aus einem tragischen historischen Ereignis stammt, wird er in der Informatik didaktisch genutzt, um grundlegende Ideen des maschinellen Lernens anschaulich zu machen – etwa wie man mit einfachen Regeln Vorhersagen trifft und wie man prüft, ob diese Vorhersagen sinnvoll sind. Ein respektvoller Umgang mit den Daten wird dabei vorausgesetzt.
 
 \begin{aufgabe}{5: Entscheidungsbäume mit echten Daten – Die Titanic}
 Öffnen Sie die beiliegende Datei \texttt{titanic\_train.csv}. Darin finden Sie Angaben zu Passagieren auf der Titanic: Geschlecht, Reiseklasse, Alter – und, ob sie überlebt haben. Wir möchten uns für die Zukunft wappnen und einen Entscheidungsbaum bauen, der für ein nächstes, ähnliches Unglück vorhersagen kann, wer überlebt und wer nicht — in der Hoffnung, natürlich, ihn nie brauchen zu müssen!
@@ -150,16 +155,71 @@ In der Praxis erstellen wir Entscheidungsbäume nicht von Hand, sondern lassen s
 \end{hinweis}
 
 \begin{aufgabe}{7: Reflexion}
-\textbf{Wie würdest Du einem Freund oder einer Freundin erklären:}
+\textbf{Wie würdest Du einem Freund oder einer Freundin erklären...}
 \begin{itemize}
-  \item Was ein Entscheidungsbaum ist?
-  \item Wie man einen guten Entscheidungsbaum erkennt?
-  \item Warum gute Fragen wichtiger sind als viele Fragen?
+  \item ...was ein Entscheidungsbaum ist?
+  \item ...wie man einen guten Entscheidungsbaum erkennt?
+  \item ...warum gute Fragen wichtiger sind als viele Fragen?
 \end{itemize}
 \end{aufgabe}
     
 \end{lpu}
 
+\subsubsection*{Zusammenfassung}
+
+In diesem Kapitel haben Sie gelernt, wie ein Computer durch strukturierte Fragen zu Vorhersagen kommt — mit Hilfe sogenannter \textbf{Entscheidungsbäume}.  
+
+\begin{itemize}
+  \item Ein Entscheidungsbaum stellt binäre Fragen über die Eigenschaften eines Objekts in einer bestimmten Reihenfolge dar.
+  \item Jede Frage teilt die Daten weiter auf: Entweder trifft die Eigenschaft zu (\texttt{True}) oder nicht (\texttt{False}).
+  \item Die wichtigsten Bestandteile eines Entscheidungsbaums sind:
+  \begin{itemize}
+    \item \textbf{Knoten:} eine Ja-/Nein-Frage (z. B. \texttt{Grösse > 170})
+    \item \textbf{Äste:} die Antwortmöglichkeiten (\texttt{True} / \texttt{False})
+    \item \textbf{Blätter:} die Vorhersage oder Kategorie (z. B. \texttt{weiblich})
+  \end{itemize}
+  \item Gute Entscheidungsbäume stellen zuerst die Fragen, die möglichst viele Fälle unterscheiden können.  
+\end{itemize}
+
+\subsubsection*{Übungsaufgaben}
+
+\begin{aufgabe}{I}
+Nennen Sie drei typische Eigenschaften, die sich gut für binäre Fragen eignen, wenn man Dinge oder Personen klassifizieren möchte. Begründen Sie Ihre Auswahl.
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+Ein Entscheidungsbaum hat als erste Frage \texttt{has\_fur?}.  
+\begin{itemize}
+  \item Was bedeutet es, wenn bei einem Objekt \texttt{has\_fur = False} ist?  
+  \item Warum könnte diese Frage ein guter Startpunkt sein?
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+Gegeben sind drei Objekte mit folgenden Eigenschaften:
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Objekt} & \texttt{has\_wheels} & \texttt{is\_alive} & \texttt{is\_man\_made} \\
+\hline
+Fahrrad & True & False & True \\
+Hund & False & True & False \\
+Stuhl & False & False & True \\
+\hline
+\end{tabular}
+\end{center}
+
+Zeichnen Sie einen Entscheidungsbaum, der alle drei Objekte korrekt klassifiziert.
+\end{aufgabe}
+
+\begin{aufgabe}{IV}
+Stellen Sie sich vor, Sie haben einen Entscheidungsbaum mit fünf Fragen gebaut.  
+\begin{itemize}
+  \item Wie würden Sie prüfen, ob dieser Baum ``gut'' ist?  
+  \item Was könnte man tun, wenn er viele Fehler macht?  
+\end{itemize}
+\end{aufgabe}
 
 \subsection*{Didaktische Überlegungen}
 
@@ -258,14 +318,14 @@ else:
 \begin{aufgabe}{4}
 Wir formulieren eine einfache binäre Regel, die das Geschlecht aufgrund der Grösse vorhersagt:
 
-\begin{lstlsting}{language=Python}
+\begin{lstlisting}[language=Python]
 if X.Größe > 170:
     return "Male"
 else:
     return "Female"
-\end{lstlsting}
+\end{lstlisting}
 
-Diese Regel setzen wir um und tragen die Vorhersagen in die Spalte „Vorhersage des Entscheidungsbaumes“ ein. Anschliessend vergleichen wir die Vorhersage mit dem tatsächlichen Geschlecht. So werden 12 von 20 Fällen korrekt klassifiziert. Das ist nur leicht besser, als wenn wir raten würden. Im beiligenden \texttt{LA\_1605\_Geschlechter\_L.xlsx} ist zu sehen, wie kompliziertere Regeln eingesetzt werden können. 
+Diese Regel setzen wir um und tragen die Vorhersagen in die Spalte „Vorhersage des Entscheidungsbaumes“ ein. Anschliessend vergleichen wir die Vorhersage mit dem tatsächlichen Geschlecht. So werden 12 von 20 Fällen korrekt klassifiziert. Das ist nur leicht besser, als wenn wir raten würden. Im beiliegenden \texttt{LA\_1605\_Geschlechter\_L.xlsx} ist zu sehen, wie kompliziertere Regeln eingesetzt werden können. 
 \end{aufgabe}
 
 Hierbei wurden die Regeln absichtlich so gewählt, dass sie \textit{kein} besseres Resultat produzieren, um den SuS zu verdeutlichen, dass mehr Regeln nicht zwingend ein besseres Modell bedeuten.
@@ -283,4 +343,50 @@ Ein guter Entscheidungsbaum verwendet Fragen, die möglichst viel Unterscheidung
 
 \textbf{Warum gute Fragen wichtiger sind als viele Fragen?}
 Viele Fragen nacheinander zu stellen, ist keine Garantie für eine gute Entscheidung – im Gegenteil: Wenn die Fragen schlecht gewählt sind (z.B. „Hat es eine rote Farbe?“), kann man sich auch mit zehn Fragen noch im Kreis drehen. Eine einzelne gute Frage, die z.B. den \textit{Suchraum} halbiert, bringt oft mehr als fünf mittelmässige. Gute Fragen sparen also Zeit, Rechenaufwand – und im maschinellen Lernen: Rechenleistung.
+\end{aufgabe}
+
+
+
+\begin{aufgabe}{I}
+Beispiele für geeignete Eigenschaften:
+\begin{itemize}
+  \item \texttt{is\_animal?} – trennt Tiere von Objekten.
+  \item \texttt{has\_wheels?} – trennt Fahrzeuge von Lebewesen oder Möbeln.
+  \item \texttt{is\_man\_made?} – trennt künstliche von natürlichen Dingen.
+\end{itemize}
+Diese Eigenschaften sind gut, weil sie viele mögliche Kategorien mit nur einer Frage ausschliessen können.
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\begin{itemize}
+  \item Wenn \texttt{has\_fur = False}, hat das Objekt kein Fell – es ist vermutlich kein Tier oder zumindest kein pelziges Tier.
+  \item Die Frage ist ein guter Startpunkt, weil sie Dinge wie Tiere (Fellträger) sofort von Maschinen oder Objekten trennt.
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+Ein möglicher Entscheidungsbaum:
+
+\centering
+\tikzstyle{level 1}=[level distance=2.5cm, sibling distance=3.8cm]
+\tikzstyle{level 2}=[level distance=2.5cm, sibling distance=2cm]
+
+\begin{tikzpicture}
+\node[rectangle,draw]{\texttt{has\_wheels?}}
+  child {node[rectangle,draw]{\texttt{is\_alive?}}
+    child {node[rectangle,draw]{\texttt{is\_man\_made?}}
+      child {node[draw,fill=green!10]{Hund}}
+      child {node[draw,fill=green!10]{Stuhl}}
+    }
+    child {node[draw,fill=green!10]{Stuhl}}
+  }
+  child {node[draw,fill=green!10]{Fahrrad}};
+\end{tikzpicture}
+\end{aufgabe}
+
+\begin{aufgabe}{IV}
+\begin{itemize}
+\item Man kann den Baum an echten Beispielen testen und prüfen, wie oft die Vorhersage korrekt ist.
+\item Wenn viele Fehler auftreten, sollte man neue, bessere Fragen überlegen oder die Reihenfolge der Fragen anpassen. Auch weitere Daten könnten helfen.
+\end{itemize}
 \end{aufgabe}

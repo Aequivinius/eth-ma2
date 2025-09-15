@@ -1,4 +1,4 @@
-\begin{lpu}
+\begin{lpu}{Wie man viele Zahlen auf einen Blick versteht: Statistik}
 Maschinelles Lernen basiert auf Daten – und wer mit Daten arbeitet, braucht Statistik. Viele Verfahren des ML beruhen auf grundlegenden Begriffen der beschreibenden Statistik, z.\,B. wenn es darum geht, wie stark sich Werte unterscheiden oder wie ``typisch'' ein Wert ist.
 
 Dieses Kapitel hat zwei Ziele:
@@ -24,16 +24,18 @@ Keine Angst, die meisten Begriffe hier kennen Sie bereits aus dem Mathematik-Unt
 \end{itemize}
 \end{theorie}
 
+Diese Werte geben an, \textit{wo} sich die Daten im Zahlenraum befinden. Sie beschreiben die typische Position der Werte – also ihre ``Lage'' auf dem Zahlenstrahl. Dabei betonen sie jeweils unterschiedliche Aspekte: Sie helfen dabei, eine Zahlenreihe auf einen einzigen ``repräsentativen'' Wert zu reduzieren – je nach Fragestellung auf unterschiedliche Weise.
+
 Nehmen wir zum Beispiel die Zahlen $[92,\ 92,\ 88,\ 81,\ 56,\ 89,\ 90,\ 86,\ 93]$, oder in sortierter Reihenfolge:
 
 \begin{center}
 $[56,\ 81,\ 86,\ 88,\ 89,\ 90,\ 92,\ 92,\ 93]$
 \end{center}
 
-Damit können wir nun die 3 M berechnen:
+Damit können wir nun die 3 M (= Lagekennwerte) berechnen:
 \begin{itemize}
   \item Mittelwert: $\bar{x} = \frac{757}{9} \approx 84.1$
-  \item Median: $89$ (5. Wert in sortierter Liste)
+  \item Median: $89$ (Unser Beispiel hat 9 Werte. Das 5. Element ist als genau in der Mitte)
   \item Modus: $92$ (kommt zweimal vor)
 \end{itemize}
 
@@ -291,6 +293,61 @@ Alle drei Algorithmen können mit numerischen und kategorischen Eingabedaten umg
 
 Überdenken Sie auch frühere Begriffsdefinitionen: Haben sich durch die neuen Aufträge Ihre Formulierungen verändert?
 \end{aufgabe}
+
+\subsubsection*{Zusammenfassung}
+
+Statistik hilft uns, grosse Datenmengen zu \textbf{beschreiben}, ohne jeden einzelnen Wert betrachten zu müssen. In diesem Kapitel haben Sie wichtige \textbf{Lage- und Streuungsmasse} kennengelernt:
+
+\begin{itemize}
+  \item \textbf{Mittelwert, Median, Modus} beschreiben die \emph{typische Lage} von Werten in einem Datensatz.
+  \item \textbf{Varianz und Standardabweichung} zeigen, wie \emph{stark die Werte um den Mittelwert streuen}.
+  \item \textbf{Perzentile und Quartile} erlauben es, Aussagen über die \emph{Verteilung} der Werte zu machen — z. B. wie viele Werte kleiner als ein bestimmter Schwellenwert sind.
+\end{itemize}
+
+Diese Begriffe spielen eine wichtige Rolle im maschinellen Lernen, z. B. wenn es darum geht, Daten zu verstehen, Modelle zu vergleichen oder Ausreisser zu erkennen.
+
+\subsubsection*{Übungsaufgaben}
+
+\begin{aufgabe}{I}
+\textbf{Wofür welcher Wert?}  
+In welchem Kontext würden Sie jeweils eher den Mittelwert, den Median oder den Modus verwenden?  
+Begründen Sie Ihre Wahl in jedem Fall:
+\begin{enumerate}
+  \item Durchschnittliches Einkommen in einer Stadt  
+  \item Typische Körpergrösse in einer Schulklasse  
+  \item Häufigste Schuhgrösse im Verkauf  
+\end{enumerate}
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\textbf{Wie gut passt ein Modell?}  
+Zwei ML-Modelle geben für dieselbe Aufgabe folgende Vorhersagen (numerisch):
+
+\[
+\text{Modell A: } [9,\ 9,\ 9,\ 9,\ 9], \quad \text{Modell B: } [7,\ 11,\ 9,\ 9,\ 9]
+\]
+
+\begin{itemize}
+  \item Beide Modelle haben den gleichen Mittelwert. Berechnen Sie ihn.  
+  \item Vergleichen Sie die Standardabweichung der beiden Modelle.
+  \item Welches Modell ist konstanter?  
+\end{itemize}
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+\textbf{Perzentile erklären}  
+Sie lesen in einem Bericht:  
+``Der 90. Perzentilwert des Reaktionszeit-Tests liegt bei 520 ms.''
+
+\begin{enumerate}
+  \item Was bedeutet das konkret für die getesteten Personen?  
+  \item Was können Sie über die restlichen 10 \% sagen?  
+  \item Warum könnte der Median hier informativer sein als der Mittelwert?
+\end{enumerate}
+\end{aufgabe}
+
+
+
 \end{lpu}
 
 
@@ -298,7 +355,7 @@ Alle drei Algorithmen können mit numerischen und kategorischen Eingabedaten umg
 
 Statistik bildet das Fundament datengetriebener Verfahren – auch und gerade im maschinellen Lernen. Dennoch ist Statistik unter SuS oft mit Vorurteilen belegt: ``zu abstrakt'', ``zu trocken'', ``zu mathematisch''. Um diese Barrieren abzubauen, wurde das Kapitel bewusst \textbf{nicht an den Anfang} der LPU gesetzt, obwohl es inhaltlich auch dort hätte stehen können.
 
-Nach Kapiteln zu Entscheidungsbäumen, Regression und Clustering haben die SuS bereits erlebt, \emph{was mit Daten möglich ist}: Vorhersagen treffen, Gruppen erkennen, Modelle evaluieren. Sie haben mit echten Datensätzen gearbeitet und eigene Vermutungen überprüfen können. Diese positiven Erfahrungen schaffen eine Offenheit gegenüber den ``Werkzeugen im Hintergrund'', also den statistischen Begriffen, mit denen man Daten sinnvoll beschreiben kann. Beim Arrangieren dieser LPU habe ich mich diesbezüglich also an der Formel \emph{Zuerst erleben, dann erklären} orientiert.
+Nach Kapiteln zu Entscheidungsbäumen, Regression und Ballungen haben die SuS bereits erlebt, \emph{was mit Daten möglich ist}: Vorhersagen treffen, Gruppen erkennen, Modelle evaluieren. Sie haben mit echten Datensätzen gearbeitet und eigene Vermutungen überprüfen können. Diese positiven Erfahrungen schaffen eine Offenheit gegenüber den ``Werkzeugen im Hintergrund'', also den statistischen Begriffen, mit denen man Daten sinnvoll beschreiben kann. Beim Arrangieren dieser LPU habe ich mich diesbezüglich also an der Formel \emph{Zuerst erleben, dann erklären} orientiert.
 
 Besonders hilfreich scheinen mir die Aufgaben, in denen die SuS mehrere Gruppen vergleichen, z. B. mit ähnlichem Mittelwert, aber unterschiedlicher Streuung. Dadurch entsteht ein intuitives Verständnis für die Begriffe \emph{Lage} und \emph{Streuung}, das weit über formales Rechnen hinausgeht.
 
@@ -577,3 +634,52 @@ P_{90} = 93 + 0.9 \cdot (94 - 93) = 93 + 0.9 = \boxed{93.9}
 \end{aufgabe}
 
 Diese Glossaraufgabe eignet sich gut zur Wiederholung und Selbstvergewisserung; und kann zu Beginn einer Lektion eingesetzt werden. Man kann die SuS auch gegenseitig ihre Einträge vergleichen und diskutieren lassen, um Begriffssicherheit aufzubauen.
+
+\begin{aufgabe}{I}
+\begin{enumerate}
+  \item \textbf{Einkommen:} Median — weil einige wenige sehr hohe Einkommen den Mittelwert stark verzerren können.  
+  \item \textbf{Körpergrösse:} Mittelwert oder Median — je nach Symmetrie der Verteilung.  
+  \item \textbf{Schuhgrösse:} Modus — weil man die \emph{häufigste} verkaufte Grösse wissen möchte.
+\end{enumerate}
+\end{aufgabe}
+
+\begin{aufgabe}{II}
+\[
+\text{Modell A: } [9,\ 9,\ 9,\ 9,\ 9], \quad \text{Modell B: } [7,\ 11,\ 9,\ 9,\ 9]
+\]
+
+\textbf{1. Mittelwert:}  
+Beide Modelle haben den Mittelwert  
+\[
+\bar{x} = \frac{9 + 9 + 9 + 9 + 9}{5} = 9
+\]
+
+\textbf{2. Standardabweichung:}
+
+\underline{Modell A:}  
+Alle Werte sind gleich → alle Abweichungen = 0  
+\[
+s = \sqrt{ \frac{1}{5} \cdot (0^2 + 0^2 + 0^2 + 0^2 + 0^2) } = 0
+\]
+
+\underline{Modell B:}  
+Abweichungen von $\bar{x} = 9$:  
+\[
+(7 - 9)^2 = 4,\quad (11 - 9)^2 = 4,\quad (9 - 9)^2 = 0
+\]  
+\[
+s = \sqrt{ \frac{1}{5} \cdot (4 + 4 + 0 + 0 + 0) } = \sqrt{ \frac{8}{5} } \approx 1.26
+\]
+
+\textbf{3. Fazit:}  
+Modell A ist \emph{konstant}, alle Werte sind gleich → Standardabweichung = 0  
+Modell B schwankt leicht → Standardabweichung $\approx 1.26$
+\end{aufgabe}
+
+\begin{aufgabe}{III}
+\begin{enumerate}
+  \item 90 \% der Personen hatten eine Reaktionszeit von 520 ms oder weniger.  
+  \item Die restlichen 10 \% waren \emph{langsamer} (mehr als 520 ms).  
+  \item Der Median ist robuster gegenüber Ausreissern (z. B. sehr langsame Reaktionszeiten) und zeigt, wo die ``mittlere'' Person liegt.
+\end{enumerate}
+\end{aufgabe}

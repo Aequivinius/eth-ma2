@@ -78,13 +78,34 @@
 }
 \lstset{style=mystyle}
 
-\newenvironment{lpu}{
+\usepackage[most]{tcolorbox}
+
+\newenvironment{lpu}[1]{%
+  \par\medskip
+  \begin{center}
+    \begin{tcolorbox}[
+      enhanced,
+      width=\linewidth,
+      colframe=white,       % kein Rahmen
+      boxrule=0pt,
+      left=1em,right=1em,
+      top=1em,bottom=1em,
+      halign=center,
+      colback=green!8!white, 
+      colframe=black!20, 
+    ]
+    \sffamily\bfseries\fontsize{22pt}{24pt}\selectfont #1
+    \end{tcolorbox}
+  \end{center}
+  \par\medskip
+  % Standardformat für Text und Listings
   \sffamily
   \fontsize{14pt}{16pt}\selectfont
   \lstset{basicstyle=\fontsize{13pt}{15pt}\ttfamily}
-}{
+}{%
   \normalfont
   \lstset{basicstyle=\normalsize\ttfamily}
+  \par\medskip
 }
 
 
@@ -98,7 +119,7 @@
 \usepackage{longtable}
 
 \usepackage{xcolor}
-\usepackage[framemethod=TikZ]{mdframed}
+
 
 % Stil für Aufgabennummer
 \newtcbox{\aufgabenummerbox}[1][]{
@@ -172,7 +193,7 @@
 \definecolor{featuregreen}{RGB}{220, 255, 220}
 \definecolor{targetred}{RGB}{255, 230, 230}
 
-\usepackage{tcolorbox}
+% \usepackage{tcolorbox}
 \usepackage{booktabs}
 
 \newenvironment{hinweis}{

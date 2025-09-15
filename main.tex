@@ -13,16 +13,33 @@ Einführung in das maschinelle Lernen mit Python}
 \section{Einleitung}
 
 \subsection{Positionierung im Lehrdiplom}
-Diese mentorierte Arbeit (MA2) baut auf der vorhergehenden MA1 auf, insbesondere was den Inhalt des Unterrichts betrifft. Die in diesen beiden Arbeiten beschriebenen Unterrichtsmaterialien können also nacheinander eingesetzt werden, und der Stoff dieser MA2 setzt als Vorwissen auch den in der MA1 behandelten Inhalt voraus. Dabei ist diese MA2 sicherlich inhaltlich spannender und in ihrer Anwendbarkeit breiter gefächert: Sie hat das wichtige Thema des \textit{maschinellen Lernens} zum Gegenstand, und macht dieses mithilfe von Python erfahr- und lernbar. Die MA1 hingegen schafft die Grundlagen der Programmierung in Python für SuS, welche bereits C\# kennen. 
+Diese mentorierte Arbeit (MA2) baut auf der vorhergehenden MA1 auf, insbesondere was den Inhalt des Unterrichts betrifft. Die in diesen beiden Arbeiten beschriebenen Unterrichtsmaterialien können also nacheinander eingesetzt werden, und der Stoff dieser MA2 setzt als Vorwissen auch den in der MA1 behandelten Inhalt voraus. Dabei ist diese MA2 sicherlich inhaltlich spannender und in ihrer Anwendbarkeit breiter gefächert: Sie hat das wichtige Thema des \textit{maschinellen Lernens} zum Gegenstand und macht dieses mithilfe von Python erfahr- und lernbar. Die MA1 hingegen schafft die Grundlagen der Programmierung in Python für SuS, welche bereits C\# kennen. 
 
 Die MA2 ist so konzipiert, dass sie einerseits den in der vorherigen MA1 gelegten Grundstein weiterentwickelt, jedoch andererseits auch für SuS zugänglich ist, die das erforderliche Vorwissen auf andere Weise erworben haben. Da Python häufig  in den Informatik-Unterrichten der Gymnasialstufe eingesetzt wird, ist das eine übliche Ausgangslage. Die MA1 hatte jedoch auch zum Ziel, den SuS grundlegende algorithmische Konzepte sowie die praktische Umsetzung einfacher Programme zu vermitteln. In diesem Sinne stellt die MA1 für Lernende, die diese durchlaufen haben, eine ideale Voraussetzung dar, um die Inhalte der MA2 mit einem vertieften Verständnis zu bearbeiten.
 
 Hintergrund dieses Aufbaus ist der Umstand, dass diese beiden mentorierten Arbeiten aus von mir für die Berufsschule Baden (BBB) entwickelten Modul hervorgegangen sind. Der Unterricht an der Berufsschule Baden für Informatik ist in Module gegliedert, deren Entwicklung in der Verantwortung der Lehrpersonen liegt. Als Mitarbeiter habe ich das Modul 259 entwickelt, das sich dem Thema des maschinellen Lernens widmet. Ein zentraler Aspekt bei der Konzeption dieses Moduls war die Auswahl der geeigneten Programmiersprache für die Vermittlung der Inhalte. Das Curriculum an der BBB sieht C\# als verbindliche Programmiersprache vor, welche jedoch für die Verarbeitung grosser Datenmengen weniger geeignet ist als Python. Vor diesem Hintergrund habe ich die Entscheidung getroffen, das Modul so zu gestalten, dass es den SuS im ersten Teil die grundlegenden Konzepte von Python vermittelt, bevor der eigentliche Teil zum maschinellen Lernen beginnt.
 
-Das Ziel meiner leitprogrammartigen Unterrichtsunterlagen (LPU) in dieser MA2 ist es daher, mithilfe von Python die Grundkonzepte des maschinellen Lernens zu vermitteln. Während diese Arbeit sich am Aufbau jenes Moduls 259 orientiert, wurden die Aufgaben grundlegend an die Anforderungen einer LPU angepasst, und lassen sich so auch ausserhalb des Kontexts der Berufsschule verwenden. 
+Das Ziel meiner leitprogrammartigen Unterrichtsunterlagen (LPU) in dieser MA2 ist es daher, mithilfe von Python die Grundkonzepte des maschinellen Lernens zu vermitteln. Während diese Arbeit sich am Aufbau jenes Moduls 259 orientiert, wurden die Aufgaben grundlegend an die Anforderungen einer LPU angepasst und lassen sich so auch ausserhalb des Kontexts der Berufsschule verwenden. 
+
+\subsection{Überarbeitung}
+Nach einer ersten Rückmeldung wurde diese Arbeit überarbeitet. Dabei wurden zahlreiche Rechtschreibfehler, stilistische Ungereimtheiten und fehlende Verweise behoben. An zahlreichen Stellen wurden Formulierungen angepasst, um den Lesefluss zu vereinfachen; einige Abschnitte wiederum wurden leicht gekürzt, indem konzise Formulierungen und Darstellungen gewählt wurden, um Platz für folgende gewichtigere Änderungen zu schaffen:
+
+\begin{itemize}
+    \item Die Leitidee \ref{sec:leitideegymi} (und damit einhergehend auch die Dispositionsziele in \ref{sec:dispziele}) wurde aufgrund der Rückmeldung angepasst, sodass sie auch dem Umstand Rechnung trägt, dass viele Gymnasiasten in wissenschaftlichen Berufen arbeiten werden, in welchen sie sich mit ML konfrontiert sehen werden.
+    \item Mit der Ergänzung durch die Tabelle \ref{tab:lernziele} enthält das Kapitel tatsächliche operationalisierte Lernziele. 
+    \item Die eigentlichen Kapitel, welche die SuS durcharbeiten, haben nun jeweils einen an die SuS gerichteten Titel und sind farblich vom an die LP gerichteten didaktischen Überbau abgegrenzt.
+    \item Der IU+ (\ref{sec:iuplus}) wurde um einen wichtigen Absatz erweitert, in welchem das maschinelle Lernen als Forschungsfeld der Informatik eingeführt wird. Weiterhin wurde das fiktive Einstiegsbeispiel der Krankenkassen in Bezug zu den rechtlichen Begebenheiten der Schweiz gestellt. Auch wurden die Formulierungen vereinzelter plastischen Lernziele an das Vorwissen der SuS angepasst.
+    \item Der Begriff der Ballung wird nun konsequent dem englischen \textit{clustering} vorgezogen. Einerseits knüpft dieser Begriff an die Intuition der SuS an (\textit{Menschenballungen} oder \textit{Ballungszentren}, zum Beispiel, andererseits werden in dieser Arbeit auch andere Konzepte mit deren deutschen Begriffen verwendet (wie \textit{Entscheidungsbaum} und \textit{Vorhersage}). Trotzdem wird der Begriff mit der englischen Übersetzung eingeführt, um Anknüpfungspunkte an die englische Fachliteratur beizubehalten.
+   \item Dem möglichen Fehlkonzept von ``verrechenbaren'' kategorischen Daten wurde durch eine lange Erklärung in \ref{sec:categorical} vorgebeugt.
+   \item Aufgabe 2 im Kapitel \ref{sec:elephant} wurde deutlicher formuliert.
+   \item Der MSE wird im Kapitel \ref{sec:regression} schonender eingeführt. Die Aufgabe 4 wurde dahingehend angepasst.
+   \item Inhalt aus den Musterlösungen wurde in den eigentlichen Unterrichtsteil eingebaut (bspw. in Kapitel \ref{sec:stats} die Erklärung der Lagekennwerte.
+   \item Das Kapitel \ref{sec:clustering} wurde gemäss der Rückmeldung umgearbeitet, sodass die Aufgabe 2 dort in mehrere Schritte unterteilt wurde, die das ``Lernen durch entdecken lassen'' besser ermöglichen, und ein einordnender Abschluss verfasst.
+   \item Jedes Kapitel schliesst nun mit einer Zusammenfassung und Übungsaufgaben (ausser das Kapitel \ref{sec:skit}, für welches die grossen Übungen aus der Wissensfestigung als geeignete Übungsaufgaben dienen.
+\end{itemize}
 
 \subsection{Maschinelles Lernen}
-Maschinelles Lernen (ML), das sich durch die Fähigkeit auszeichnet, aus Daten zu lernen und Muster autonom zu erkennen, bildet ein fundamentales Element moderner Technologien und eröffnet Anwendungsfelder in Bereichen wie automatisierter Entscheidungsfindung, Bild- und Spracherkennung sowie datengetriebenen Prognosemodellen.
+Maschinelles Lernen (ML), das sich durch die Fähigkeit auszeichnet, aus Daten zu lernen und Muster autonom zu erkennen, bildet ein fundamentales Element moderner Technologien und eröffnet Anwendungsfelder in Bereichen wie automatisierter Entscheidungsfindung, Bild- und Spracherkennung sowie datengestützten Prognosemodellen.
 
 Zunehmend spielt ML auch in alltäglichen Entscheidungsprozessen eine Rolle: Von personalisierten Empfehlungen auf Streaming-Plattformen über Gesichtserkennungssysteme bis hin zur Automatisierung von medizinischen Diagnosen. Für SuS ist es daher essenziell, ein Bewusstsein dafür zu entwickeln, wie diese Technologien funktionieren, welche Potenziale sie bieten und welche Grenzen sie mit sich bringen.
 
@@ -39,7 +56,7 @@ Dennoch ist es wichtig, hier die Relevanz solcher Modelle zu erwähnen, da sie d
 \subsection{Aufbau}
 Das nachfolgende Kapitel \ref{sec:vorwissen} fasst die Lernziele der MA1 zusammen und listet somit die erwarteten Vorkenntnisse der Zielgruppe auf. Darauf folgt die Beschreibung der Leitidee und Ausarbeitung der Lernziele (Kapitel \ref{sec:leitidee}), gefolgt von der Unterrichtsplanung (Kapitel \ref{sec:planung}), welche eine Übersicht über die einzelnen Unterrichtseinheiten und damit verbundenen Übungen zeigt.
 
-Der eigentliche Inhalt des Stoffes ist in den Kapiteln \ref{sec:iuplus} (für den \textit{informierenden Unterrichtseinstieg+}) und \ref{sec:lpu} (für die Materialien des \textit{leitprogrammartigen Unterrichts}) zu finden. Diese MA schliesst mit den Kapiteln \ref{sec:wissensfestigung}, in welchem Vorschläge unterbreitet werden, wie das Wissen gefestigt und geprüft werden kann, und \ref{sec:abschluss}, welches einige Reflexionen und Einschränkungen zu dieser MA2 aufführt.
+Der eigentliche Inhalt des Stoffes ist in den Kapiteln \ref{sec:iuplus} (für den \textit{informierenden Unterrichtseinstieg+}) und \ref{sec:first} bis \ref{sec:last} (für die Materialien des \textit{leitprogrammartigen Unterrichts}) zu finden. Diese MA schliesst mit dem Kapitel \ref{sec:wissensfestigung}, in welchem Vorschläge unterbreitet werden, wie das Wissen gefestigt und geprüft werden kann, und \ref{sec:abschluss}, welches einige Reflexionen und Einschränkungen zu dieser MA2 aufführt.
 
 \subsection{Technische Aspekte}
 Im letzten Teil dieser LPU werden \text{Python Notebooks} verwendet. Dies sind Dateien im Format \texttt{.ipynb}, welche den SuS erlauben, Schnipsel von Python-Code interaktiv auszuführen und direkt die Resultate der Ausführung zu sehen und visualisieren zu lassen. Sie ermöglichen es, Erklärungen, Code und Visualisierungen in einem Dokument zu integrieren, was das Verständnis komplexer Konzepte erleichtert. Dadurch, dass die Instruktionen-Sätze schrittweise ausgeführt werden können, unterstützen sie auch ein strukturiertes Verständnis der Aufgaben; aber fördern auch Interaktivität dadurch, dass die SuS den vorgegebenen Code ändern, und den Effekt auf die Resultate beobachten können.
@@ -53,7 +70,7 @@ Die Zielgruppe für das dieser Arbeit zugrunde liegenden Moduls sind SuS der Ber
 
 Die SuS haben bisher kein explizites Vorwissen über maschinelles Lernen (ML). Sie haben jedoch grundlegende Programmierkenntnisse in Python, insbesondere den Umgang mit Jupyter Notebooks sowie Listen und Kontrollstrukturen. Bisher erworbene Kompetenzen:
 
-\begin{itemize}
+\begin{itemize}[itemsep=0.3em, parsep=0pt, topsep=1em]
 \item Grundlagen der Programmierung in Python (insbesondere: Variablen und Datentypen, Kontrollstrukturen (Schleifen, Bedingungen), Funktionen und Modularisierung)
 
 \item Arbeiten mit Jupyter Notebooks (insbesondere: Ausführen von Codezellen, Markdown als Dokumentations-Sprache, Fehler erkennen)
@@ -68,7 +85,7 @@ Stattdessen konzentriert sich die nachfolgende Analyse auf den in diesem Modul z
 
 \subsection{Zentrale Begriffe}
 
-Basierend auf der Fachliteratur und den Lehrplänen erachte ich folgende Begriffe als zentral für diese Unterrichtseinheit. Die SuS führen während des Unterrichts ein Glossar, in welchem sie zum Teil auch schon eine eigene Definition dessen verfassen müssen, \textit{bevor} sie mit einem neuen Konzept vertraut gemacht werden. Sie passen daraufhin ihre Definition an. Diese Technik hat sich bewährt, um die SuS kognitiv zu aktivieren, Verknüpfung zu bestehendem Vorwissen zu vereinfachen und Kontraste zu ähnlichen Konzepten (oder gleichnamigen Konzepten in anderen Fach-Domänen) zu verstärken.
+Basierend auf der Fachliteratur und den Lehrplänen erachte ich folgende Begriffe als zentral für diese Unterrichtseinheit. Die SuS führen während des Unterrichts ein Glossar, in welchem sie zum Teil auch schon eine eigene Definition dessen verfassen müssen, \textit{bevor} sie mit einem neuen Konzept vertraut gemacht werden. Sie passen daraufhin ihre Definition an. Diese Technik hat sich bewährt, um die SuS kognitiv zu aktivieren, Verknüpfung zu bestehendem Vorwissen zu vereinfachen und Kontraste zu ähnlichen Konzepten (oder gleichnamigen Konzepten in anderen Fach-Domänen) zu verstärken. Folgende Begriffe werden die Glossare am Ende dieser Unterrichtseinheit enthalten:
 
 \begin{itemize}[noitemsep]
     \item Modell
@@ -106,7 +123,7 @@ Bei der Vermittlung dieses Stoffs kann also auf sehr wenig theoretisches Vorwiss
 \label{sec:leitidee}
 
 \subsection{Handlungsziele in der Berufsbildung}
-Dieses Modul ordnet sich in den regulären Ablauf der Ausbildung zum Applikations-Entwickler EFZ ein; und somit bestehen bereits \textit{Handlungsziele} (HZ), welche die Organisation der Arbeitswelt festgelegt hat. Diese lassen sich \href{https://www.modulbaukasten.ch/module/259/1/de-DE?title=ICT-L%C3%B6sungen-mit-Machine-Learning-entwickeln}{hier}\footnote{\url{modulbaukasten.ch/module/259/1/de-DE?title=ICT-L\%C3\%B6sungen-mit-Machine-Learning-entwickeln}} einsehen. Diese Handlungsziele werden an den Berufsschulen in \textit{Leistungsziele} (LZ) heruntergebrochen, welche durch die Verwendung bestimmter Verben (nachfolgend fettgedruckt) zum Ausdruck bringen, auf welcher Taxonomiestufe sich das LZ befindet. Die folgenden LZ habe ich also als Ersteller des Moduls aus den sehr viel allgemeiner gehaltenen, vorgegebenen HZ erstellt.
+Das Modul, auf dessen Basis die Unterrichtseinheit entstanden ist, ordnet sich in den regulären Ablauf der Ausbildung zum Applikations-Entwickler EFZ ein. Somit bestehen bereits \textit{Handlungsziele} (HZ), welche die Organisation der Arbeitswelt festgelegt hat. Diese lassen sich \href{https://www.modulbaukasten.ch/module/259/1/de-DE?title=ICT-L%C3%B6sungen-mit-Machine-Learning-entwickeln}{hier}\footnote{\url{modulbaukasten.ch/module/259/1/de-DE?title=ICT-L\%C3\%B6sungen-mit-Machine-Learning-entwickeln}} einsehen. Diese Handlungsziele werden an den Berufsschulen in \textit{Leistungsziele} (LZ) heruntergebrochen, welche durch die Verwendung bestimmter Verben (nachfolgend fettgedruckt) zum Ausdruck bringen, auf welcher Taxonomiestufe sich das LZ befindet. Die folgenden LZ habe ich also als Ersteller des Moduls aus den sehr viel allgemeiner gehaltenen, vorgegebenen HZ erstellt.
 
 \newcounter{mainnum} % Creates a counter for the first number
 \setcounter{mainnum}{1} % Set the starting number
@@ -153,7 +170,7 @@ Dieses Modul ordnet sich in den regulären Ablauf der Ausbildung zum Applikation
 \end{enumerate}
 
 
-Da die Berufsbildung den Fokus auf \textit{Handlungs-} statt \textit{Lern-Ziele} setzt, ist also eine gewisse Übersetzung nötig.
+Da die Berufsbildung den Fokus auf \textit{Handlungs-} statt \textit{Lern-Ziele} setzt, ist also eine gewisse Übersetzung nötig, welche ich im nachfolgenden Abschnitt vornehme.
 
 \subsection{Leitidee}
 In der heutigen Welt sind Daten, Algorithmen und künstliche Intelligenz allgegenwärtig – von sozialen Medien über medizinische Diagnosen bis hin zur Finanzwelt. Die Fähigkeit, algorithmisches Denken anzuwenden und grundlegende Konzepte des maschinellen Lernens zu verstehen, ist daher nicht nur für angehende Informatiker relevant, sondern für alle, die fundierte Entscheidungen in einer zunehmend digitalisierten Gesellschaft treffen müssen.
@@ -163,13 +180,15 @@ In der heutigen Welt sind Daten, Algorithmen und künstliche Intelligenz allgege
 Für Berufsschüler, die eine Karriere in der IT anstreben, sind ML-Konzepte essenziell, da sie die Grundlage vieler moderner Technologien bilden. Wer als Informatiker arbeitet, wird früher oder später mit Datenanalyse, Automatisierung und KI konfrontiert. Das Verständnis von Klassifikation, Entscheidungsbäumen und Vorhersagemodellen ist daher nicht nur theoretisch interessant, sondern direkt anwendbar – sei es in der Softwareentwicklung, der Cybersicherheit oder der KI-gestützten Automatisierung.
 
 \subsubsection{Gymnasiasten}
+\label{sec:leitideegymi}
 
-Gymnasiasten hingegen werden nicht alle Informatiker, aber sie werden in einer Welt leben und arbeiten, in der Algorithmen über Kreditzusagen, Jobempfehlungen und wissenschaftliche Erkenntnisse entscheiden. Wer ML-Konzepte versteht, kann:
+Gymnasiasten hingegen werden nicht alle Informatiker, aber sie werden in einer Welt leben und arbeiten, in der Algorithmen über Kreditzusagen, Jobempfehlungen und wissenschaftliche Erkenntnisse entscheiden. Auch in vielen wissenschaftlichen Disziplinen, insbesondere im MINT-Umfeld, spielen KI-Technologien heute bereits eine zentrale Rolle: Wer später etwa als Biologin, Chemiker oder Bauingenieurin arbeitet, wird sich intensiv mit KI-gestützten Verfahren auseinandersetzen müssen, um komplexe Projekte durchzuführen. Wer ML-Konzepte versteht, kann:
 
-\begin{itemize}
+\begin{itemize}[itemsep=0.3em, parsep=0pt, topsep=1em]
    \item Kritisch mit KI-Technologien umgehen (z. B. wie funktionieren Algorithmen hinter Suchmaschinen oder Social-Media-Feeds?).
    \item Grundlegende statistische Zusammenhänge erfassen, um datenbasierte Entscheidungen zu hinterfragen.
    \item Chancen und Risiken neuer Technologien einschätzen können (z. B. Datenschutz oder Befangenheit in KI).
+   \item Den Stellenwert von KI-Verfahren auch in der eigenen Fachdisziplin erkennen und reflektiert damit umgehen.
 \end{itemize}
 
 \subsubsection{Fazit}
@@ -178,59 +197,104 @@ Während Berufsschüler ML als Werkzeug für ihre berufliche Zukunft nutzen, ben
 
 
 \subsection{Dispositionsziele}
+\label{sec:dispziele}
 
-Diese Dispositionsziele definieren die allgemeinen Fähigkeiten, die SuS nach dem Modul erwerben sollen. Die SuS sollen nicht nur ML-Algorithmen verstehen und anwenden können; sondern sich auch langfristig mit technologischen Entwicklungen auseinandersetzen können.
+Diese Dispositionsziele definieren die allgemeinen Fähigkeiten, die SuS nach der Unterrichtseinheit erwerben sollen. Die SuS sollen nicht nur ML-Algorithmen verstehen und anwenden können, sondern sich auch langfristig mit technologischen Entwicklungen auseinandersetzen können und wollen.  
 
-\begin{enumerate}
-
-    \item Nach Abschluss der Unterrichtseinheit können die SuS verschiedene Algorithmen des maschinellen Lernens unterscheiden und deren Einsatzbereiche begründen. Sie erkennen, welche Algorithmen für welche Art von Problemen geeignet sind (z. B. Klassifikation, Regression, Clustering), und entwickeln eine Intuition für die Stärken und Schwächen verschiedener ML-Ansätze. So können sie neue Algorithmen in bestehende Konzepte einordnen.
+\begin{enumerate}[itemsep=0.3em, parsep=0pt, topsep=0em]
+    \item Nach Abschluss der Unterrichtseinheit können die SuS verschiedene Algorithmen des maschinellen Lernens unterscheiden und deren Einsatzbereiche begründen. Sie erkennen, welche Algorithmen für welche Art von Problemen geeignet sind (z. B. Klassifikation, Regression, Ballung), und entwickeln eine Intuition für die Stärken und Schwächen verschiedener ML-Ansätze. So können sie neue Algorithmen in bestehende Konzepte einordnen.
 
     \item Die SuS verfolgen aktuelle Entwicklungen im Bereich des maschinellen Lernens mit Interesse und reflektieren deren Auswirkungen. Sie sind motiviert, sich eigenständig über neue ML-Technologien zu informieren, etwa durch Fachartikel, Nachrichten oder wissenschaftliche Beiträge.
     Sie können neue ML-Verfahren kritisch bewerten und mit bekannten Algorithmen vergleichen, um deren Nutzen und Herausforderungen einzuschätzen.
-
 \end{enumerate}
 
 \subsection{Operationalisierte Lernziele}
+\label{sec:oplernziele}
+
+Zur besseren Einordnung wird zunächst die Leitidee ausdifferenziert:
+
+\begin{enumerate}[itemsep=0.3em, parsep=0pt, topsep=0em]
+  \item In einer Welt, in der immer mehr digitale Entscheidungen durch Modelle getroffen werden, ist es notwendig, dass Lernende die Funktionsweise dieser Modelle verstehen. Daher sollen die SuS die grundlegenden Kategorien maschinellen Lernens (überwacht, unüberwacht) unterscheiden und typische Anwendungsbeispiele dafür nennen können.
+
+  \item Viele ML-Verfahren lassen sich auch ohne Informatikstudium nachvollziehen — insbesondere einfache Entscheidungsbäume oder lineare Modelle.  Aus diesem Grund sollen die SuS in der Lage sein, kleine Entscheidungsbäume und lineare Regressionsmodelle von Hand auf einem gegebenen Datensatz zu berechnen und deren Vorhersagen zu interpretieren.
+
+  \item Damit ML-Modelle nicht als ``Black Boxes'' erscheinen, sondern als Werkzeuge verstanden werden, braucht es Erfahrungen mit konkreten Implementierungen.  Deshalb sollen die SuS eine einfache ML-Pipeline in Python mit \texttt{scikit-learn} aufbauen, ausführen und evaluieren können.
+
+  \item Da das ML in zahlreichen wissenschaftlichen Disziplinen eine zentrale Rolle spielt, sollen die SuS zentrale Begriffe kennen, mit welchen sie können Modelle schneller verstehen, einordnen und kritisch reflektieren können.
+
+  \item Der verantwortungsvolle Umgang mit Daten ist im Kontext des maschinellen Lernens unumgänglich. Darum sollen die SuS typische ethische Fragestellungen (Bias, Transparenz, Profiling) erkennen und reflektieren können.
+\end{enumerate}
+
+Aus diesen kleineren Leitideen ergeben sich die in Tabelle \ref{tab:lernziele} aufgeführten operationalisierten Lernziele.
+
+\begin{table*}[ht]
+\centering
+\begin{tabular}{p{1.2cm}p{3.5cm}p{3.5cm}p{3.5cm}p{3.5cm}}
+\hline
+\textbf{Nr.} & \textbf{Endverhalten} & \textbf{Gegenstand} & \textbf{Bedingungen} & \textbf{Beurteilungs\-maßstab} \\
+\hline
+
+1 & Die SuS können die grundlegenden Kategorien des maschinellen Lernens (überwachtes und unüberwachtes Lernen) sicher unterscheiden und typische Anwendungsbeispiele nennen. 
+& Kategorien des ML: überwachtes und unüberwachtes ML, Beispiele (z. B. Klassifikation, Regression, Ballung). 
+& Einzelarbeit ohne Hilfsmittel, nach Einführung. 
+& SuS ordnen fünf Problemstellungen korrekt zu und nennen je Kategorie ein eigenes Beispiel. \\
+
+\hline
+
+2 & Die SuS können kleine Entscheidungsbäume und lineare Regressionsmodelle von Hand auf einem Datensatz konstruieren und Vorhersagen berechnen. 
+& Entscheidungsbaum (Klassifikation), lineare Regression (numerische Vorhersage). 
+& Arbeit mit kleinen Datensätzen (Papier/Excel), Einzel- oder Partnerarbeit. 
+& SuS wenden Modelle auf mindestens fünf Datenpunkte korrekt an und überprüfen mit MSE. \\
+
+\hline
+
+3 & Die SuS bauen in Python mit \texttt{scikit-learn} eine Pipeline (Daten laden, aufteilen, trainieren, evaluieren) und führen diese aus. 
+& Standard-ML-Pipeline (z. B. Iris-Datensatz), Klassifikation oder Regression, Evaluation mit \texttt{score()} oder \texttt{classification\_report}. 
+& Arbeit im Jupyter Notebook, Nutzung der Dokumentation erlaubt. 
+& Pipeline läuft fehlerfrei und Evaluation wird korrekt interpretiert (z. B. Unterschied Training/Test). \\
+
+\hline
+
+4 & Die SuS definieren zentrale Begriffe des ML (z. B. supervised learning, model, bias, precision, recall) in eigenen Worten und wenden diese auf Beispiele an. 
+& Glossararbeit mit eingeführten Fachbegriffen. 
+& Einzelarbeit mit Glossar, Unterrichtsmaterialien erlaubt. 
+& Die Definitionen sind allesamt korrekt und nachvollziehbar. \\
+
+\hline
+
+5 & Die SuS erkennen typische ethische Fragestellungen (Bias, Transparenz, Profiling) und diskutieren deren Relevanz kritisch. 
+& Ethische Aspekte von ML, Datenschutzgesetz, Bias im Training, Transparenz. 
+& Arbeit mit Fallbeispielen, Diskussion im Plenum. 
+& Schriftliche Reflexion: SuS nennen zu jedem Aspekt ein Beispiel und mögliche Konsequenzen. \\
+
+\hline
+\end{tabular}
+\caption{Operationalisierte Lernziele für diese LPU}
+\label{tab:lernziele}
+\end{table*}
 
 
-\begin{itemize}
-  \item
-  In einer Welt, in der immer mehr digitale Entscheidungen durch Modelle getroffen werden, ist es notwendig, dass Lernende die Funktionsweise dieser Modelle verstehen. 
-  Daher sollen die SuS die grundlegenden Kategorien maschinellen Lernens (überwacht, unüberwacht) unterscheiden und typische Anwendungsbeispiele dafür nennen können.
-
-  \item
-  Viele ML-Verfahren lassen sich auch ohne Informatikstudium nachvollziehen – insbesondere einfache Entscheidungsbäume oder lineare Modelle. 
-  Aus diesem Grund sollen die SuS in der Lage sein, kleine Entscheidungsbäume und lineare Regressionsmodelle von Hand auf einem gegebenen Datensatz zu berechnen und deren Vorhersagen zu interpretieren.
-
-  \item
-  Damit ML-Modelle nicht als ``Black Boxes'' erscheinen, sondern als Werkzeuge verstanden werden, braucht es Erfahrungen mit konkreten Implementierungen. 
-  Deshalb sollen die SuS eine einfache ML-Pipeline in Python mit \texttt{scikit-learn} aufbauen, ausführen und evaluieren können.
-
-  \item
-  Der verantwortungsvolle Umgang mit Daten ist im Kontext des maschinellen Lernens unumgänglich. 
-  Darum sollen die SuS typische ethische Fragestellungen (Bias, Transparenz, Profiling) erkennen und reflektieren können.
-\end{itemize}
 
 \section{Unterrichtsplanung}
 \label{sec:planung}
 
 Die folgende Unterrichtsplanung führt die SuS systematisch vom theoretischen Fundament des maschinellen Lernens zu konkreten Implementierungen. Dabei werden sowohl kognitive als auch praktische Kompetenzen aufgebaut.
 
-\begin{itemize}
-  \item \textbf{Lektion 1: Einführung in zentrale Begriffe des ML}\\
+\begin{itemize}[itemsep=0.3em, parsep=0pt, topsep=0em]
+  \item \textbf{Lektion 1: Zentrale Begriffe des ML}\\
   Die SuS erstellen ein eigenes Glossar mit Begriffen wie \emph{Modell}, \emph{Klassifikation}, \emph{Vorhersage}, \emph{überwachtes und unüberwachtes Lernen} etc., und formulieren erste Definitionen in eigenen Worten.
 
-  \item \textbf{Lektion 2: Theoretische Grundlagen – Datentypen und Vorhersagen}\\
+  \item \textbf{Lektion 2: Theoretische Grundlagen: Datentypen und Vorhersagen}\\
   Einführung in die Unterscheidung numerischer und kategorischer Daten, Überblick über Klassifikation, Regression und Ballung als Zieltypen maschinellen Lernens.
 
   \item \textbf{Lektion 3: Klassifikation mit Entscheidungsbäumen}\\
   Die SuS analysieren den Titanic-Datensatz und konstruieren von Hand einen einfachen Entscheidungsbaum zur Vorhersage des Überlebens. Ziel ist die Förderung von Intuition für Merkmalswahl und Entscheidungslogik.
 
-  \item \textbf{Lektion 4: Einführung in Regressionsmodelle}\\
+  \item \textbf{Lektion 4: Regressionsmodelle}\\
   Die SuS explorieren Zusammenhänge zwischen Körpergrösse und Gewicht, formulieren einfache lineare Modelle und optimieren diese auf Basis des mittleren quadratischen Fehlers (MSE).
 
-  \item \textbf{Lektion 5: Einführung in das Clustering}\\
-  Vorstellung des Konzepts unüberwachten Lernens am Beispiel von \emph{k-means}; Diskussion geeigneter Anwendungsfälle (z. B. Kundensegmentierung).
+  \item \textbf{Lektion 5: Ballung}\\
+  Vorstellung des Konzepts unüberwachten Lernens am Beispiel von \emph{k-means}; Diskussion geeigneter Anwendungsfälle (z. B. Kundensegmentierung).
 
   \item \textbf{Lektion 6: Statistische Grundbegriffe und Evaluation}\\
   Wiederholung der Begriffe Mittelwert, Median, Varianz sowie Einführung in Metriken wie \emph{precision}, \emph{recall} und \emph{F1-Score}; anschliessend Quiz zur Vertiefung.
@@ -241,11 +305,6 @@ Die folgende Unterrichtsplanung führt die SuS systematisch vom theoretischen Fu
   \item \textbf{Lektionen 8: Modelle mit \texttt{scikit-learn}}\\
   Die SuS setzen ML-Pipelines in \texttt{scikit-learn} um, inklusive Datenaufbereitung, \texttt{train-test-split}, Modelltraining (z. B. Entscheidungsbaum, Regression) und Evaluation.
 
-%  \item \textbf{Lektion 11: Einführung in Perzeptron und KNN}\\
-%  Vorstellung zweier klassischer ML-Algorithmen mit stark unterschiedlicher Funktionsweise; Analyse von Vor- und Nachteilen; Implementierung in Python.
-
-%  \item \textbf{Lektionen 12–13: Erweiterungsprojekte}\\
-%  Freie Vertiefung: Die SuS wählen aus Zusatzaufträgen wie Textklassifikation mit \texttt{spaCy} oder Bildklassifikation. Ziel ist es, selbständiges Arbeiten an komplexeren Datensätzen zu fördern.
 \end{itemize}
 
 Im nachfolgenden Kapitel wird jede Lektion als eigenes Unterkapitel aufgeführt.
@@ -255,30 +314,35 @@ Im nachfolgenden Kapitel wird jede Lektion als eigenes Unterkapitel aufgeführt.
 \section{LPU}
 \setcounter{subsection}{-1}
 \subsection{IU+}
+\label{sec:iuplus}
 \input{lpu/iuplus}
 
 \subsection{Zentrale Begriffe des ML}
+\label{sec:first}
 \input{lpu/1_begriffe}
 
 \subsection{Datentypen und Vorhersagen}
 \input{lpu/2_typen}
 
-\subsection{Entscheidungsbäue}
+\subsection{Entscheidungsbäume}
 \input{lpu/3_decisiontree}
 
 \subsection{Regression}
 \input{lpu/4_regression}
 
 \subsection{Ballung}
+\label{sec:clustering}
 \input{lpu/5_clustering}
 
 \subsection{Statistik}
+\label{sec:stats}
 \input{lpu/6_statistics}
 
 \subsection{Ethik}
 \input{lpu/7_ethics}
 
 \subsection{\texttt{scikit-learn}}
+\label{sec:last}
 \input{lpu/8_scikit}
 
 \section{Wissensfestigung}
@@ -291,7 +355,7 @@ Eine weitere Möglichkeit zur Wissensfestigung oder -Prüfung wäre ein ``Vokabe
 
 In dieser Phase empfiehlt es sich, das Rollenverständnis der SuS zu verschieben: Vom ``Nachvollziehen'' einzelner Anweisungen hin zum ``Selbststrukturieren'' ganzer Projekte. Die festigende Wirkung tritt nicht allein durch Wiederholung ein, sondern durch sinnvolle und zunehmend selbstständige Anwendung – gestützt durch die direkte Rückmeldung der Notizbücher und Vergleich mit der Musterlösung von \texttt{LA\_1651}.
 
-
+\newpage
 \section{Ausblick}
 \label{sec:abschluss}
 
